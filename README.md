@@ -35,6 +35,12 @@ MyClass2.prototype.method = function() {};
 ## Public functions
 
 ``` javascript
+void apply(plugins: Plugin...)
+```
+
+Attaches all plugins passed as arguments to the instance, by calling `apply` on them.
+
+``` javascript
 void plugin(name: string, handler: Function)
 ```
 
