@@ -93,6 +93,16 @@ applyPluginsAsyncWaterfall(
 Asynchronously applies all registered handers for `name`. The hander functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void`. When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, `callback` is called with the last value. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
 
 ``` javascript
+applyPluginsAsyncSeries(
+	name: string,
+	args: any...,
+	callback: (err: Error, result: any) -> void
+)
+```
+
+Asynchronously applies all registered handers for `name`. The hander functions are called with all `args` and a callback function with the signature `(err: Error) -> void`. The handers are called in series, one at a time. After all handlers are applied, `callback` is called. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
+
+``` javascript
 applyPluginsParallel(
 	name: string,
 	args: any...,
