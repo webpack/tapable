@@ -1,6 +1,6 @@
 {
 	"name": "tapable",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"author": "Tobias Koppers @sokra",
 	"description": "Just a little module for plugins.",
 	"licenses": [
