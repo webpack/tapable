@@ -45,10 +45,10 @@ Attaches all plugins passed as arguments to the instance, by calling `apply` on 
 ### plugin
 
 ``` javascript
-void plugin(name: string, handler: Function)
+void plugin(names: string|string[], handler: Function)
 ```
 
-`name` is the name of the plugin interface the class provides.
+`names` are the names (or a single name) of the plugin interfaces the class provides.
 
 `handler` is a callback function. The signature depends on the class. `this` is the instance of the class.
 
