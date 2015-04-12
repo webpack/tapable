@@ -1,24 +1,24 @@
 {
-	"name": "tapable",
-	"version": "0.1.8",
-	"author": "Tobias Koppers @sokra",
-	"description": "Just a little module for plugins.",
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "http://www.opensource.org/licenses/mit-license.php"
-		}
-	],
-	"devDependencies": {
-		"mocha": "^2.2.4",
-		"should": "^5.2.0"
-	},
-	"engines": {
-		"node":  ">=0.6"
-	},
-	"homepage": "https://github.com/webpack/tapable",
-	"main": "lib/Tapable.js",
-	"scripts": {
-		"test": "mocha --reporter spec"
-	}
+  "name": "tapable",
+  "version": "0.1.9",
+  "author": "Tobias Koppers @sokra",
+  "description": "Just a little module for plugins.",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "should": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=0.6"
+  },
+  "homepage": "https://github.com/webpack/tapable",
+  "main": "lib/Tapable.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  }
 }
