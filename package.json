@@ -10,8 +10,8 @@
 		}
 	],
 	"devDependencies": {
-		"mocha": "1.3.x",
-		"should": "1.1.x"
+		"mocha": "^2.2.4",
+		"should": "^5.2.0"
 	},
 	"engines": {
 		"node":  ">=0.6"
