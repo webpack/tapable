@@ -70,6 +70,14 @@ any applyPluginsWaterfall(name: string, init: any, args: any...)
 
 Synchronously applies all registered handlers for `name`. The handler functions are called with the return value of the previous handler and all args. For the first handler `init` is used and the return value of the last handler is return by `applyPluginsWaterfall`
 
+### applyPluginsWaterfallWhileCond
+
+``` javascript
+any applyPluginsWaterfallWhileCond(name: string, init: any, cond: function, args: any...)
+```
+
+Synchronous applies all registered handers for `name`. The handler functions are called with the return value of the previous handler and all args. For the first handler `init` is used.  `cond` will be called with `init`/return value of the previous handler before the first/next handler is called; if it returns falsey, no more handlers will be applied and the current value will be returned.  Otherwise the return value of the very last handler will be returned.  This can be used to create plugins that filter the application of other plugins.
+
 ### applyPluginsAsync
 
 ``` javascript
