@@ -3,12 +3,7 @@
   "version": "0.1.9",
   "author": "Tobias Koppers @sokra",
   "description": "Just a little module for plugins.",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/mit-license.php"
-    }
-  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "http://github.com/webpack/tapable.git"
