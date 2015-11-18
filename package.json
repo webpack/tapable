@@ -9,6 +9,10 @@
       "url": "http://www.opensource.org/licenses/mit-license.php"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/webpack/tapable.git"
+  },
   "devDependencies": {
     "mocha": "^2.2.4",
     "should": "^5.2.0"
