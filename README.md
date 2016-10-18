@@ -154,6 +154,23 @@ Compiler.prototype.method = function() {};
 
 var compiler = new Compiler();
 
+// ========= apply ==========
+function plugin0() {
+	console.log("plugin0 main function");
+}
+
+plugin0.prototype.apply = function()  {
+	console.log("apply function");    /// that's why plugin of webpack always need an `apply` function
+};
+
+compiler.apply(new plugin0());
+
+/** output
+
+plugin0 main function
+apply function
+
+*/
 
 // ========= applyPlugins ==========
 function plugin1() {
@@ -176,7 +193,6 @@ compiler.plugin("plugin1", (arg) => {
 });
 
 compiler.applyPlugins("plugin1", 1);
-compiler.apply(plugin1);
 
 /** output
 
@@ -186,7 +202,6 @@ apply plugin1-2
 1
 apply plugin1-3
 1
-plugin1 main function
 
 */
 
@@ -222,8 +237,6 @@ compiler.plugin("plugin4", (a, b) =>{
 var returnVal = compiler.applyPluginsWaterfall("plugin4", 1, 2);
 console.log("final result = " + returnVal);
 
-compiler.apply(plugin2);
-
 /** output
 
 apply plugin4-1
@@ -235,7 +248,6 @@ apply plugin4-3
 apply plugin4-4
 7 2
 final result = 9
-plugin2 main function
 
 */
 
@@ -266,12 +278,9 @@ compiler.applyPluginsAsync("plugin3", () => {
 	console.log("plugin3 applyPluginsAsync cb");
 });
 
-compiler.apply(plugin3);
-
 /** output
 
 apply plugin3-1
-plugin3 main function
 apply plugin3-2
 wait 1 second
 apply plugin3-3
@@ -312,8 +321,6 @@ compiler.plugin("plugin4", (a) =>{
 var returnVal = compiler.applyPluginsBailResult("plugin4", 1);
 console.log("final result=" + returnVal);
 
-compiler.apply(plugin4);
-
 /** output
 
 apply plugin4-1
@@ -323,7 +330,6 @@ apply plugin4-2
 apply plugin4-3
 1
 final result=3
-plugin4 main function
 
 */
 
@@ -356,14 +362,11 @@ compiler.applyPluginsAsyncWaterfall("plugin5", 10, (err, result) => {
 	}
 });
 
-compiler.apply(plugin5);
-
 /** output
 
 apply plugin5-1
 10
 wait 1 second
-plugin5 main function
 apply plugin5-2
 20
 result = 20
@@ -403,8 +406,6 @@ compiler.applyPluginsAsyncSeries("plugin6", 1, (err, result) => {
 	}
 });
 
-compiler.apply(plugin6);
-
 /** output
 
 apply plugin6-1
@@ -414,7 +415,6 @@ apply plugin6-2
 apply plugin6-3
 1
 result = undefined
-plugin6 main function
 
 */
 
@@ -447,11 +447,8 @@ compiler.applyPluginsParallel("plugin7", 1, (err) => {
 	}
 });
 
-compiler.apply(plugin7);
-
 /** output
 
-plugin7 main function
 apply plugin7-2  // this sometimes would be apply plugin7-1 since they run parallel
 apply plugin7-1
 success
@@ -486,8 +483,6 @@ var returnVal = compiler.applyPluginsParallelBailResult("plugin8", 1, (err, resu
 	}
 });
 
-compiler.apply(plugin8);
-
 /** output
 
 apply plugin8-1
@@ -495,7 +490,7 @@ apply plugin8-1
 apply plugin8-2
 1
 result = 6
-plugin8 main function
+
 
 */
 
