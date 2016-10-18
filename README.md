@@ -164,12 +164,13 @@ plugin0.prototype.apply = function()  {
 };
 
 compiler.apply(new plugin0());
+compiler.apply(plugin0);
 
 /** output
 
 plugin0 main function
 apply function
-
+plugin0 main function
 */
 
 // ========= applyPlugins ==========
