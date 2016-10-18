@@ -9,6 +9,11 @@
     "url": "http://github.com/webpack/tapable.git"
   },
   "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
+    "babel-plugin-transform-flow-strip-types": "^6.14.0",
+    "eslint": "^3.8.0",
+    "flow-bin": "^0.33.0",
     "mocha": "^2.2.4",
     "should": "^5.2.0"
   },
@@ -18,6 +23,8 @@
   "homepage": "https://github.com/webpack/tapable",
   "main": "lib/Tapable.js",
   "scripts": {
-    "test": "mocha --reporter spec"
-  }
+    "test": "mocha --compilers js:babel-core/register --reporter spec",
+    "flow": "flow"
+  },
+  "dependencies": {}
 }
