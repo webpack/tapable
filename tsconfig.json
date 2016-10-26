@@ -1,0 +1,13 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "es2016"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
