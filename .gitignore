@@ -9,3 +9,7 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
+
+# IDE
+.vscode
+.idea
