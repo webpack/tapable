@@ -21,6 +21,6 @@
   "types": "typings/Tapable.d.ts",
   "scripts": {
     "test": "mocha --reporter spec",
-    "build": "tsc -p ."
+    "build": "tsc -p . || true"
   }
 }

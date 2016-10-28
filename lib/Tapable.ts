@@ -2,8 +2,22 @@
  MIT License http://www.opensource.org/licenses/mit-license.php
  Author Tobias Koppers @sokra
  */
+interface Handler {
+    (...args: any[]): void;
+}
+
+interface Plugin {
+    apply(...args: any[]): void;
+}
+
+interface CallbackFunction {
+    (err?: Error, result?: any, ...args: any[]): void;
+}
+
 abstract class Tapable {
-    protected _plugins: any = {};
+    private _plugins: {
+        [propName: string]: Handler[]
+    } = {};
 
     /**
      * Register plugin(s)
@@ -13,7 +27,7 @@ abstract class Tapable {
      * @param names a string or an array of strings to generate the id(group name) of plugins
      * @param handler a function which provides the plugin functionality *
      */
-    plugin(names: string[] | string, handler: Plugin) {
+    plugin(names: string[] | string, handler: Handler) {
         if (Array.isArray(names)) {
             names.forEach((name: string) => {
                 this.plugin(name, handler);
