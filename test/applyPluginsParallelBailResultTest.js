@@ -2,7 +2,7 @@
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */
-var Tapable = require("../lib/Tapable");
+var Tapable = require("../dist/Tapable");
 var should = require("should");
 
 function makeTestPlugin(arr, index) {
