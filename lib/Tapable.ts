@@ -277,7 +277,7 @@ abstract class Tapable {
      */
     applyPluginsAsyncWaterfall(name: string, init: any, callback: CallbackFunction) {
         if (!this._plugins[name] || this._plugins[name].length === 0) {
-            return callback(null, init);
+            return callback(undefined, init);
         }
         const plugins = this._plugins[name];
         let i = 0;
@@ -287,7 +287,7 @@ abstract class Tapable {
             }
             i++;
             if (plugins.length <= i) {
-                return callback(null, value);
+                return callback(undefined, value);
             }
             plugins[i].call(this, value, next);
         });
@@ -353,23 +353,25 @@ abstract class Tapable {
         const plugins = this._plugins[name];
         let currentPos = plugins.length;
         let currentResult;
-        let done = [];
+        let done: number[] = [];
         for (let i = 0; i < plugins.length; i++) {
-            args[args.length - 1] = (pos => copyProperties(callback, function shadowCallback(...args) {
-                if (pos >= currentPos) {
-                    return; // ignore
-                }
-                done.push(pos);
-                if (args.length > 0) {
-                    currentPos = pos + 1;
-                    done = done.filter((item) => item <= pos);
-                    currentResult = args;
-                }
-                if (done.length === currentPos) {
-                    callback.apply(null, currentResult);
-                    currentPos = 0;
-                }
-            }))(i);
+            args[args.length - 1] = function (pos) {
+                return copyProperties(callback, function shadowCallback(...args) {
+                    if (pos >= currentPos) {
+                        return; // ignore
+                    }
+                    done.push(pos);
+                    if (args.length > 0) {
+                        currentPos = pos + 1;
+                        done = done.filter((item) => item <= pos);
+                        currentResult = args;
+                    }
+                    if (done.length === currentPos) {
+                        callback.apply(null, currentResult);
+                        currentPos = 0;
+                    }
+                })
+            }(i);
             plugins[i].apply(this, args);
         }
     }
@@ -391,23 +393,25 @@ abstract class Tapable {
         }
         let currentPos = plugins.length;
         let currentResult;
-        let done = [];
+        let done: number[] = [];
         for (let i = 0; i < plugins.length; i++) {
-            const innerCallback = (pos => copyProperties(callback, function shadowCallback(...args) {
-                if (pos >= currentPos) {
-                    return; // ignore
-                }
-                done.push(pos);
-                if (args.length > 0) {
-                    currentPos = pos + 1;
-                    done = done.filter((item) => item <= pos);
-                    currentResult = args;
-                }
-                if (done.length === currentPos) {
-                    callback.apply(null, currentResult);
-                    currentPos = 0;
-                }
-            }))(i);
+            const innerCallback = function (pos) {
+                return copyProperties(callback, function shadowCallback(...args) {
+                    if (pos >= currentPos) {
+                        return; // ignore
+                    }
+                    done.push(pos);
+                    if (args.length > 0) {
+                        currentPos = pos + 1;
+                        done = done.filter((item) => item <= pos);
+                        currentResult = args;
+                    }
+                    if (done.length === currentPos) {
+                        callback.apply(null, currentResult);
+                        currentPos = 0;
+                    }
+                })
+            }(i);
             plugins[i].call(this, param, innerCallback);
         }
     }
