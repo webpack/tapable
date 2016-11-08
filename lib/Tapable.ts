@@ -22,7 +22,7 @@ class Tapable {
     var plugins = this._plugins[name];
     for(var i = 0; i < plugins.length; i++)
       plugins[i].apply(this, args);
-  };
+  }
 
   applyPluginsWaterfall<T>(name: string, init: T): T {
     if(!this._plugins[name]) return init;
@@ -32,7 +32,7 @@ class Tapable {
     for(var i = 0; i < plugins.length; i++)
       current = plugins[i].apply(this, [current].concat(args));
     return current;
-  };
+  }
 
   applyPluginsWaterfall0<T>(name: string, init: T): T {
     var plugins = this._plugins[name];
@@ -41,7 +41,7 @@ class Tapable {
     for(var i = 0; i < plugins.length; i++)
       current = plugins[i].call(this, current);
     return current;
-  };
+  }
 
   applyPluginsBailResult(name: string): any {
     if(!this._plugins[name]) return;
@@ -53,7 +53,7 @@ class Tapable {
         return result;
       }
     }
-  };
+  }
 
   applyPluginsBailResult1(name: string, param): any {
     if(!this._plugins[name]) return;
@@ -64,9 +64,9 @@ class Tapable {
         return result;
       }
     }
-  };
+  }
 
-//Tapable.prototype.applyPluginsAsyncSeries = 
+
   applyPluginsAsync(name: string): void {
     var args = Array.prototype.slice.call(arguments, 1);
     var callback = args.pop();
@@ -83,7 +83,9 @@ class Tapable {
       plugins[i].apply(_this, args);
     }));
     plugins[0].apply(this, args);
-  };
+  }
+
+  applyPluginsAsyncSeries: any;
 
   applyPluginsAsyncSeriesBailResult(name: string): void {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -101,7 +103,7 @@ class Tapable {
       plugins[i].apply(_this, args);
     }));
     plugins[0].apply(this, args);
-  };
+  }
 
   applyPluginsAsyncSeriesBailResult1(name: string, param, callback: Function): void {
     var plugins = this._plugins[name];
@@ -117,7 +119,7 @@ class Tapable {
       plugins[i].call(_this, param, innerCallback);
     });
     plugins[0].call(this, param, innerCallback);
-  };
+  }
 
   applyPluginsAsyncWaterfall(name: string, init, callback: Function): void {
     if(!this._plugins[name] || this._plugins[name].length === 0) return callback(null, init);
@@ -133,7 +135,7 @@ class Tapable {
       plugins[i].call(_this, value, next);
     });
     plugins[0].call(this, init, next);
-  };
+  }
 
   applyPluginsParallel(name: string): void {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -156,7 +158,7 @@ class Tapable {
       plugins[i].apply(this, args);
       if(remaining < 0) return;
     }
-  };
+  }
 
   applyPluginsParallelBailResult(name: string): void {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -186,7 +188,7 @@ class Tapable {
       }(i));
       plugins[i].apply(this, args);
     }
-  };
+  }
 
   applyPluginsParallelBailResult1(name: string, param, callback: Function): void {
     var plugins = this._plugins[name];
@@ -214,7 +216,7 @@ class Tapable {
       }(i));
       plugins[i].call(this, param, innerCallback);
     }
-  };
+  }
 
 
   plugin(name: string, fn: Plugin) {
@@ -226,14 +228,16 @@ class Tapable {
     }
     if(!this._plugins[name]) this._plugins[name] = [fn];
     else this._plugins[name].push(fn);
-  };
+  }
 
   apply() {
     for(var i = 0; i < arguments.length; i++) {
       arguments[i].apply(this);
     }
-  };
+  }
 }
+
+Tapable.prototype.applyPluginsAsyncSeries = Tapable.prototype.applyPluginsAsync;
 
 export = Tapable;
 

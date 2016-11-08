@@ -15,7 +15,6 @@ var Tapable = (function () {
         for (var i = 0; i < plugins.length; i++)
             plugins[i].apply(this, args);
     };
-    ;
     Tapable.prototype.applyPluginsWaterfall = function (name, init) {
         if (!this._plugins[name])
             return init;
@@ -26,7 +25,6 @@ var Tapable = (function () {
             current = plugins[i].apply(this, [current].concat(args));
         return current;
     };
-    ;
     Tapable.prototype.applyPluginsWaterfall0 = function (name, init) {
         var plugins = this._plugins[name];
         if (!plugins)
@@ -36,7 +34,6 @@ var Tapable = (function () {
             current = plugins[i].call(this, current);
         return current;
     };
-    ;
     Tapable.prototype.applyPluginsBailResult = function (name) {
         if (!this._plugins[name])
             return;
@@ -49,7 +46,6 @@ var Tapable = (function () {
             }
         }
     };
-    ;
     Tapable.prototype.applyPluginsBailResult1 = function (name, param) {
         if (!this._plugins[name])
             return;
@@ -61,8 +57,6 @@ var Tapable = (function () {
             }
         }
     };
-    ;
-    //Tapable.prototype.applyPluginsAsyncSeries = 
     Tapable.prototype.applyPluginsAsync = function (name) {
         var args = Array.prototype.slice.call(arguments, 1);
         var callback = args.pop();
@@ -82,7 +76,6 @@ var Tapable = (function () {
         }));
         plugins[0].apply(this, args);
     };
-    ;
     Tapable.prototype.applyPluginsAsyncSeriesBailResult = function (name) {
         var args = Array.prototype.slice.call(arguments, 1);
         var callback = args.pop();
@@ -102,7 +95,6 @@ var Tapable = (function () {
         }));
         plugins[0].apply(this, args);
     };
-    ;
     Tapable.prototype.applyPluginsAsyncSeriesBailResult1 = function (name, param, callback) {
         var plugins = this._plugins[name];
         if (!plugins || plugins.length === 0)
@@ -120,7 +112,6 @@ var Tapable = (function () {
         });
         plugins[0].call(this, param, innerCallback);
     };
-    ;
     Tapable.prototype.applyPluginsAsyncWaterfall = function (name, init, callback) {
         if (!this._plugins[name] || this._plugins[name].length === 0)
             return callback(null, init);
@@ -138,7 +129,6 @@ var Tapable = (function () {
         });
         plugins[0].call(this, init, next);
     };
-    ;
     Tapable.prototype.applyPluginsParallel = function (name) {
         var args = Array.prototype.slice.call(arguments, 1);
         var callback = args.pop();
@@ -164,7 +154,6 @@ var Tapable = (function () {
                 return;
         }
     };
-    ;
     Tapable.prototype.applyPluginsParallelBailResult = function (name) {
         var args = Array.prototype.slice.call(arguments, 1);
         var callback = args[args.length - 1];
@@ -196,7 +185,6 @@ var Tapable = (function () {
             plugins[i].apply(this, args);
         }
     };
-    ;
     Tapable.prototype.applyPluginsParallelBailResult1 = function (name, param, callback) {
         var plugins = this._plugins[name];
         if (!plugins || plugins.length === 0)
@@ -226,7 +214,6 @@ var Tapable = (function () {
             plugins[i].call(this, param, innerCallback);
         }
     };
-    ;
     Tapable.prototype.plugin = function (name, fn) {
         if (Array.isArray(name)) {
             name.forEach(function (name) {
@@ -239,16 +226,15 @@ var Tapable = (function () {
         else
             this._plugins[name].push(fn);
     };
-    ;
     Tapable.prototype.apply = function () {
         for (var i = 0; i < arguments.length; i++) {
             arguments[i].apply(this);
         }
     };
-    ;
     return Tapable;
 }());
 Tapable.mixin = function (pt) { copyProperties(Tapable.prototype, pt); };
+Tapable.prototype.applyPluginsAsyncSeries = Tapable.prototype.applyPluginsAsync;
 function copyProperties(from, to) {
     for (var key in from)
         to[key] = from[key];

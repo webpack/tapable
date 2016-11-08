@@ -19,6 +19,7 @@
   "homepage": "https://github.com/webpack/tapable",
   "main": "dist/Tapable.js",
   "scripts": {
+    "build": "tsc",
     "test": "mocha --reporter spec"
   }
 }
