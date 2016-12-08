@@ -61,13 +61,43 @@ abstract class Tapable {
      * @param name - plugin group name
      * @param args
      */
-    applyPlugins(name: string, ...args) {
+    applyPlugins(name: string, ...args: any[]) {
         if (!this._plugins[name]) {
             return;
         }
         const plugins = this._plugins[name];
         for (const plugin of plugins) {
             plugin.apply(this, args);
+        }
+    }
+
+    applyPlugins0(name: string) {
+        const plugins = this._plugins[name];
+        if (!plugins) {
+            return;
+        }
+        for (const plugin of plugins) {
+            plugin.call(this);
+        }
+    }
+
+    applyPlugins1(name: string, param: any) {
+        const plugins = this._plugins[name];
+        if (!plugins) {
+            return;
+        }
+        for (const plugin of plugins) {
+            plugin.call(this, param);
+        }
+    }
+
+    applyPlugins2(name: string, param1: any, param2: any) {
+        const plugins = this._plugins[name];
+        if (!plugins) {
+            return;
+        }
+        for (const plugin of plugins) {
+            plugin.call(this, param1, param2);
         }
     }
 
@@ -80,7 +110,7 @@ abstract class Tapable {
      *
      * return the returned value of the last handler
      */
-    applyPluginsWaterfall(name: string, init: any, ...args) {
+    applyPluginsWaterfall(name: string, init: any, ...args: any[]) {
         if (!this._plugins[name]) {
             return init;
         }
@@ -120,7 +150,7 @@ abstract class Tapable {
      *
      * If a handler returns something !== undefined, that value is returned and no more handlers will be applied.
      */
-    applyPluginsBailResult(name: string, ...args) {
+    applyPluginsBailResult(name: string, ...args: any[]) {
         if (!this._plugins[name]) {
             return;
         }
@@ -168,14 +198,14 @@ abstract class Tapable {
      * If any handler invokes the (anonymous)callback with error, no more handlers will be called
      * and the real callback is call with that error.
      */
-    applyPluginsAsync(name: string, ...args) {
+    applyPluginsAsync(name: string, ...args: any[]) {
         const callback = <CallbackFunction>args.pop();
         if (!this._plugins[name] || this._plugins[name].length === 0) {
             return callback();
         }
         const plugins = this._plugins[name];
         let i = 0;
-        args.push(copyProperties(callback, (err) => {
+        args.push(copyProperties(callback, (err: Error) => {
             if (err) {
                 return callback(err);
             }
@@ -195,8 +225,27 @@ abstract class Tapable {
      * @param name
      * @param args
      */
-    applyPluginsAsyncSeries(name: string, ...args) {
+    applyPluginsAsyncSeries(name: string, ...args: any[]) {
         this.applyPluginsAsync(name, ...args)
+    }
+
+    applyPluginsAsyncSeries1(name: string, param: any, callback: CallbackFunction) {
+        const plugins = this._plugins[name];
+        if (!plugins || plugins.length === 0) {
+            return callback();
+        }
+        let i = 0;
+        const innerCallback = copyProperties(callback, (err: Error) => {
+            if (err) {
+                return callback(err);
+            }
+            i++;
+            if (i >= plugins.length) {
+                return callback();
+            }
+            plugins[i].call(this, param, innerCallback);
+        });
+        plugins[0].call(this, param, innerCallback);
     }
 
     /**
@@ -212,14 +261,14 @@ abstract class Tapable {
      *
      * If a handler returns something !== undefined, that value is returned and no more handlers will be applied.
      */
-    applyPluginsAsyncSeriesBailResult(name: string, ...args) {
+    applyPluginsAsyncSeriesBailResult(name: string, ...args: any[]) {
         const callback = <CallbackFunction>args.pop();
         if (!this._plugins[name] || this._plugins[name].length === 0) {
             return callback();
         }
         const plugins = this._plugins[name];
         let i = 0;
-        args.push(copyProperties(callback, (...params) => {
+        args.push(copyProperties(callback, (...params: any[]) => {
             if (params.length > 0) {
                 return callback.apply(null, params);
             }
@@ -242,13 +291,13 @@ abstract class Tapable {
      *       while `{@link applyPluginsAsyncSeriesBailResult1}` passes the arguments as single param(any type)
      *       and a callback for plugins
      */
-    applyPluginsAsyncSeriesBailResult1(name: string, param: any, callback: CallbackFunction) {
+    applyPluginsAsyncSeriesBailResult1<T>(name: string, param: any, callback: CallbackFunction) {
         const plugins = this._plugins[name];
         if (!plugins || plugins.length === 0) {
             return callback();
         }
         let i = 0;
-        const innerCallback = copyProperties(callback, function next(err, result) {
+        const innerCallback = copyProperties(callback, function next(this: T, err: Error, result: any) {
             if (arguments.length > 0) {
                 return callback(err, result);
             }
@@ -281,7 +330,7 @@ abstract class Tapable {
         }
         const plugins = this._plugins[name];
         let i = 0;
-        const next = copyProperties(callback, (err, value) => {
+        const next = copyProperties(callback, (err: Error, value: any) => {
             if (err) {
                 return callback(err);
             }
@@ -305,14 +354,14 @@ abstract class Tapable {
      * If any handler invokes the callback with err, callback is invoked with this error and the other handlers are
      * skipped.
      */
-    applyPluginsParallel(name: string, ...args) {
+    applyPluginsParallel(name: string, ...args: any[]) {
         const callback = <CallbackFunction>args.pop();
         if (!this._plugins[name] || this._plugins[name].length === 0) {
             return callback();
         }
         const plugins = this._plugins[name];
         let remaining = plugins.length;
-        args.push(copyProperties(callback, (err) => {
+        args.push(copyProperties(callback, (err: Error) => {
             if (remaining < 0) {
                 return;
             } // ignore
@@ -345,18 +394,18 @@ abstract class Tapable {
      *
      * The order is defined by registration not by speed of the handler function.
      */
-    applyPluginsParallelBailResult(name: string, ...args) {
+    applyPluginsParallelBailResult(name: string, ...args: any[]) {
         const callback = <CallbackFunction>args[args.length - 1];
         if (!this._plugins[name] || this._plugins[name].length === 0) {
             return callback();
         }
         const plugins = this._plugins[name];
         let currentPos = plugins.length;
-        let currentResult;
+        let currentResult: any[];
         let done: number[] = [];
         for (let i = 0; i < plugins.length; i++) {
             args[args.length - 1] = function (pos) {
-                return copyProperties(callback, function shadowCallback(...args) {
+                return copyProperties(callback, function shadowCallback(...args: any[]) {
                     if (pos >= currentPos) {
                         return; // ignore
                     }
@@ -392,11 +441,11 @@ abstract class Tapable {
             return callback();
         }
         let currentPos = plugins.length;
-        let currentResult;
+        let currentResult: any[];
         let done: number[] = [];
         for (let i = 0; i < plugins.length; i++) {
             const innerCallback = function (pos) {
-                return copyProperties(callback, function shadowCallback(...args) {
+                return copyProperties(callback, function shadowCallback(...args: any[]) {
                     if (pos >= currentPos) {
                         return; // ignore
                     }
@@ -416,15 +465,16 @@ abstract class Tapable {
         }
     }
 
-    static mixin(proto) {
+    static mixin(proto: any) {
         copyProperties(Tapable.prototype, proto);
     }
 }
 
 export = Tapable;
 
-function copyProperties(from, to) {
-    for (const key in from)
+function copyProperties(from: any, to: any) {
+    for (const key in from) {
         to[key] = from[key];
+    }
     return to;
 }
