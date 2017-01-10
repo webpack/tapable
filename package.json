@@ -15,6 +15,7 @@
   "engines": {
     "node": ">=0.6"
   },
+  "files": ["lib"],
   "homepage": "https://github.com/webpack/tapable",
   "main": "lib/Tapable.js",
   "scripts": {
