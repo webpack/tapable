@@ -1,6 +1,6 @@
 {
   "name": "tapable",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Tobias Koppers @sokra",
   "description": "Just a little module for plugins.",
   "license": "MIT",
@@ -15,7 +15,9 @@
   "engines": {
     "node": ">=0.6"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/webpack/tapable",
   "main": "lib/Tapable.js",
   "scripts": {
