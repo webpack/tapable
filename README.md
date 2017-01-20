@@ -60,7 +60,7 @@ void plugin(names: string|string[], handler: Function)
 void applyPlugins(name: string, args: any...)
 ```
 
-Synchronous applies all registered handlers for `name`. The handler functions are called with all args.
+Synchronously applies all registered handlers for `name`. The handler functions are called with all args.
 
 ### applyPluginsWaterfall
 
@@ -68,7 +68,7 @@ Synchronous applies all registered handlers for `name`. The handler functions ar
 any applyPluginsWaterfall(name: string, init: any, args: any...)
 ```
 
-Synchronous applies all registered handlers for `name`. The handler functions are called with the return value of the previous handler and all args. For the first handler `init` is used and the return value of the last handler is return by `applyPluginsWaterfall`
+Synchronously applies all registered handlers for `name`. The handler functions are called with the return value of the previous handler and all args. For the first handler `init` is used and the return value of the last handler is return by `applyPluginsWaterfall`
 
 ### applyPluginsAsync
 
@@ -90,7 +90,7 @@ Asynchronously applies all registered handlers for `name`. The handler functions
 any applyPluginsBailResult(name: string, args: any...)
 ```
 
-Synchronous applies all registered handlers for `name`. The handler function are called with all args. If a handler function returns something `!== undefined`, the value is returned and no more handlers are applied.
+Synchronously applies all registered handlers for `name`. The handler function are called with all args. If a handler function returns something `!== undefined`, the value is returned and no more handlers are applied.
 
 ### applyPluginsAsyncWaterfall
 
