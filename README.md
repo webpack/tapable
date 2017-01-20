@@ -60,7 +60,7 @@ void plugin(names: string|string[], handler: Function)
 void applyPlugins(name: string, args: any...)
 ```
 
-Synchronous applies all registered handers for `name`. The handler functions are called with all args.
+Synchronously applies all registered handlers for `name`. The handler functions are called with all args.
 
 ### applyPluginsWaterfall
 
@@ -68,7 +68,7 @@ Synchronous applies all registered handers for `name`. The handler functions are
 any applyPluginsWaterfall(name: string, init: any, args: any...)
 ```
 
-Synchronous applies all registered handers for `name`. The handler functions are called with the return value of the previous handler and all args. For the first handler `init` is used and the return value of the last handler is return by `applyPluginsWaterfall`
+Synchronously applies all registered handlers for `name`. The handler functions are called with the return value of the previous handler and all args. For the first handler `init` is used and the return value of the last handler is return by `applyPluginsWaterfall`
 
 ### applyPluginsAsync
 
@@ -80,7 +80,7 @@ void applyPluginsAsync(
 )
 ```
 
-Asynchronously applies all registered handers for `name`. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The hander functions are called in order of registration.
+Asynchronously applies all registered handlers for `name`. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration.
 
 `callback` is called after all handlers are called.
 
@@ -90,7 +90,7 @@ Asynchronously applies all registered handers for `name`. The handler functions 
 any applyPluginsBailResult(name: string, args: any...)
 ```
 
-Synchronous applies all registered handers for `name`. The handler function are called with all args. If a handler function returns something `!== undefined`, the value is returned and no more handers are applied.
+Synchronously applies all registered handlers for `name`. The handler function are called with all args. If a handler function returns something `!== undefined`, the value is returned and no more handlers are applied.
 
 ### applyPluginsAsyncWaterfall
 
@@ -102,7 +102,7 @@ applyPluginsAsyncWaterfall(
 )
 ```
 
-Asynchronously applies all registered handers for `name`. The hander functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void`. When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, `callback` is called with the last value. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
+Asynchronously applies all registered handlers for `name`. The handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void`. When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, `callback` is called with the last value. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
 
 ### applyPluginsAsyncSeries
 
@@ -114,7 +114,7 @@ applyPluginsAsyncSeries(
 )
 ```
 
-Asynchronously applies all registered handers for `name`. The hander functions are called with all `args` and a callback function with the signature `(err: Error) -> void`. The handers are called in series, one at a time. After all handlers are applied, `callback` is called. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
+Asynchronously applies all registered handlers for `name`. The handler functions are called with all `args` and a callback function with the signature `(err: Error) -> void`. The handlers are called in series, one at a time. After all handlers are applied, `callback` is called. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
 
 ### applyPluginsParallel
 
