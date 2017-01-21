@@ -1,6 +1,14 @@
 var Tapable = require("../lib/Tapable");
 var should = require("should");
 
+/**
+ * Function designed to return a plugin handler.
+ * With applyPluginsWaterfall, each plugin handler
+ * has some expected arguments it will receive and an
+ * optional return value. This function produces plugin
+ * handler functions that perform expected arg checks and
+ * returns some value (implicitly undefined if none specified).
+ */
 function makeTestPlugin(expectedArgs, returnVal) {
   return function() {
     var args = Array.prototype.slice.call(arguments);
@@ -58,7 +66,7 @@ describe("applyPluginsWaterfall", function() {
   it("should call subsequent handlers with original arguments", function() {
     var tapable = new Tapable();
     var allArgs = ['plugin', 'initValue', 'sharedArg1', 'sharedArg2', 'sharedArg3'];
-    var sharedArgs = allArgs.slice(2); // arguments that each instance will get
+    var sharedArgs = allArgs.slice(2); // arguments that each plugin handler will get
     
     var pluginHandler1 = makeTestPlugin(allArgs.slice(1), 'handler1Return');
     var pluginHandler2 = makeTestPlugin(['handler1Return'].concat(sharedArgs), 'handler2Return');
