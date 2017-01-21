@@ -61,9 +61,9 @@ describe("applyPluginsWaterfall", function() {
     var sharedArgs = allArgs.slice(2); // arguments that each instance will get
     
     var pluginHandler1 = makeTestPlugin(allArgs.slice(1), 'handler1Return');
-    var pluginHandler2 = makeTestPlugin(['handler1Return', ...sharedArgs], 'handler2Return');
-    var pluginHandler3 = makeTestPlugin(['handler2Return', ...sharedArgs], 'handler3Return');
-    var pluginHandler4 = makeTestPlugin(['handler3Return', ...sharedArgs]);
+    var pluginHandler2 = makeTestPlugin(['handler1Return'].concat(sharedArgs), 'handler2Return');
+    var pluginHandler3 = makeTestPlugin(['handler2Return'].concat(sharedArgs), 'handler3Return');
+    var pluginHandler4 = makeTestPlugin(['handler3Return'].concat(sharedArgs));
 
     tapable.plugin('plugin', pluginHandler1);
     tapable.plugin('plugin', pluginHandler2);
