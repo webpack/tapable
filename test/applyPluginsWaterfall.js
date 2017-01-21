@@ -57,10 +57,10 @@ describe("applyPluginsWaterfall", function() {
 
   it("should call subsequent handlers with original arguments", function() {
     var tapable = new Tapable();
-    var allArgs = ['initValue', 'sharedArg1', 'sharedArg2', 'sharedArg3'];
-    var sharedArgs = allArgs.slice(1);
+    var allArgs = ['plugin', 'initValue', 'sharedArg1', 'sharedArg2', 'sharedArg3'];
+    var sharedArgs = allArgs.slice(2); // arguments that each instance will get
     
-    var pluginHandler1 = makeTestPlugin(allArgs, 'handler1Return');
+    var pluginHandler1 = makeTestPlugin(allArgs.slice(1), 'handler1Return');
     var pluginHandler2 = makeTestPlugin(['handler1Return', ...sharedArgs], 'handler2Return');
     var pluginHandler3 = makeTestPlugin(['handler2Return', ...sharedArgs], 'handler3Return');
     var pluginHandler4 = makeTestPlugin(['handler3Return', ...sharedArgs]);
@@ -70,7 +70,8 @@ describe("applyPluginsWaterfall", function() {
     tapable.plugin('plugin', pluginHandler3);
     tapable.plugin('plugin', pluginHandler4);
 
-    tapable.applyPluginsWaterfall('plugin', ...allArgs);
+    // Calling apply to simulate ...spreadOperator
+    tapable.applyPluginsWaterfall.apply(tapable, allArgs);
   });
 
 });
