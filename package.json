@@ -23,7 +23,6 @@
   "main": "lib/Tapable.js",
   "scripts": {
     "test": "mocha --reporter spec",
-    "release:create": "standard-version -i CHANGELOG.md -m \"Creating release %s\"",
-    "release:publish": "git push --follow-tags origin master; npm publish"
+    "release": "standard-version"
   }
 }
