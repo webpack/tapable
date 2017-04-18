@@ -102,7 +102,7 @@ applyPluginsAsyncWaterfall(
 )
 ```
 
-Asynchronously applies all registered handlers for `name`. The handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void`. When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, `callback` is called with the last value. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
+Asynchronously applies all registered handlers for `name`. The handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void`. When called, `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, `callback` is called with the last value. If any handler passes a value for `err`, the `callback` is called with this error and no more handlers are called.
 
 ### applyPluginsAsyncSeries
 
@@ -126,7 +126,7 @@ applyPluginsParallel(
 )
 ```
 
-Applies all registered handlers for `name` parallel. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The `callback` function is called when all handlers called the callback without `err`. If any handler calls the callback with `err`, `callback` is invoked with this error and the other handlers are ignored.
+Applies all registered handlers for `name` in parallel. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. The `callback` function is called when all handlers have called the callback without `err`. If any handler calls the callback with `err`, `callback` is invoked with this error and the other handlers are ignored.
 
 ### applyPluginsParallelBailResult
 
@@ -138,4 +138,4 @@ applyPluginsParallelBailResult(
 )
 ```
 
-Applies all registered handlers for `name` parallel. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. Handler functions must call the callback. They can either pass an error, or pass undefined, or pass an value. The first result (either error or value) with is not undefined is passed to the `callback`. The order is defined by registeration not by speed of the handler function. This function compentate this.
+Applies all registered handlers for `name` in parallel. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. Handler functions must call the callback. They can either pass an error, pass undefined, or pass a value. The first result (either error or value) which is not undefined is passed to the `callback`. The order is defined by registration, not by the speed of the handler function.
