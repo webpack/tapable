@@ -10,7 +10,8 @@
   },
   "devDependencies": {
     "mocha": "^2.2.4",
-    "should": "^5.2.0"
+    "should": "^5.2.0",
+    "typescript": "^2.0.6"
   },
   "engines": {
     "node": ">=0.6"
@@ -20,7 +21,9 @@
   ],
   "homepage": "https://github.com/webpack/tapable",
   "main": "lib/Tapable.js",
+  "types": "typings/Tapable.d.ts",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha --reporter spec",
+    "build": "tsc -p . || true"
   }
 }

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noEmit": false,
+    "lib": [
+      "es2016"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
