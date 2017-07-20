@@ -139,3 +139,13 @@ applyPluginsParallelBailResult(
 ```
 
 Applies all registered handlers for `name` in parallel. The handler functions are called with all args and a callback function with the signature `(err?: Error) -> void`. Handler functions must call the callback. They can either pass an error, pass undefined, or pass a value. The first result (either error or value) which is not undefined is passed to the `callback`. The order is defined by registration, not by the speed of the handler function.
+
+### hasPlugins
+
+``` js
+hasPlugins(
+	name: string
+)
+```
+
+Returns true, if plugins are registered for this name.
