@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": true,
+        "declarationDir":"./typings/", 
+        "noImplicitAny": false,
+        "noImplicitUseStrict": true,
+        "removeComments": false,  
+        "outDir":"./lib/",
+        "noLib": false
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}
