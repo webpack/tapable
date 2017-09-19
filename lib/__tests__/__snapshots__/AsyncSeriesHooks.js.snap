@@ -1003,6 +1003,25 @@ Object {
   "callAsyncInterceptedSyncCalledCall": 1,
   "callAsyncInterceptedSyncCalledLoop": 83,
   "callAsyncInterceptedSyncCalledTap": 125,
+  "callAsyncMixed": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncMixedCalled1": 124,
+  "callAsyncMixedCalled2": 83,
+  "callAsyncMixedCalled3": 42,
+  "callAsyncMultipleAsync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncMultipleAsyncCalled1": 83,
+  "callAsyncMultipleAsyncCalled2": 42,
+  "callAsyncMultiplePromise": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncMultiplePromiseCalled1": 83,
+  "callAsyncMultiplePromiseCalled2": 42,
   "callAsyncMultipleSync": Object {
     "type": "async",
     "value": undefined,
@@ -1017,12 +1036,31 @@ Object {
     "type": "async",
     "value": undefined,
   },
+  "callAsyncSingleAsync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncSingleAsyncCalled": 42,
+  "callAsyncSinglePromise": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncSinglePromiseCalled": 42,
   "callAsyncSingleSync": Object {
     "type": "async",
     "value": undefined,
   },
   "callAsyncSingleSyncCalled": 42,
   "callInterceptedSync": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callMixed": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callMultipleAsync": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callMultiplePromise": Object {
     "error": "hook[method] is not a function",
   },
   "callMultipleSync": Object {
@@ -1032,6 +1070,12 @@ Object {
     "error": "hook[method] is not a function",
   },
   "callNoneWithArg": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callSingleAsync": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callSinglePromise": Object {
     "error": "hook[method] is not a function",
   },
   "callSingleSync": Object {
@@ -1046,6 +1090,25 @@ Object {
   "promiseInterceptedSyncCalledCall": 1,
   "promiseInterceptedSyncCalledLoop": 83,
   "promiseInterceptedSyncCalledTap": 125,
+  "promiseMixed": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseMixedCalled1": 124,
+  "promiseMixedCalled2": 83,
+  "promiseMixedCalled3": 42,
+  "promiseMultipleAsync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseMultipleAsyncCalled1": 83,
+  "promiseMultipleAsyncCalled2": 42,
+  "promiseMultiplePromise": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseMultiplePromiseCalled1": 83,
+  "promiseMultiplePromiseCalled2": 42,
   "promiseMultipleSync": Object {
     "type": "promise",
     "value": undefined,
@@ -1060,6 +1123,16 @@ Object {
     "type": "promise",
     "value": undefined,
   },
+  "promiseSingleAsync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseSingleAsyncCalled": 42,
+  "promiseSinglePromise": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseSinglePromiseCalled": 42,
   "promiseSingleSync": Object {
     "type": "promise",
     "value": undefined,
