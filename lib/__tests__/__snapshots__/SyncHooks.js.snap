@@ -2,26 +2,26 @@
 
 exports[`SyncBailHook should have to correct behavior 1`] = `
 Object {
-  "callInspected": Object {
+  "callIntercepted": Object {
     "type": "return",
     "value": 6,
   },
-  "callInspectedCall1": Array [
+  "callInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "callInspectedCall2": Array [
+  "callInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "callInspectedTap1": Object {
+  "callInterceptedTap1": Object {
     "fn": 3,
     "name": "sync1",
     "type": "sync",
   },
-  "callInspectedTap2": Object {
+  "callInterceptedTap2": Object {
     "fn": 3,
     "name": "sync1",
     "type": "sync",
@@ -87,25 +87,25 @@ Object {
 
 exports[`SyncHook should have to correct behavior 1`] = `
 Object {
-  "callInspected": Object {
+  "callIntercepted": Object {
     "type": "no result",
   },
-  "callInspectedCall1": Array [
+  "callInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "callInspectedCall2": Array [
+  "callInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "callInspectedTap1": Object {
+  "callInterceptedTap1": Object {
     "fn": 2,
     "name": "sync2",
     "type": "sync",
   },
-  "callInspectedTap2": Object {
+  "callInterceptedTap2": Object {
     "fn": 3,
     "name": "sync1",
     "type": "sync",
@@ -170,28 +170,112 @@ Object {
 }
 `;
 
+exports[`SyncLoopHook should have to correct behavior 1`] = `
+Object {
+  "callAsyncInterceptedSync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncInterceptedSyncCalled1": 83,
+  "callAsyncInterceptedSyncCalled2": 42,
+  "callAsyncInterceptedSyncCalledCall": 1,
+  "callAsyncInterceptedSyncCalledLoop": 83,
+  "callAsyncInterceptedSyncCalledTap": 125,
+  "callAsyncMultipleSync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncMultipleSyncCalled1": 83,
+  "callAsyncMultipleSyncCalled2": 42,
+  "callAsyncNone": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncNoneWithArg": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncSingleSync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncSingleSyncCalled": 42,
+  "callInterceptedSync": Object {
+    "type": "no result",
+  },
+  "callInterceptedSyncCalled1": 83,
+  "callInterceptedSyncCalled2": 42,
+  "callInterceptedSyncCalledCall": 1,
+  "callInterceptedSyncCalledLoop": 83,
+  "callInterceptedSyncCalledTap": 125,
+  "callMultipleSync": Object {
+    "type": "no result",
+  },
+  "callMultipleSyncCalled1": 83,
+  "callMultipleSyncCalled2": 42,
+  "callNone": Object {
+    "type": "no result",
+  },
+  "callNoneWithArg": Object {
+    "type": "no result",
+  },
+  "callSingleSync": Object {
+    "type": "no result",
+  },
+  "callSingleSyncCalled": 42,
+  "promiseInterceptedSync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseInterceptedSyncCalled1": 83,
+  "promiseInterceptedSyncCalled2": 42,
+  "promiseInterceptedSyncCalledCall": 1,
+  "promiseInterceptedSyncCalledLoop": 83,
+  "promiseInterceptedSyncCalledTap": 125,
+  "promiseMultipleSync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseMultipleSyncCalled1": 83,
+  "promiseMultipleSyncCalled2": 42,
+  "promiseNone": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseNoneWithArg": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseSingleSync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseSingleSyncCalled": 42,
+}
+`;
+
 exports[`SyncWaterfallHook should have to correct behavior 1`] = `
 Object {
-  "callInspected": Object {
+  "callIntercepted": Object {
     "type": "return",
     "value": 9,
   },
-  "callInspectedCall1": Array [
+  "callInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "callInspectedCall2": Array [
+  "callInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "callInspectedTap1": Object {
+  "callInterceptedTap1": Object {
     "fn": 2,
     "name": "sync2",
     "type": "sync",
   },
-  "callInspectedTap2": Object {
+  "callInterceptedTap2": Object {
     "fn": 3,
     "name": "sync1",
     "type": "sync",

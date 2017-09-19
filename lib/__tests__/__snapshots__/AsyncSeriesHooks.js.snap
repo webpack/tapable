@@ -2,26 +2,26 @@
 
 exports[`AsyncSeriesBailHook should have to correct behavior 1`] = `
 Object {
-  "callAsyncInspected": Object {
+  "callAsyncIntercepted": Object {
     "type": "async",
     "value": 6,
   },
-  "callAsyncInspectedCall1": Array [
+  "callAsyncInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "callAsyncInspectedCall2": Array [
+  "callAsyncInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "callAsyncInspectedTap1": Object {
+  "callAsyncInterceptedTap1": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
   },
-  "callAsyncInspectedTap2": Object {
+  "callAsyncInterceptedTap2": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
@@ -222,7 +222,7 @@ Object {
     "value": undefined,
   },
   "callAsyncSingleSyncWithArgNoReturnCalled1": 42,
-  "callInspected": Object {
+  "callIntercepted": Object {
     "error": "hook.call is not a function",
   },
   "callMultipleSync": Object {
@@ -258,26 +258,26 @@ Object {
   "callSingleSyncWithArg": Object {
     "error": "hook.call is not a function",
   },
-  "promiseInspected": Object {
+  "promiseIntercepted": Object {
     "type": "promise",
     "value": 6,
   },
-  "promiseInspectedCall1": Array [
+  "promiseInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "promiseInspectedCall2": Array [
+  "promiseInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "promiseInspectedTap1": Object {
+  "promiseInterceptedTap1": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
   },
-  "promiseInspectedTap2": Object {
+  "promiseInterceptedTap2": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
@@ -483,26 +483,26 @@ Object {
 
 exports[`AsyncSeriesHook should have to correct behavior 1`] = `
 Object {
-  "callAsyncInspected": Object {
+  "callAsyncIntercepted": Object {
     "type": "async",
     "value": undefined,
   },
-  "callAsyncInspectedCall1": Array [
+  "callAsyncInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "callAsyncInspectedCall2": Array [
+  "callAsyncInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "callAsyncInspectedTap1": Object {
+  "callAsyncInterceptedTap1": Object {
     "fn": 2,
     "name": "promise",
     "type": "promise",
   },
-  "callAsyncInspectedTap2": Object {
+  "callAsyncInterceptedTap2": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
@@ -718,7 +718,7 @@ Object {
     "value": undefined,
   },
   "callAsyncSingleSyncWithArgNoReturnCalled1": 42,
-  "callInspected": Object {
+  "callIntercepted": Object {
     "error": "hook.call is not a function",
   },
   "callMultipleSync": Object {
@@ -754,26 +754,26 @@ Object {
   "callSingleSyncWithArg": Object {
     "error": "hook.call is not a function",
   },
-  "promiseInspected": Object {
+  "promiseIntercepted": Object {
     "type": "promise",
     "value": undefined,
   },
-  "promiseInspectedCall1": Array [
+  "promiseInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "promiseInspectedCall2": Array [
+  "promiseInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "promiseInspectedTap1": Object {
+  "promiseInterceptedTap1": Object {
     "fn": 2,
     "name": "promise",
     "type": "promise",
   },
-  "promiseInspectedTap2": Object {
+  "promiseInterceptedTap2": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
@@ -992,28 +992,104 @@ Object {
 }
 `;
 
+exports[`AsyncSeriesLoopHook should have to correct behavior 1`] = `
+Object {
+  "callAsyncInterceptedSync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncInterceptedSyncCalled1": 83,
+  "callAsyncInterceptedSyncCalled2": 42,
+  "callAsyncInterceptedSyncCalledCall": 1,
+  "callAsyncInterceptedSyncCalledLoop": 83,
+  "callAsyncInterceptedSyncCalledTap": 125,
+  "callAsyncMultipleSync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncMultipleSyncCalled1": 83,
+  "callAsyncMultipleSyncCalled2": 42,
+  "callAsyncNone": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncNoneWithArg": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncSingleSync": Object {
+    "type": "async",
+    "value": undefined,
+  },
+  "callAsyncSingleSyncCalled": 42,
+  "callInterceptedSync": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callMultipleSync": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callNone": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callNoneWithArg": Object {
+    "error": "hook[method] is not a function",
+  },
+  "callSingleSync": Object {
+    "error": "hook[method] is not a function",
+  },
+  "promiseInterceptedSync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseInterceptedSyncCalled1": 83,
+  "promiseInterceptedSyncCalled2": 42,
+  "promiseInterceptedSyncCalledCall": 1,
+  "promiseInterceptedSyncCalledLoop": 83,
+  "promiseInterceptedSyncCalledTap": 125,
+  "promiseMultipleSync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseMultipleSyncCalled1": 83,
+  "promiseMultipleSyncCalled2": 42,
+  "promiseNone": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseNoneWithArg": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseSingleSync": Object {
+    "type": "promise",
+    "value": undefined,
+  },
+  "promiseSingleSyncCalled": 42,
+}
+`;
+
 exports[`AsyncSeriesWaterfallHook should have to correct behavior 1`] = `
 Object {
-  "callAsyncInspected": Object {
+  "callAsyncIntercepted": Object {
     "type": "async",
     "value": 9,
   },
-  "callAsyncInspectedCall1": Array [
+  "callAsyncInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "callAsyncInspectedCall2": Array [
+  "callAsyncInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "callAsyncInspectedTap1": Object {
+  "callAsyncInterceptedTap1": Object {
     "fn": 2,
     "name": "promise",
     "type": "promise",
   },
-  "callAsyncInspectedTap2": Object {
+  "callAsyncInterceptedTap2": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",
@@ -1197,7 +1273,7 @@ Object {
     "value": 42,
   },
   "callAsyncSingleSyncWithArgNoReturnCalled1": 42,
-  "callInspected": Object {
+  "callIntercepted": Object {
     "error": "hook.call is not a function",
   },
   "callMultipleSync": Object {
@@ -1233,26 +1309,26 @@ Object {
   "callSingleSyncWithArg": Object {
     "error": "hook.call is not a function",
   },
-  "promiseInspected": Object {
+  "promiseIntercepted": Object {
     "type": "promise",
     "value": 9,
   },
-  "promiseInspectedCall1": Array [
+  "promiseInterceptedCall1": Array [
     1,
     2,
     3,
   ],
-  "promiseInspectedCall2": Array [
+  "promiseInterceptedCall2": Array [
     1,
     2,
     3,
   ],
-  "promiseInspectedTap1": Object {
+  "promiseInterceptedTap1": Object {
     "fn": 2,
     "name": "promise",
     "type": "promise",
   },
-  "promiseInspectedTap2": Object {
+  "promiseInterceptedTap2": Object {
     "fn": 3,
     "name": "sync",
     "type": "sync",

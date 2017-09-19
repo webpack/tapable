@@ -115,16 +115,16 @@ The Hook will compile a method with the most efficient way of running your plugi
 * The kind of registered plugins (sync, async, promise)
 * The used call method (sync, async, promise)
 * The number of arguments
-* Whether inspection is used
+* Whether interception is used
 
 This ensures fastest possible execution.
 
-## Inspection
+## Interception
 
-All Hooks offer an additional inspection API:
+All Hooks offer an additional interception API:
 
 ``` js
-myCar.hooks.calculateRoutes.inspect({
+myCar.hooks.calculateRoutes.intercept({
 	call: (source, target, routesList) => {
 		console.log("Starting to calculate routes");
 	},
