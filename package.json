@@ -23,7 +23,7 @@
     "lib"
   ],
   "homepage": "https://github.com/webpack/tapable",
-  "main": "lib/Tapable.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "travis": "jest --coverage && codecov"
