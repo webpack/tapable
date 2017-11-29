@@ -10,9 +10,9 @@ const {
 	SyncLoopHook,
 	AsyncParallelHook,
 	AsyncParallelBailHook,
-	AsyncSequencialHook,
-	AsyncSequencialBailHook,
-	AsyncWaterfallHook
+	AsyncSeriesHook,
+	AsyncSeriesBailHook,
+	AsyncSeriesWaterfallHook
  } = require("tapable");
 ```
 
