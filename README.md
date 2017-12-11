@@ -150,3 +150,13 @@ interface TapInfo: {
 	fn: Function
 }
 ```
+
+## MultiHook
+
+A helper Hook-like class to redirect taps to multiple other hooks:
+
+``` js
+const { MultiHook } = require("tapable");
+
+this.hooks.allHooks = new MultiHook([this.hooks.hookA, this.hooks.hookB]);
+```
