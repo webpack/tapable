@@ -135,3 +135,18 @@ myCar.hooks.calculateRoutes.intercept({
 	}
 })
 ```
+
+**call**: `(...args): -> void` Adding `call` to your intercept object will trigger when hooks are triggered. You have access to the hooks arguments.
+
+**tap**: `(tapInfo: TapInfo): -> TapInfo` Adding `tap` to your intercept object will trigger when a plugin taps into a hook. Provided is the `tapInfo` object. The `tapInfo` object ***must be returned*** or the Hook you are intercepting will likely throw. `tapInfo` object can be changed and a new version can be returned also. This would be how you _override_ an existing plugins functionality. So use with care.
+
+**loop**: TODO: Document how loop works from intercept api (Help wanted!)
+
+
+```ts
+interface TapInfo: {
+	name: string,
+	type: string
+	fn: Function
+}
+```
