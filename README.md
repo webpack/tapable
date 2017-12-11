@@ -136,18 +136,67 @@ myCar.hooks.calculateRoutes.intercept({
 })
 ```
 
-**call**: `(...args): -> void` Adding `call` to your intercept object will trigger when hooks are triggered. You have access to the hooks arguments.
+**call**: `(...args) => void` Adding `call` to your interceptor will trigger when hooks are triggered. You have access to the hooks arguments.
 
-**tap**: `(tapInfo: TapInfo): -> TapInfo` Adding `tap` to your intercept object will trigger when a plugin taps into a hook. Provided is the `tapInfo` object. The `tapInfo` object ***must be returned*** or the Hook you are intercepting will likely throw. `tapInfo` object can be changed and a new version can be returned also. This would be how you _override_ an existing plugins functionality. So use with care.
+**tap**: `(tap: Tap) => void` Adding `tap` to your interceptor will trigger when a plugin taps into a hook. Provided is the `Tap` object. `Tap` object can't be changed.
 
-**loop**: TODO: Document how loop works from intercept api (Help wanted!)
+**loop**: `(...args) => void` Adding `loop` to your interceptor will trigger for each loop of a looping hook.
+
+**register**: `(tap: Tap) => Tap | undefined` Adding `register` to your interceptor will trigger for each added `Tap` and allows to modify it.
 
 
-```ts
-interface TapInfo: {
+## Hook/HookMap interface
+
+Public:
+
+``` ts
+interface Hook {
+	tap: (name: string | Tap, fn: (...args) => Result) => void,
+	tapAsync: (name: string | Tap, fn: (...args, callback: (err, result: Result) => void) => void) => void,
+	tapPromise: (name: string | Tap, fn: (...args) => Promise<Result>) => void,
+	intercept: (interceptor: HookInterceptor) => void
+}
+
+interface HookInterceptor {
+	call: (...args) => void,
+	loop: (...args) => void,
+	tap: (tap: Tap) => void,
+	register: (tap: Tap) => Tap
+}
+
+interface HookMap {
+	for: (key: any) => Hook,
+	tap: (key: any, name: string | Tap, fn: (...args) => Result) => void,
+	tapAsync: (key: any, name: string | Tap, fn: (...args, callback: (err, result: Result) => void) => void) => void,
+	tapPromise: (key: any, name: string | Tap, fn: (...args) => Promise<Result>) => void,
+	intercept: (interceptor: HookMapInterceptor) => void
+}
+
+interface HookMapInterceptor {
+	factory: (key: any, hook: Hook) => Hook
+}
+
+interface Tap {
 	name: string,
 	type: string
-	fn: Function
+	fn: Function,
+	stage: number
+}
+```
+
+Protected (only for the class containing the hook):
+
+``` ts
+interface Hook {
+	isUsed: () => boolean,
+	call: (...args) => Result,
+	promise: (...args) => Promise<Result>,
+	callAsync: (...args, callback: (err, result: Result) => void) => void,
+}
+
+interface HookMap {
+	get: (key: any) => Hook | undefined,
+	for: (key: any) => Hook
 }
 ```
 
