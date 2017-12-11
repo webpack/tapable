@@ -36,6 +36,7 @@ Object {
     "callAsyncMultipleSyncCalled1": true,
     "callAsyncMultipleSyncError": Object {
       "error": "Error in sync2",
+      "type": "async",
     },
     "callAsyncMultipleSyncErrorCalled1": true,
     "callAsyncMultipleSyncErrorCalled2": true,
@@ -199,6 +200,7 @@ Object {
     "promiseMultipleSyncCalled1": true,
     "promiseMultipleSyncError": Object {
       "error": "Error in sync2",
+      "type": "promise",
     },
     "promiseMultipleSyncErrorCalled1": true,
     "promiseMultipleSyncErrorCalled2": true,
@@ -292,6 +294,7 @@ Object {
     "callAsyncMultipleSyncCalled2": true,
     "callAsyncMultipleSyncError": Object {
       "error": "Error in sync2",
+      "type": "async",
     },
     "callAsyncMultipleSyncErrorCalled1": true,
     "callAsyncMultipleSyncErrorCalled2": true,
@@ -463,6 +466,7 @@ Object {
     "promiseMultipleSyncCalled2": true,
     "promiseMultipleSyncError": Object {
       "error": "Error in sync2",
+      "type": "promise",
     },
     "promiseMultipleSyncErrorCalled1": true,
     "promiseMultipleSyncErrorCalled2": true,
