@@ -145,6 +145,27 @@ myCar.hooks.calculateRoutes.intercept({
 **register**: `(tap: Tap) => Tap | undefined` Adding `register` to your interceptor will trigger for each added `Tap` and allows to modify it.
 
 
+## HookMap
+
+A HookMap is a helper class for a Map with Hooks
+
+``` js
+const keyedHook = new HookMap(key => new SyncHook(["arg"]))
+```
+
+``` js
+keyedHook.tap("some-key", "MyPlugin", (arg) => { /* ... */ });
+keyedHook.tapAsync("some-key", "MyPlugin", (arg, callback) => { /* ... */ });
+keyedHook.tapPromise("some-key", "MyPlugin", (arg) => { /* ... */ });
+```
+
+``` js
+const hook = keyedHook.get("some-key");
+if(hook !== undefined) {
+	hook.callAsync("arg", err => { /* ... */ });
+}
+```
+
 ## Hook/HookMap interface
 
 Public:
