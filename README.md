@@ -172,24 +172,25 @@ Public:
 
 ``` ts
 interface Hook {
-	tap: (name: string | Tap, fn: (...args) => Result) => void,
-	tapAsync: (name: string | Tap, fn: (...args, callback: (err, result: Result) => void) => void) => void,
-	tapPromise: (name: string | Tap, fn: (...args) => Promise<Result>) => void,
+	tap: (name: string | Tap, fn: (context?, ...args) => Result) => void,
+	tapAsync: (name: string | Tap, fn: (context?, ...args, callback: (err, result: Result) => void) => void) => void,
+	tapPromise: (name: string | Tap, fn: (context?, ...args) => Promise<Result>) => void,
 	intercept: (interceptor: HookInterceptor) => void
 }
 
 interface HookInterceptor {
-	call: (...args) => void,
-	loop: (...args) => void,
-	tap: (tap: Tap) => void,
-	register: (tap: Tap) => Tap
+	call: (context?, ...args) => void,
+	loop: (context?, ...args) => void,
+	tap: (context?, tap: Tap) => void,
+	register: (tap: Tap) => Tap,
+	context: boolean
 }
 
 interface HookMap {
 	for: (key: any) => Hook,
-	tap: (key: any, name: string | Tap, fn: (...args) => Result) => void,
-	tapAsync: (key: any, name: string | Tap, fn: (...args, callback: (err, result: Result) => void) => void) => void,
-	tapPromise: (key: any, name: string | Tap, fn: (...args) => Promise<Result>) => void,
+	tap: (key: any, name: string | Tap, fn: (context?, ...args) => Result) => void,
+	tapAsync: (key: any, name: string | Tap, fn: (context?, ...args, callback: (err, result: Result) => void) => void) => void,
+	tapPromise: (key: any, name: string | Tap, fn: (context?, ...args) => Promise<Result>) => void,
 	intercept: (interceptor: HookMapInterceptor) => void
 }
 
@@ -201,7 +202,8 @@ interface Tap {
 	name: string,
 	type: string
 	fn: Function,
-	stage: number
+	stage: number,
+	context: boolean
 }
 ```
 

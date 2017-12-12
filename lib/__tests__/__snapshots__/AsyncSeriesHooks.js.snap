@@ -397,6 +397,26 @@ Object {
     "promiseSingleSyncWithArgNoReturnCalled1": 42,
   },
   "intercept": Object {
+    "callAsyncContextIntercepted": Object {
+      "type": "async",
+      "value": 48,
+    },
+    "callAsyncContextInterceptedCall1": Array [
+      Object {
+        "number": 42,
+      },
+      1,
+      2,
+      3,
+    ],
+    "callAsyncContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "callAsyncContextInterceptedTap1": Object {
+      "number": 42,
+    },
     "callAsyncIntercepted": Object {
       "type": "async",
       "value": 6,
@@ -420,6 +440,42 @@ Object {
       "fn": 3,
       "name": "sync",
       "type": "sync",
+    },
+    "callAsyncUnusedContextIntercepted": Object {
+      "type": "async",
+      "value": 6,
+    },
+    "callAsyncUnusedContextInterceptedCall1": Array [
+      undefined,
+      1,
+      2,
+      3,
+    ],
+    "callAsyncUnusedContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "callAsyncUnusedContextInterceptedTap1": undefined,
+    "promiseContextIntercepted": Object {
+      "type": "promise",
+      "value": 48,
+    },
+    "promiseContextInterceptedCall1": Array [
+      Object {
+        "number": 42,
+      },
+      1,
+      2,
+      3,
+    ],
+    "promiseContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "promiseContextInterceptedTap1": Object {
+      "number": 42,
     },
     "promiseIntercepted": Object {
       "type": "promise",
@@ -445,6 +501,22 @@ Object {
       "name": "sync",
       "type": "sync",
     },
+    "promiseUnusedContextIntercepted": Object {
+      "type": "promise",
+      "value": 6,
+    },
+    "promiseUnusedContextInterceptedCall1": Array [
+      undefined,
+      1,
+      2,
+      3,
+    ],
+    "promiseUnusedContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "promiseUnusedContextInterceptedTap1": undefined,
   },
   "sync": Object {
     "callAsyncIntercepted": Object {
@@ -1046,6 +1118,26 @@ Object {
     "promiseSingleSyncWithArgNoReturnCalled1": 42,
   },
   "intercept": Object {
+    "callAsyncContextIntercepted": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncContextInterceptedCall1": Array [
+      Object {
+        "number": 42,
+      },
+      1,
+      2,
+      3,
+    ],
+    "callAsyncContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "callAsyncContextInterceptedTap1": Object {
+      "number": 42,
+    },
     "callAsyncIntercepted": Object {
       "type": "async",
       "value": undefined,
@@ -1069,6 +1161,42 @@ Object {
       "fn": 3,
       "name": "sync",
       "type": "sync",
+    },
+    "callAsyncUnusedContextIntercepted": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncUnusedContextInterceptedCall1": Array [
+      undefined,
+      1,
+      2,
+      3,
+    ],
+    "callAsyncUnusedContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "callAsyncUnusedContextInterceptedTap1": undefined,
+    "promiseContextIntercepted": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseContextInterceptedCall1": Array [
+      Object {
+        "number": 42,
+      },
+      1,
+      2,
+      3,
+    ],
+    "promiseContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "promiseContextInterceptedTap1": Object {
+      "number": 42,
     },
     "promiseIntercepted": Object {
       "type": "promise",
@@ -1094,6 +1222,22 @@ Object {
       "name": "sync",
       "type": "sync",
     },
+    "promiseUnusedContextIntercepted": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseUnusedContextInterceptedCall1": Array [
+      undefined,
+      1,
+      2,
+      3,
+    ],
+    "promiseUnusedContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "promiseUnusedContextInterceptedTap1": undefined,
   },
   "sync": Object {
     "callAsyncIntercepted": Object {
@@ -1770,6 +1914,26 @@ Object {
     "promiseSingleSyncWithArgNoReturnCalled1": 42,
   },
   "intercept": Object {
+    "callAsyncContextIntercepted": Object {
+      "type": "async",
+      "value": 48,
+    },
+    "callAsyncContextInterceptedCall1": Array [
+      Object {
+        "number": 42,
+      },
+      1,
+      2,
+      3,
+    ],
+    "callAsyncContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "callAsyncContextInterceptedTap1": Object {
+      "number": 42,
+    },
     "callAsyncIntercepted": Object {
       "type": "async",
       "value": 9,
@@ -1793,6 +1957,42 @@ Object {
       "fn": 3,
       "name": "sync",
       "type": "sync",
+    },
+    "callAsyncUnusedContextIntercepted": Object {
+      "type": "async",
+      "value": 6,
+    },
+    "callAsyncUnusedContextInterceptedCall1": Array [
+      undefined,
+      1,
+      2,
+      3,
+    ],
+    "callAsyncUnusedContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "callAsyncUnusedContextInterceptedTap1": undefined,
+    "promiseContextIntercepted": Object {
+      "type": "promise",
+      "value": 48,
+    },
+    "promiseContextInterceptedCall1": Array [
+      Object {
+        "number": 42,
+      },
+      1,
+      2,
+      3,
+    ],
+    "promiseContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "promiseContextInterceptedTap1": Object {
+      "number": 42,
     },
     "promiseIntercepted": Object {
       "type": "promise",
@@ -1818,6 +2018,22 @@ Object {
       "name": "sync",
       "type": "sync",
     },
+    "promiseUnusedContextIntercepted": Object {
+      "type": "promise",
+      "value": 6,
+    },
+    "promiseUnusedContextInterceptedCall1": Array [
+      undefined,
+      1,
+      2,
+      3,
+    ],
+    "promiseUnusedContextInterceptedCall2": Array [
+      1,
+      2,
+      3,
+    ],
+    "promiseUnusedContextInterceptedTap1": undefined,
   },
   "sync": Object {
     "callAsyncIntercepted": Object {
