@@ -8,7 +8,8 @@ onError(_err1);
 } else {
 onResult(_result1);
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) async without onResult 1`] = `
@@ -19,7 +20,8 @@ onError(_err1);
 } else {
 onDone();
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) promise with onResult 1`] = `
@@ -86,7 +88,8 @@ onError(_err1);
 } else {
 onResult(_result1);
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) async without onResult 1`] = `
@@ -97,7 +100,8 @@ onError(_err1);
 } else {
 onDone();
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) promise with onResult 1`] = `
@@ -167,7 +171,8 @@ onError(_err1);
 } else {
 onResult(_result1);
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) async without onResult 1`] = `
@@ -181,7 +186,8 @@ onError(_err1);
 } else {
 onDone();
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) promise with onResult 1`] = `
@@ -298,7 +304,8 @@ onError(2, _err2);
 });
 }
 }
-});}
+});
+}
 }
 } while(_loop);
 _loopAsync = true;
@@ -341,7 +348,8 @@ _done();
 });
 }
 }
-});if(_counter <= 0) break;
+});
+if(_counter <= 0) break;
 var _fn2 = this._x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
@@ -391,7 +399,8 @@ onError(2, _err2);
 onDone();
 });
 }
-});}, () => {
+});
+}, () => {
 onDone();
 });
 "
@@ -445,7 +454,8 @@ onError(1, _err1);
 });
 }
 }
-});} while(_loop);
+});
+} while(_loop);
 _loopAsync = true;
 };
 _looper();
@@ -475,7 +485,8 @@ _done();
 });
 }
 }
-});if(_counter <= 0) break;
+});
+if(_counter <= 0) break;
 var _fn1 = this._x[1];
 var _hasResult1 = false;
 _fn1(a, b, c).then(_result1 => {
@@ -547,7 +558,8 @@ onError(1, _err1);
 onDone();
 });
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory taps (multiple sync) callTapsLooping 1`] = `
@@ -680,7 +692,8 @@ onDone();
 }
 }
 }
-});} while(_loop);
+});
+} while(_loop);
 _loopAsync = true;
 };
 _looper();
@@ -699,7 +712,8 @@ onDone();
 onDone();
 });
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory taps (single async) callTapsSeries 1`] = `
@@ -714,7 +728,8 @@ onDone();
 onDone();
 });
 }
-});"
+});
+"
 `;
 
 exports[`HookCodeFactory taps (single promise) callTapsLooping 1`] = `
