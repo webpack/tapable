@@ -2,7 +2,7 @@
   "name": "definitions",
   "version": "1.0.0",
   "scripts": {
-    "test": "ts-node ./build.ts"
+    "build": "ts-node ./build.ts"
   },
   "dependencies": {
     "tapable": "../"

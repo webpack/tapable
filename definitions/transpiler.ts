@@ -4,12 +4,15 @@ const REMOVE_MULTI_LINE_COMMENTS = true
 const GENERIC_LETTERS = "ABCDEFGHIJKLMNOPQRSUVWXYZ".split('')
 
 // Create new array of length
-const arr = (len, fill = null) => (new Array(len).fill(fill))
+const arr = (len, fillValue = null) => (new Array(len).fill(fillValue))
 
 const OPS: {[type: string]: (content: string, params?: any) => string} = {
-    // new <T = any, A = any>(args?: [string]): HookAsync1<T, A>
-    // =>
-    // new <T = any, A = any, B = any>(args?: [string, string]): HookAsync2<T, A, B>
+    // Example:
+    // src: `new <T = any, A = any>(args?: [string]): HookAsync1<T, A>`
+    // return `new <T = any>(): HookAsync0<T>` + '\n'
+    //      + `new <T = any, A = any>(args?: [string]): HookAsync1<T, A>` + '\n'
+    //      + `new <T = any, A = any, B = any>(args?: [string, string]): HookAsync2<T, A, B>` + '\n'
+    //      + `new <T = any, A = any, B = any, C = any>(args?: [string, string, string]): HookAsync3<T, A, B, C>` + '\n'
     "loopHookConstructor": (src, n = NUMBER_OF_LOOPS) => {
         return arr(n)
         .map((_, idx) => {
@@ -47,7 +50,8 @@ const OPS: {[type: string]: (content: string, params?: any) => string} = {
                 .replace(
                     /\ba: A(| *= *\w+)(, *)?/g,
                     letters.reduce((prev, curr) => prev + curr.toLowerCase() + ': ' + curr + '$1, ', '')
-                )                // clean up left-over commas followed by terminator 
+                )
+                // clean up left-over commas followed by terminator 
                 .replace(/, *([\>\)\]])/g, '$1')
                 // clean up left over generic brackets
                 .replace(/\<\s*\>/g, '')
@@ -86,6 +90,7 @@ export function transpile(content: string) {
             let opArgs = [content]
             if (parameters) {
                 try {
+                    // Put parameters in array brackets and evaluate
                     opArgs = opArgs.concat(eval(`[${parameters}]`))
                 } catch (error) {
                     throw new Error(`parameters '${parameters}' not valid javascript`)
@@ -94,6 +99,7 @@ export function transpile(content: string) {
             if (!OPS[type]) {
                 throw new Error(`Operation type '${type}' does not have definition!\nMatched:\n${match}`)
             }
+            // Recursive for nested macros
             return transpile(OPS[type].apply(OPS, opArgs))
         }
     )
