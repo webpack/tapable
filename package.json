@@ -25,6 +25,7 @@
   ],
   "homepage": "https://github.com/webpack/tapable",
   "main": "lib/index.js",
+  "typings": "./types.build.d.ts",
   "scripts": {
     "test": "jest",
     "travis": "jest --coverage && codecov"
