@@ -1,0 +1,17 @@
+{
+  "name": "definitions",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "ts-node ./build.ts"
+  },
+  "dependencies": {
+    "tapable": "../"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.9",
+    "@types/node": "^8.5.2",
+    "ts-jest": "^22.0.0",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.6.2"
+  }
+}

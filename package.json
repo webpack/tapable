@@ -9,6 +9,7 @@
     "url": "http://github.com/webpack/tapable.git"
   },
   "devDependencies": {
+    "@types/node": "^8.5.2",
     "babel-core": "^6.26.0",
     "babel-jest": "^21.0.2",
     "babel-polyfill": "^6.26.0",
