@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HookCodeFactory callTap (no args, no intercept) async with onResult 1`] = `
-"var _fn1 = this._x[1];
+"var _fn1 = _x[1];
 _fn1((_err1, _result1) => {
 if(_err1) {
 onError(_err1);
@@ -13,7 +13,7 @@ onResult(_result1);
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) async without onResult 1`] = `
-"var _fn1 = this._x[1];
+"var _fn1 = _x[1];
 _fn1(_err1 => {
 if(_err1) {
 onError(_err1);
@@ -25,7 +25,7 @@ onDone();
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) promise with onResult 1`] = `
-"var _fn2 = this._x[2];
+"var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2().then(_result2 => {
 _hasResult2 = true;
@@ -38,7 +38,7 @@ onError(_err2);
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) promise without onResult 1`] = `
-"var _fn2 = this._x[2];
+"var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2().then(_result2 => {
 _hasResult2 = true;
@@ -51,7 +51,7 @@ onError(_err2);
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) sync with onResult 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 var _result0 = _fn0();
@@ -66,7 +66,7 @@ onResult(_result0);
 `;
 
 exports[`HookCodeFactory callTap (no args, no intercept) sync without onResult 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 _fn0();
@@ -81,7 +81,7 @@ onDone();
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) async with onResult 1`] = `
-"var _fn1 = this._x[1];
+"var _fn1 = _x[1];
 _fn1(a, b, c, (_err1, _result1) => {
 if(_err1) {
 onError(_err1);
@@ -93,7 +93,7 @@ onResult(_result1);
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) async without onResult 1`] = `
-"var _fn1 = this._x[1];
+"var _fn1 = _x[1];
 _fn1(a, b, c, _err1 => {
 if(_err1) {
 onError(_err1);
@@ -105,7 +105,7 @@ onDone();
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) promise with onResult 1`] = `
-"var _fn2 = this._x[2];
+"var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -118,7 +118,7 @@ onError(_err2);
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) promise without onResult 1`] = `
-"var _fn2 = this._x[2];
+"var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -131,7 +131,7 @@ onError(_err2);
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) sync with onResult 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 var _result0 = _fn0(a, b, c);
@@ -146,7 +146,7 @@ onResult(_result0);
 `;
 
 exports[`HookCodeFactory callTap (with args, no intercept) sync without onResult 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 _fn0(a, b, c);
@@ -161,10 +161,10 @@ onDone();
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) async with onResult 1`] = `
-"var _tap1 = this.taps[1];
-this.interceptors[0].tap(_tap1);
-this.interceptors[1].tap(_tap1);
-var _fn1 = this._x[1];
+"var _tap1 = _taps[1];
+_interceptors[0].tap(_tap1);
+_interceptors[1].tap(_tap1);
+var _fn1 = _x[1];
 _fn1(a, b, c, (_err1, _result1) => {
 if(_err1) {
 onError(_err1);
@@ -176,10 +176,10 @@ onResult(_result1);
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) async without onResult 1`] = `
-"var _tap1 = this.taps[1];
-this.interceptors[0].tap(_tap1);
-this.interceptors[1].tap(_tap1);
-var _fn1 = this._x[1];
+"var _tap1 = _taps[1];
+_interceptors[0].tap(_tap1);
+_interceptors[1].tap(_tap1);
+var _fn1 = _x[1];
 _fn1(a, b, c, _err1 => {
 if(_err1) {
 onError(_err1);
@@ -191,10 +191,10 @@ onDone();
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) promise with onResult 1`] = `
-"var _tap2 = this.taps[2];
-this.interceptors[0].tap(_tap2);
-this.interceptors[1].tap(_tap2);
-var _fn2 = this._x[2];
+"var _tap2 = _taps[2];
+_interceptors[0].tap(_tap2);
+_interceptors[1].tap(_tap2);
+var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -207,10 +207,10 @@ onError(_err2);
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) promise without onResult 1`] = `
-"var _tap2 = this.taps[2];
-this.interceptors[0].tap(_tap2);
-this.interceptors[1].tap(_tap2);
-var _fn2 = this._x[2];
+"var _tap2 = _taps[2];
+_interceptors[0].tap(_tap2);
+_interceptors[1].tap(_tap2);
+var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -223,10 +223,10 @@ onError(_err2);
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) sync with onResult 1`] = `
-"var _tap0 = this.taps[0];
-this.interceptors[0].tap(_tap0);
-this.interceptors[1].tap(_tap0);
-var _fn0 = this._x[0];
+"var _tap0 = _taps[0];
+_interceptors[0].tap(_tap0);
+_interceptors[1].tap(_tap0);
+var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 var _result0 = _fn0(a, b, c);
@@ -241,10 +241,10 @@ onResult(_result0);
 `;
 
 exports[`HookCodeFactory callTap (with args, with intercept) sync without onResult 1`] = `
-"var _tap0 = this.taps[0];
-this.interceptors[0].tap(_tap0);
-this.interceptors[1].tap(_tap0);
-var _fn0 = this._x[0];
+"var _tap0 = _taps[0];
+_interceptors[0].tap(_tap0);
+_interceptors[1].tap(_tap0);
+var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 _fn0(a, b, c);
@@ -264,7 +264,7 @@ var _loopAsync = false;
 var _loop;
 do {
 _loop = false;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 var _hasError0 = false;
 try {
 var _result0 = _fn0(a, b, c);
@@ -277,7 +277,7 @@ if(_result0 !== undefined) {
 _loop = true;
 if(_loopAsync) _looper();
 } else {
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 _fn1(a, b, c, (_err1, _result1) => {
 if(_err1) {
 onError(1, _err1);
@@ -286,7 +286,7 @@ if(_result1 !== undefined) {
 _loop = true;
 if(_loopAsync) _looper();
 } else {
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -321,7 +321,7 @@ var _done = () => {
 onDone();
 };
 if(_counter <= 0) break;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 if(_counter > 0) {
 onResult(0, _result0, () => {
@@ -332,7 +332,7 @@ _done();
 });
 }
 if(_counter <= 0) break;
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 _fn1(a, b, c, (_err1, _result1) => {
 if(_err1) {
 if(_counter > 0) {
@@ -350,7 +350,7 @@ _done();
 }
 });
 if(_counter <= 0) break;
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -373,16 +373,16 @@ onError(2, _err2);
 `;
 
 exports[`HookCodeFactory taps (mixed) callTapsSeries 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 onResult(0, _result0, () => {
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 _fn1(a, b, c, (_err1, _result1) => {
 if(_err1) {
 onError(1, _err1);
 } else {
 onResult(1, _result1, () => {
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _hasResult2 = false;
 _fn2(a, b, c).then(_result2 => {
 _hasResult2 = true;
@@ -412,7 +412,7 @@ var _loopAsync = false;
 var _loop;
 do {
 _loop = false;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
 if(_err0) {
 onError(0, _err0);
@@ -421,7 +421,7 @@ if(_result0 !== undefined) {
 _loop = true;
 if(_loopAsync) _looper();
 } else {
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 var _hasResult1 = false;
 _fn1(a, b, c).then(_result1 => {
 _hasResult1 = true;
@@ -429,7 +429,7 @@ if(_result1 !== undefined) {
 _loop = true;
 if(_loopAsync) _looper();
 } else {
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _hasError2 = false;
 try {
 var _result2 = _fn2(a, b, c);
@@ -469,7 +469,7 @@ var _done = () => {
 onDone();
 };
 if(_counter <= 0) break;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
 if(_err0) {
 if(_counter > 0) {
@@ -487,7 +487,7 @@ _done();
 }
 });
 if(_counter <= 0) break;
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 var _hasResult1 = false;
 _fn1(a, b, c).then(_result1 => {
 _hasResult1 = true;
@@ -506,7 +506,7 @@ onError(1, _err1);
 }
 });
 if(_counter <= 0) break;
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _result2 = _fn2(a, b, c);
 if(_counter > 0) {
 onResult(2, _result2, () => {
@@ -521,18 +521,18 @@ _done();
 `;
 
 exports[`HookCodeFactory taps (mixed2) callTapsSeries 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
 if(_err0) {
 onError(0, _err0);
 } else {
 onResult(0, _result0, () => {
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 var _hasResult1 = false;
 _fn1(a, b, c).then(_result1 => {
 _hasResult1 = true;
 onResult(1, _result1, () => {
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _hasError2 = false;
 try {
 var _result2 = _fn2(a, b, c);
@@ -566,17 +566,17 @@ exports[`HookCodeFactory taps (multiple sync) callTapsLooping 1`] = `
 "var _loop;
 do {
 _loop = false;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 if(_result0 !== undefined) {
 _loop = true;
 } else {
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 var _result1 = _fn1(a, b, c);
 if(_result1 !== undefined) {
 _loop = true;
 } else {
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _result2 = _fn2(a, b, c);
 if(_result2 !== undefined) {
 _loop = true;
@@ -598,7 +598,7 @@ var _done = () => {
 onDone();
 };
 if(_counter <= 0) break;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 if(_counter > 0) {
 onResult(0, _result0, () => {
@@ -609,7 +609,7 @@ _done();
 });
 }
 if(_counter <= 0) break;
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 var _result1 = _fn1(a, b, c);
 if(_counter > 0) {
 onResult(1, _result1, () => {
@@ -620,7 +620,7 @@ _done();
 });
 }
 if(_counter <= 0) break;
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _result2 = _fn2(a, b, c);
 if(_counter > 0) {
 onResult(2, _result2, () => {
@@ -635,13 +635,13 @@ _done();
 `;
 
 exports[`HookCodeFactory taps (multiple sync) callTapsSeries 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 onResult(0, _result0, () => {
-var _fn1 = this._x[1];
+var _fn1 = _x[1];
 var _result1 = _fn1(a, b, c);
 onResult(1, _result1, () => {
-var _fn2 = this._x[2];
+var _fn2 = _x[2];
 var _result2 = _fn2(a, b, c);
 onResult(2, _result2, () => {
 onDone();
@@ -678,7 +678,7 @@ var _loopAsync = false;
 var _loop;
 do {
 _loop = false;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
 if(_err0) {
 onError(0, _err0);
@@ -701,7 +701,7 @@ _looper();
 `;
 
 exports[`HookCodeFactory taps (single async) callTapsParallel 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
 if(_err0) {
 onError(0, _err0);
@@ -717,7 +717,7 @@ onDone();
 `;
 
 exports[`HookCodeFactory taps (single async) callTapsSeries 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
 if(_err0) {
 onError(0, _err0);
@@ -738,7 +738,7 @@ var _loopAsync = false;
 var _loop;
 do {
 _loop = false;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 var _hasResult0 = false;
 _fn0(a, b, c).then(_result0 => {
 _hasResult0 = true;
@@ -762,7 +762,7 @@ _looper();
 `;
 
 exports[`HookCodeFactory taps (single promise) callTapsParallel 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _hasResult0 = false;
 _fn0(a, b, c).then(_result0 => {
 _hasResult0 = true;
@@ -779,7 +779,7 @@ onError(0, _err0);
 `;
 
 exports[`HookCodeFactory taps (single promise) callTapsSeries 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _hasResult0 = false;
 _fn0(a, b, c).then(_result0 => {
 _hasResult0 = true;
@@ -799,7 +799,7 @@ exports[`HookCodeFactory taps (single sync) callTapsLooping 1`] = `
 "var _loop;
 do {
 _loop = false;
-var _fn0 = this._x[0];
+var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 if(_result0 !== undefined) {
 _loop = true;
@@ -813,7 +813,7 @@ onDone();
 `;
 
 exports[`HookCodeFactory taps (single sync) callTapsParallel 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 onResult(0, _result0, () => {
 onDone();
@@ -824,7 +824,7 @@ onDone();
 `;
 
 exports[`HookCodeFactory taps (single sync) callTapsSeries 1`] = `
-"var _fn0 = this._x[0];
+"var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 onResult(0, _result0, () => {
 onDone();
