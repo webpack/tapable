@@ -128,7 +128,7 @@ myCar.hooks.calculateRoutes.intercept({
 	call: (source, target, routesList) => {
 		console.log("Starting to calculate routes");
 	},
-	tap: (tapInfo) => {
+	register: (tapInfo) => {
 		// tapInfo = { type: "promise", name: "GoogleMapsPlugin", fn: ... }
 		console.log(`${tapInfo.name} is doing it's job`);
 		return tapInfo; // may return a new tapInfo object
