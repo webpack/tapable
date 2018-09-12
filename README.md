@@ -119,6 +119,29 @@ The Hook will compile a method with the most efficient way of running your plugi
 
 This ensures fastest possible execution.
 
+## Hook types
+
+Each hook can be tapped with one or several functions. How they are executed depends on the hook type:
+
+* Basic hook (without “Waterfall”, “Bail” or “Loop” in its name). This hook simply calls every function it’s tapped with in a row.
+
+* __Waterfall__. A waterfall hook also calls each tapped function in a row. Unlike the basic hook, it passes a return value from each function to the next function.
+
+* __Bail__. A bail hook allows exitting early. When any of the tapped function returns anything, the bail hook will stop executing the remaining ones.
+
+* __Loop__. TODO
+
+Additionally, hooks can be synchronous or asynchronous. To reflect this, there’re “Sync”, “AsyncSeries” and “AsyncParallel” hook classes:
+
+* __Sync__. A sync hooks can only be tapped with synchronous functions (using `myHook.tap()`).
+
+* __AsyncSeries__. Async-series hooks can be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). They call each async method in a row.
+
+* __AsyncParallel__. Async-parallel hooks can also be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). However, they run each async method in parallel.
+
+The hook type is reflected in its class name. E.g., `AsyncSeriesWaterfallHook` allows asynchronous functions and runs them in series passing each function’s return value into the next function.
+
+
 ## Interception
 
 All Hooks offer an additional interception API:
