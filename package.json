@@ -14,7 +14,8 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "codecov": "^2.3.0",
-    "jest": "^21.0.4"
+    "jest": "^21.0.4",
+    "prettier": "^1.13.2"
   },
   "engines": {
     "node": ">=6"
@@ -26,7 +27,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "travis": "jest --coverage && codecov"
+    "travis": "jest --coverage && codecov",
+    "pretty": "prettier --write lib/*.js lib/__tests__/*.js"
   },
   "jest": {
     "transform": {
