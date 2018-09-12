@@ -1432,12 +1432,7 @@ exports[`AsyncSeriesLoopHook should have to correct behavior 1`] = `
 Object {
   "async": Object {
     "callAsyncBrokenPromise": Object {
-      "error": "Callback did not return promise. Code:
-
-() => \\"this is not a promise\\"
-
-Result: this is not a promise
-",
+      "error": "Tap function (tapPromise) did not return promise (returned this is not a promise)",
     },
     "callAsyncMixed": Object {
       "type": "async",
@@ -1469,12 +1464,7 @@ Result: this is not a promise
     },
     "callAsyncSinglePromiseCalled": 42,
     "promiseBrokenPromise": Object {
-      "error": "Callback did not return promise. Code:
-
-() => \\"this is not a promise\\"
-
-Result: this is not a promise
-",
+      "error": "Tap function (tapPromise) did not return promise (returned this is not a promise)",
       "type": "promise",
     },
     "promiseMixed": Object {
