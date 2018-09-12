@@ -27,7 +27,10 @@ onDone();
 exports[`HookCodeFactory callTap (no args, no intercept) promise with onResult 1`] = `
 "var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2().then(_result2 => {
+var _promise2 = _fn2();
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onResult(_result2);
 }, _err2 => {
@@ -40,7 +43,10 @@ onError(_err2);
 exports[`HookCodeFactory callTap (no args, no intercept) promise without onResult 1`] = `
 "var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2().then(_result2 => {
+var _promise2 = _fn2();
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onDone();
 }, _err2 => {
@@ -107,7 +113,10 @@ onDone();
 exports[`HookCodeFactory callTap (with args, no intercept) promise with onResult 1`] = `
 "var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onResult(_result2);
 }, _err2 => {
@@ -120,7 +129,10 @@ onError(_err2);
 exports[`HookCodeFactory callTap (with args, no intercept) promise without onResult 1`] = `
 "var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onDone();
 }, _err2 => {
@@ -196,7 +208,10 @@ _interceptors[0].tap(_tap2);
 _interceptors[1].tap(_tap2);
 var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onResult(_result2);
 }, _err2 => {
@@ -212,7 +227,10 @@ _interceptors[0].tap(_tap2);
 _interceptors[1].tap(_tap2);
 var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onDone();
 }, _err2 => {
@@ -288,7 +306,10 @@ if(_loopAsync) _looper();
 } else {
 var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 if(_result2 !== undefined) {
 _loop = true;
@@ -352,7 +373,10 @@ _done();
 if(_counter <= 0) break;
 var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 if(_counter > 0) {
 onResult(2, _result2, () => {
@@ -384,7 +408,10 @@ onError(1, _err1);
 onResult(1, _result1, () => {
 var _fn2 = _x[2];
 var _hasResult2 = false;
-_fn2(a, b, c).then(_result2 => {
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
 _hasResult2 = true;
 onResult(2, _result2, () => {
 onDone();
@@ -423,7 +450,10 @@ if(_loopAsync) _looper();
 } else {
 var _fn1 = _x[1];
 var _hasResult1 = false;
-_fn1(a, b, c).then(_result1 => {
+var _promise1 = _fn1(a, b, c);
+if (!_promise1 || !_promise1.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+_promise1.then(_result1 => {
 _hasResult1 = true;
 if(_result1 !== undefined) {
 _loop = true;
@@ -489,7 +519,10 @@ _done();
 if(_counter <= 0) break;
 var _fn1 = _x[1];
 var _hasResult1 = false;
-_fn1(a, b, c).then(_result1 => {
+var _promise1 = _fn1(a, b, c);
+if (!_promise1 || !_promise1.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+_promise1.then(_result1 => {
 _hasResult1 = true;
 if(_counter > 0) {
 onResult(1, _result1, () => {
@@ -529,7 +562,10 @@ onError(0, _err0);
 onResult(0, _result0, () => {
 var _fn1 = _x[1];
 var _hasResult1 = false;
-_fn1(a, b, c).then(_result1 => {
+var _promise1 = _fn1(a, b, c);
+if (!_promise1 || !_promise1.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+_promise1.then(_result1 => {
 _hasResult1 = true;
 onResult(1, _result1, () => {
 var _fn2 = _x[2];
@@ -740,7 +776,10 @@ do {
 _loop = false;
 var _fn0 = _x[0];
 var _hasResult0 = false;
-_fn0(a, b, c).then(_result0 => {
+var _promise0 = _fn0(a, b, c);
+if (!_promise0 || !_promise0.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+_promise0.then(_result0 => {
 _hasResult0 = true;
 if(_result0 !== undefined) {
 _loop = true;
@@ -764,7 +803,10 @@ _looper();
 exports[`HookCodeFactory taps (single promise) callTapsParallel 1`] = `
 "var _fn0 = _x[0];
 var _hasResult0 = false;
-_fn0(a, b, c).then(_result0 => {
+var _promise0 = _fn0(a, b, c);
+if (!_promise0 || !_promise0.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+_promise0.then(_result0 => {
 _hasResult0 = true;
 onResult(0, _result0, () => {
 onDone();
@@ -781,7 +823,10 @@ onError(0, _err0);
 exports[`HookCodeFactory taps (single promise) callTapsSeries 1`] = `
 "var _fn0 = _x[0];
 var _hasResult0 = false;
-_fn0(a, b, c).then(_result0 => {
+var _promise0 = _fn0(a, b, c);
+if (!_promise0 || !_promise0.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+_promise0.then(_result0 => {
 _hasResult0 = true;
 onResult(0, _result0, () => {
 onDone();
