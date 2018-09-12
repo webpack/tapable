@@ -144,6 +144,37 @@ myCar.hooks.calculateRoutes.intercept({
 
 **register**: `(tap: Tap) => Tap | undefined` Adding `register` to your interceptor will trigger for each added `Tap` and allows to modify it.
 
+## Context
+
+Plugins and interceptors can opt-in to access an optional `context` object, which can be used to pass arbitrary values to subsequent plugins and interceptors.
+
+``` js
+myCar.hooks.accelerate.intercept({
+	context: true,
+	tap: (context, tapInfo) => {
+		// tapInfo = { type: "sync", name: "NoisePlugin", fn: ... }
+		console.log(`${tapInfo.name} is doing it's job`);
+
+		// `context` starts as an empty object if at least one plugin uses `context: true`.
+		// If no plugins use `context: true`, then `context` is undefined.
+		if (context) {
+			// Arbitrary properties can be added to `context`, which plugins can then access.
+			context.hasMuffler = true;
+		}
+	}
+});
+
+myCar.hooks.accelerate.tap({
+	name: "NoisePlugin",
+	context: true
+}, (context, newSpeed) => {
+	if (context && context.hasMuffler) {
+		console.log("Silence...");
+	} else {
+		console.log("Vroom!");
+	}
+});
+```
 
 ## HookMap
 
