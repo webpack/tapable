@@ -1,6 +1,6 @@
 # Tapable
 
-The tapable packages exposes many Hook classes, which can be used to create hooks for plugins.
+The tapable packages expose many Hook classes, which can be used to create hooks for plugins.
 
 ``` javascript
 const {
@@ -14,6 +14,12 @@ const {
 	AsyncSeriesBailHook,
 	AsyncSeriesWaterfallHook
  } = require("tapable");
+```
+
+## Installation
+
+``` shell
+npm install --save tapable
 ```
 
 ## Usage
@@ -31,7 +37,7 @@ class Car {
 	constructor() {
 		this.hooks = {
 			accelerate: new SyncHook(["newSpeed"]),
-			break: new SyncHook(),
+			brake: new SyncHook(),
 			calculateRoutes: new AsyncParallelHook(["source", "target", "routesList"])
 		};
 	}
@@ -46,7 +52,7 @@ Other people can now use these hooks:
 const myCar = new Car();
 
 // Use the tap method to add a consument
-myCar.hooks.break.tap("WarningLampPlugin", () => warningLamp.on());
+myCar.hooks.brake.tap("WarningLampPlugin", () => warningLamp.on());
 ```
 
 It's required to pass a name to identify the plugin/reason.
@@ -123,21 +129,21 @@ This ensures fastest possible execution.
 
 Each hook can be tapped with one or several functions. How they are executed depends on the hook type:
 
-* Basic hook (without “Waterfall”, “Bail” or “Loop” in its name). This hook simply calls every function it’s tapped with in a row.
+* Basic hook (without “Waterfall”, “Bail” or “Loop” in its name). This hook simply calls every function it tapped in a row.
 
 * __Waterfall__. A waterfall hook also calls each tapped function in a row. Unlike the basic hook, it passes a return value from each function to the next function.
 
-* __Bail__. A bail hook allows exitting early. When any of the tapped function returns anything, the bail hook will stop executing the remaining ones.
+* __Bail__. A bail hook allows exiting early. When any of the tapped function returns anything, the bail hook will stop executing the remaining ones.
 
 * __Loop__. TODO
 
 Additionally, hooks can be synchronous or asynchronous. To reflect this, there’re “Sync”, “AsyncSeries” and “AsyncParallel” hook classes:
 
-* __Sync__. A sync hooks can only be tapped with synchronous functions (using `myHook.tap()`).
+* __Sync__. A sync hook can only be tapped with synchronous functions (using `myHook.tap()`).
 
-* __AsyncSeries__. Async-series hooks can be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). They call each async method in a row.
+* __AsyncSeries__. An async-series hook can be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). They call each async method in a row.
 
-* __AsyncParallel__. Async-parallel hooks can also be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). However, they run each async method in parallel.
+* __AsyncParallel__. An async-parallel hook can also be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). However, they run each async method in parallel.
 
 The hook type is reflected in its class name. E.g., `AsyncSeriesWaterfallHook` allows asynchronous functions and runs them in series passing each function’s return value into the next function.
 
@@ -153,7 +159,7 @@ myCar.hooks.calculateRoutes.intercept({
 	},
 	register: (tapInfo) => {
 		// tapInfo = { type: "promise", name: "GoogleMapsPlugin", fn: ... }
-		console.log(`${tapInfo.name} is doing it's job`);
+		console.log(`${tapInfo.name} is doing its job`);
 		return tapInfo; // may return a new tapInfo object
 	}
 })
