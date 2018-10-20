@@ -1,6 +1,6 @@
 # Tapable
 
-The tapable packages expose many Hook classes, which can be used to create hooks for plugins.
+The tapable package exposes many Hook classes, which can be used to create hooks for plugins.
 
 ``` javascript
 const {
