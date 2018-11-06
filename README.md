@@ -1,6 +1,6 @@
 # Tapable
 
-The tapable packages exposes many Hook classes, which can be used to create hooks for plugins.
+The tapable packages expose many Hook classes, which can be used to create hooks for plugins.
 
 ``` javascript
 const {
@@ -57,7 +57,7 @@ You may receive arguments:
 myCar.hooks.accelerate.tap("LoggerPlugin", newSpeed => console.log(`Accelerating to ${newSpeed}`));
 ```
 
-For sync hooks `tap` is the only valid method to add a plugin. Async hooks also support async plugins:
+For sync hooks, `tap` is the only valid method to add a plugin. Async hooks also support async plugins:
 
 ``` js
 myCar.hooks.calculateRoutes.tapPromise("GoogleMapsPlugin", (source, target, routesList) => {
@@ -131,7 +131,7 @@ Each hook can be tapped with one or several functions. How they are executed dep
 
 * __Loop__. TODO
 
-Additionally, hooks can be synchronous or asynchronous. To reflect this, there’re “Sync”, “AsyncSeries” and “AsyncParallel” hook classes:
+Additionally, hooks can be synchronous or asynchronous. To reflect this, there’re “Sync”, “AsyncSeries”, and “AsyncParallel” hook classes:
 
 * __Sync__. A sync hooks can only be tapped with synchronous functions (using `myHook.tap()`).
 
@@ -139,7 +139,7 @@ Additionally, hooks can be synchronous or asynchronous. To reflect this, there�
 
 * __AsyncParallel__. Async-parallel hooks can also be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). However, they run each async method in parallel.
 
-The hook type is reflected in its class name. E.g., `AsyncSeriesWaterfallHook` allows asynchronous functions and runs them in series passing each function’s return value into the next function.
+The hook type is reflected in it's class name. E.g., `AsyncSeriesWaterfallHook` allows asynchronous functions and runs them in series, passing each function’s return value into the next function.
 
 
 ## Interception
