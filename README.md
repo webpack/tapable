@@ -139,7 +139,7 @@ Additionally, hooks can be synchronous or asynchronous. To reflect this, there�
 
 * __AsyncParallel__. Async-parallel hooks can also be tapped with synchronous, callback-based and promise-based functions (using `myHook.tap()`, `myHook.tapAsync()` and `myHook.tapPromise()`). However, they run each async method in parallel.
 
-The hook type is reflected in it's class name. E.g., `AsyncSeriesWaterfallHook` allows asynchronous functions and runs them in series, passing each function’s return value into the next function.
+The hook type is reflected in its class name. E.g., `AsyncSeriesWaterfallHook` allows asynchronous functions and runs them in series, passing each function’s return value into the next function.
 
 
 ## Interception
