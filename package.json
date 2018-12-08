@@ -4,6 +4,7 @@
   "author": "Tobias Koppers @sokra",
   "description": "Just a little module for plugins.",
   "license": "MIT",
+  "homepage": "https://github.com/webpack/tapable",
   "repository": {
     "type": "git",
     "url": "http://github.com/webpack/tapable.git"
@@ -21,10 +22,11 @@
     "node": ">=6"
   },
   "files": [
-    "lib"
+    "lib",
+    "tapable.d.ts"
   ],
-  "homepage": "https://github.com/webpack/tapable",
   "main": "lib/index.js",
+  "types": "./tapable.d.ts",
   "scripts": {
     "test": "jest",
     "travis": "jest --coverage && codecov",
