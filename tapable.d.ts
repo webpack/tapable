@@ -87,9 +87,9 @@ interface HookMapInterceptor<H> {
 
 export class HookMap<H> {
 	constructor(factory: HookFactory<H>);
-	get(key: string): H;
+	get(key: string): H | undefined;
 	for(key: string): H;
-	intercept(interceptor: HookMapInterceptor<H>);
+	intercept(interceptor: HookMapInterceptor<H>): void;
 }
 
 export class MultiHook<H> {
