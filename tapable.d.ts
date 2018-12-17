@@ -55,7 +55,7 @@ export class SyncHook<T extends any[], R = void> extends Hook<T, R> {
 }
 
 export class SyncBailHook<T extends any[], R> extends SyncHook<T, R> {}
-export class SyncLoopHook<T extends any[], R> extends SyncHook<T, R> {}
+export class SyncLoopHook<T extends any[]> extends SyncHook<T, void> {}
 export class SyncWaterfallHook<T extends any[]> extends SyncHook<T, T[0]> {}
 
 declare class AsyncHook<T extends any[], R> extends Hook<T, R> {
@@ -66,14 +66,14 @@ declare class AsyncHook<T extends any[], R> extends Hook<T, R> {
 	tapPromise(options: string | Tap, fn: (...args: T) => Promise<R>): void;
 }
 
-export class AsyncParallelHook<T extends any[], R> extends AsyncHook<T, R> {}
+export class AsyncParallelHook<T extends any[]> extends AsyncHook<T, void> {}
 export class AsyncParallelBailHook<T extends any[], R> extends AsyncHook<
 	T,
 	R
 > {}
-export class AsyncSeriesHook<T extends any[], R> extends AsyncHook<T, R> {}
+export class AsyncSeriesHook<T extends any[]> extends AsyncHook<T, void> {}
 export class AsyncSeriesBailHook<T extends any[], R> extends AsyncHook<T, R> {}
-export class AsyncSeriesLoopHook<T extends any[], R> extends AsyncHook<T, R> {}
+export class AsyncSeriesLoopHook<T extends any[]> extends AsyncHook<T, void> {}
 export class AsyncSeriesWaterfallHook<T extends any[]> extends AsyncHook<
 	T,
 	T[0]
