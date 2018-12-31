@@ -79,7 +79,7 @@ export class AsyncSeriesWaterfallHook<T extends any[]> extends AsyncHook<
 	T[0]
 > {}
 
-type HookFactory<H> = (key: string, hook?: H) => H;
+type HookFactory<H> = (key: any, hook?: H) => H;
 
 interface HookMapInterceptor<H> {
 	factory?: HookFactory<H>;
@@ -87,8 +87,8 @@ interface HookMapInterceptor<H> {
 
 export class HookMap<H> {
 	constructor(factory: HookFactory<H>);
-	get(key: string): H | undefined;
-	for(key: string): H;
+	get(key: any): H | undefined;
+	for(key: any): H;
 	intercept(interceptor: HookMapInterceptor<H>): void;
 }
 
