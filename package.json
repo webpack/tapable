@@ -23,6 +23,7 @@
   },
   "files": [
     "lib",
+    "!lib/__tests__",
     "tapable.d.ts"
   ],
   "main": "lib/index.js",
