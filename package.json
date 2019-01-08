@@ -21,7 +21,8 @@
     "node": ">=6"
   },
   "files": [
-    "lib"
+    "lib",
+    "!lib/__tests__"
   ],
   "homepage": "https://github.com/webpack/tapable",
   "main": "lib/index.js",
