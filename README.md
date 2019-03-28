@@ -98,7 +98,7 @@ class Car {
 	 **/
 
 	setSpeed(newSpeed) {
-		// following call returns undefined even you returned values
+		// following call returns undefined even when you returned values
 		this.hooks.accelerate.call(newSpeed);
 	}
 
