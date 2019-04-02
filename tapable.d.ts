@@ -41,7 +41,7 @@ interface HookInterceptor<H> {
 type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
 
 declare class Hook<T extends any[], R> {
-	constructor(args: ArgumentNames<T>);
+	constructor(args?: ArgumentNames<T>);
 	intercept(interceptor: HookInterceptor<Hook<T, R>>): void;
 	isUsed(): boolean;
 	callAsync(...args: Append<T, Callback<Error, R>>): void;
