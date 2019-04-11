@@ -88,20 +88,24 @@ myCar.hooks.calculateRoutes.tap("CachedRoutesPlugin", (source, target, routesLis
 		routesList.add(cachedRoute);
 })
 ```
-
 The class declaring these hooks need to call them:
 
 ``` js
 class Car {
-	/* ... */
+	/**
+	  * You won't get returned value from SyncHook or AsyncParallelHook,
+	  * to do that, use SyncWaterfallHook and AsyncSeriesWaterfallHook respectively
+	 **/
 
 	setSpeed(newSpeed) {
+		// following call returns undefined even when you returned values
 		this.hooks.accelerate.call(newSpeed);
 	}
 
 	useNavigationSystemPromise(source, target) {
 		const routesList = new List();
-		return this.hooks.calculateRoutes.promise(source, target, routesList).then(() => {
+		return this.hooks.calculateRoutes.promise(source, target, routesList).then((res) => {
+			// res is undefined for AsyncParallelHook
 			return routesList.getRoutes();
 		});
 	}
