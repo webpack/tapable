@@ -600,6 +600,27 @@ var _loopAsync = false;
 var _loop;
 do {
 _loop = false;
+function _next1() {
+var _fn2 = _x[2];
+var _hasResult2 = false;
+var _promise2 = _fn2(a, b, c);
+if (!_promise2 || !_promise2.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
+_promise2.then(_result2 => {
+_hasResult2 = true;
+if(_result2 !== undefined) {
+_loop = true;
+if(_loopAsync) _looper();
+} else {
+if(!_loop) {
+onDone();
+}
+}
+}, _err2 => {
+if(_hasResult2) throw _err2;
+onError(2, _err2);
+});
+}
 var _fn0 = _x[0];
 var _hasError0 = false;
 try {
@@ -622,25 +643,7 @@ if(_result1 !== undefined) {
 _loop = true;
 if(_loopAsync) _looper();
 } else {
-var _fn2 = _x[2];
-var _hasResult2 = false;
-var _promise2 = _fn2(a, b, c);
-if (!_promise2 || !_promise2.then)
-  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise2 + ')');
-_promise2.then(_result2 => {
-_hasResult2 = true;
-if(_result2 !== undefined) {
-_loop = true;
-if(_loopAsync) _looper();
-} else {
-if(!_loop) {
-onDone();
-}
-}
-}, _err2 => {
-if(_hasResult2) throw _err2;
-onError(2, _err2);
-});
+_next1();
 }
 }
 });
@@ -659,6 +662,34 @@ exports[`HookCodeFactory taps (mixed) callTapsLooping 2`] = `
   var _loop;
   do {
     _loop = false;
+    function _next1() {
+      var _fn2 = _x[2];
+      var _hasResult2 = false;
+      var _promise2 = _fn2(a, b, c);
+      if (!_promise2 || !_promise2.then)
+        throw new Error(
+          \\"Tap function (tapPromise) did not return promise (returned \\" +
+            _promise2 +
+            \\")\\"
+        );
+      _promise2.then(
+        _result2 => {
+          _hasResult2 = true;
+          if (_result2 !== undefined) {
+            _loop = true;
+            if (_loopAsync) _looper();
+          } else {
+            if (!_loop) {
+              onDone();
+            }
+          }
+        },
+        _err2 => {
+          if (_hasResult2) throw _err2;
+          onError(2, _err2);
+        }
+      );
+    }
     var _fn0 = _x[0];
     var _hasError0 = false;
     try {
@@ -681,32 +712,7 @@ exports[`HookCodeFactory taps (mixed) callTapsLooping 2`] = `
               _loop = true;
               if (_loopAsync) _looper();
             } else {
-              var _fn2 = _x[2];
-              var _hasResult2 = false;
-              var _promise2 = _fn2(a, b, c);
-              if (!_promise2 || !_promise2.then)
-                throw new Error(
-                  \\"Tap function (tapPromise) did not return promise (returned \\" +
-                    _promise2 +
-                    \\")\\"
-                );
-              _promise2.then(
-                _result2 => {
-                  _hasResult2 = true;
-                  if (_result2 !== undefined) {
-                    _loop = true;
-                    if (_loopAsync) _looper();
-                  } else {
-                    if (!_loop) {
-                      onDone();
-                    }
-                  }
-                },
-                _err2 => {
-                  if (_hasResult2) throw _err2;
-                  onError(2, _err2);
-                }
-              );
+              _next1();
             }
           }
         });
@@ -864,15 +870,7 @@ exports[`HookCodeFactory taps (mixed) callTapsParallel 2`] = `
 `;
 
 exports[`HookCodeFactory taps (mixed) callTapsSeries 1`] = `
-"var _fn0 = _x[0];
-var _result0 = _fn0(a, b, c);
-onResult(0, _result0, () => {
-var _fn1 = _x[1];
-_fn1(a, b, c, (_err1, _result1) => {
-if(_err1) {
-onError(1, _err1);
-} else {
-onResult(1, _result1, () => {
+"function _next1() {
 var _fn2 = _x[2];
 var _hasResult2 = false;
 var _promise2 = _fn2(a, b, c);
@@ -889,6 +887,17 @@ onDone();
 if(_hasResult2) throw _err2;
 onError(2, _err2);
 });
+}
+var _fn0 = _x[0];
+var _result0 = _fn0(a, b, c);
+onResult(0, _result0, () => {
+var _fn1 = _x[1];
+_fn1(a, b, c, (_err1, _result1) => {
+if(_err1) {
+onError(1, _err1);
+} else {
+onResult(1, _result1, () => {
+_next1();
 }, () => {
 onDone();
 });
@@ -901,7 +910,37 @@ onDone();
 `;
 
 exports[`HookCodeFactory taps (mixed) callTapsSeries 2`] = `
-"var _fn0 = _x[0];
+"function _next1() {
+  var _fn2 = _x[2];
+  var _hasResult2 = false;
+  var _promise2 = _fn2(a, b, c);
+  if (!_promise2 || !_promise2.then)
+    throw new Error(
+      \\"Tap function (tapPromise) did not return promise (returned \\" +
+        _promise2 +
+        \\")\\"
+    );
+  _promise2.then(
+    _result2 => {
+      _hasResult2 = true;
+      onResult(
+        2,
+        _result2,
+        () => {
+          onDone();
+        },
+        () => {
+          onDone();
+        }
+      );
+    },
+    _err2 => {
+      if (_hasResult2) throw _err2;
+      onError(2, _err2);
+    }
+  );
+}
+var _fn0 = _x[0];
 var _result0 = _fn0(a, b, c);
 onResult(
   0,
@@ -916,34 +955,7 @@ onResult(
           1,
           _result1,
           () => {
-            var _fn2 = _x[2];
-            var _hasResult2 = false;
-            var _promise2 = _fn2(a, b, c);
-            if (!_promise2 || !_promise2.then)
-              throw new Error(
-                \\"Tap function (tapPromise) did not return promise (returned \\" +
-                  _promise2 +
-                  \\")\\"
-              );
-            _promise2.then(
-              _result2 => {
-                _hasResult2 = true;
-                onResult(
-                  2,
-                  _result2,
-                  () => {
-                    onDone();
-                  },
-                  () => {
-                    onDone();
-                  }
-                );
-              },
-              _err2 => {
-                if (_hasResult2) throw _err2;
-                onError(2, _err2);
-              }
-            );
+            _next1();
           },
           () => {
             onDone();
@@ -965,26 +977,7 @@ var _loopAsync = false;
 var _loop;
 do {
 _loop = false;
-var _fn0 = _x[0];
-_fn0(a, b, c, (_err0, _result0) => {
-if(_err0) {
-onError(0, _err0);
-} else {
-if(_result0 !== undefined) {
-_loop = true;
-if(_loopAsync) _looper();
-} else {
-var _fn1 = _x[1];
-var _hasResult1 = false;
-var _promise1 = _fn1(a, b, c);
-if (!_promise1 || !_promise1.then)
-  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-_promise1.then(_result1 => {
-_hasResult1 = true;
-if(_result1 !== undefined) {
-_loop = true;
-if(_loopAsync) _looper();
-} else {
+function _next1() {
 var _fn2 = _x[2];
 var _hasError2 = false;
 try {
@@ -1004,10 +997,35 @@ onDone();
 }
 }
 }
+function _next0() {
+var _fn1 = _x[1];
+var _hasResult1 = false;
+var _promise1 = _fn1(a, b, c);
+if (!_promise1 || !_promise1.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+_promise1.then(_result1 => {
+_hasResult1 = true;
+if(_result1 !== undefined) {
+_loop = true;
+if(_loopAsync) _looper();
+} else {
+_next1();
+}
 }, _err1 => {
 if(_hasResult1) throw _err1;
 onError(1, _err1);
 });
+}
+var _fn0 = _x[0];
+_fn0(a, b, c, (_err0, _result0) => {
+if(_err0) {
+onError(0, _err0);
+} else {
+if(_result0 !== undefined) {
+_loop = true;
+if(_loopAsync) _looper();
+} else {
+_next0();
 }
 }
 });
@@ -1024,6 +1042,52 @@ exports[`HookCodeFactory taps (mixed2) callTapsLooping 2`] = `
   var _loop;
   do {
     _loop = false;
+    function _next1() {
+      var _fn2 = _x[2];
+      var _hasError2 = false;
+      try {
+        var _result2 = _fn2(a, b, c);
+      } catch (_err) {
+        _hasError2 = true;
+        onError(2, _err);
+      }
+      if (!_hasError2) {
+        if (_result2 !== undefined) {
+          _loop = true;
+          if (_loopAsync) _looper();
+        } else {
+          if (!_loop) {
+            onDone();
+          }
+        }
+      }
+    }
+    function _next0() {
+      var _fn1 = _x[1];
+      var _hasResult1 = false;
+      var _promise1 = _fn1(a, b, c);
+      if (!_promise1 || !_promise1.then)
+        throw new Error(
+          \\"Tap function (tapPromise) did not return promise (returned \\" +
+            _promise1 +
+            \\")\\"
+        );
+      _promise1.then(
+        _result1 => {
+          _hasResult1 = true;
+          if (_result1 !== undefined) {
+            _loop = true;
+            if (_loopAsync) _looper();
+          } else {
+            _next1();
+          }
+        },
+        _err1 => {
+          if (_hasResult1) throw _err1;
+          onError(1, _err1);
+        }
+      );
+    }
     var _fn0 = _x[0];
     _fn0(a, b, c, (_err0, _result0) => {
       if (_err0) {
@@ -1033,47 +1097,7 @@ exports[`HookCodeFactory taps (mixed2) callTapsLooping 2`] = `
           _loop = true;
           if (_loopAsync) _looper();
         } else {
-          var _fn1 = _x[1];
-          var _hasResult1 = false;
-          var _promise1 = _fn1(a, b, c);
-          if (!_promise1 || !_promise1.then)
-            throw new Error(
-              \\"Tap function (tapPromise) did not return promise (returned \\" +
-                _promise1 +
-                \\")\\"
-            );
-          _promise1.then(
-            _result1 => {
-              _hasResult1 = true;
-              if (_result1 !== undefined) {
-                _loop = true;
-                if (_loopAsync) _looper();
-              } else {
-                var _fn2 = _x[2];
-                var _hasError2 = false;
-                try {
-                  var _result2 = _fn2(a, b, c);
-                } catch (_err) {
-                  _hasError2 = true;
-                  onError(2, _err);
-                }
-                if (!_hasError2) {
-                  if (_result2 !== undefined) {
-                    _loop = true;
-                    if (_loopAsync) _looper();
-                  } else {
-                    if (!_loop) {
-                      onDone();
-                    }
-                  }
-                }
-              }
-            },
-            _err1 => {
-              if (_hasResult1) throw _err1;
-              onError(1, _err1);
-            }
-          );
+          _next0();
         }
       }
     });
@@ -1229,20 +1253,7 @@ exports[`HookCodeFactory taps (mixed2) callTapsParallel 2`] = `
 `;
 
 exports[`HookCodeFactory taps (mixed2) callTapsSeries 1`] = `
-"var _fn0 = _x[0];
-_fn0(a, b, c, (_err0, _result0) => {
-if(_err0) {
-onError(0, _err0);
-} else {
-onResult(0, _result0, () => {
-var _fn1 = _x[1];
-var _hasResult1 = false;
-var _promise1 = _fn1(a, b, c);
-if (!_promise1 || !_promise1.then)
-  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-_promise1.then(_result1 => {
-_hasResult1 = true;
-onResult(1, _result1, () => {
+"function _next1() {
 var _fn2 = _x[2];
 var _hasError2 = false;
 try {
@@ -1258,6 +1269,17 @@ onDone();
 onDone();
 });
 }
+}
+function _next0() {
+var _fn1 = _x[1];
+var _hasResult1 = false;
+var _promise1 = _fn1(a, b, c);
+if (!_promise1 || !_promise1.then)
+  throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+_promise1.then(_result1 => {
+_hasResult1 = true;
+onResult(1, _result1, () => {
+_next1();
 }, () => {
 onDone();
 });
@@ -1265,6 +1287,14 @@ onDone();
 if(_hasResult1) throw _err1;
 onError(1, _err1);
 });
+}
+var _fn0 = _x[0];
+_fn0(a, b, c, (_err0, _result0) => {
+if(_err0) {
+onError(0, _err0);
+} else {
+onResult(0, _result0, () => {
+_next0();
 }, () => {
 onDone();
 });
@@ -1274,7 +1304,59 @@ onDone();
 `;
 
 exports[`HookCodeFactory taps (mixed2) callTapsSeries 2`] = `
-"var _fn0 = _x[0];
+"function _next1() {
+  var _fn2 = _x[2];
+  var _hasError2 = false;
+  try {
+    var _result2 = _fn2(a, b, c);
+  } catch (_err) {
+    _hasError2 = true;
+    onError(2, _err);
+  }
+  if (!_hasError2) {
+    onResult(
+      2,
+      _result2,
+      () => {
+        onDone();
+      },
+      () => {
+        onDone();
+      }
+    );
+  }
+}
+function _next0() {
+  var _fn1 = _x[1];
+  var _hasResult1 = false;
+  var _promise1 = _fn1(a, b, c);
+  if (!_promise1 || !_promise1.then)
+    throw new Error(
+      \\"Tap function (tapPromise) did not return promise (returned \\" +
+        _promise1 +
+        \\")\\"
+    );
+  _promise1.then(
+    _result1 => {
+      _hasResult1 = true;
+      onResult(
+        1,
+        _result1,
+        () => {
+          _next1();
+        },
+        () => {
+          onDone();
+        }
+      );
+    },
+    _err1 => {
+      if (_hasResult1) throw _err1;
+      onError(1, _err1);
+    }
+  );
+}
+var _fn0 = _x[0];
 _fn0(a, b, c, (_err0, _result0) => {
   if (_err0) {
     onError(0, _err0);
@@ -1283,53 +1365,7 @@ _fn0(a, b, c, (_err0, _result0) => {
       0,
       _result0,
       () => {
-        var _fn1 = _x[1];
-        var _hasResult1 = false;
-        var _promise1 = _fn1(a, b, c);
-        if (!_promise1 || !_promise1.then)
-          throw new Error(
-            \\"Tap function (tapPromise) did not return promise (returned \\" +
-              _promise1 +
-              \\")\\"
-          );
-        _promise1.then(
-          _result1 => {
-            _hasResult1 = true;
-            onResult(
-              1,
-              _result1,
-              () => {
-                var _fn2 = _x[2];
-                var _hasError2 = false;
-                try {
-                  var _result2 = _fn2(a, b, c);
-                } catch (_err) {
-                  _hasError2 = true;
-                  onError(2, _err);
-                }
-                if (!_hasError2) {
-                  onResult(
-                    2,
-                    _result2,
-                    () => {
-                      onDone();
-                    },
-                    () => {
-                      onDone();
-                    }
-                  );
-                }
-              },
-              () => {
-                onDone();
-              }
-            );
-          },
-          _err1 => {
-            if (_hasResult1) throw _err1;
-            onError(1, _err1);
-          }
-        );
+        _next0();
       },
       () => {
         onDone();
