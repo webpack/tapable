@@ -10,13 +10,12 @@
     "url": "http://github.com/webpack/tapable.git"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^21.0.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "codecov": "^2.3.0",
-    "jest": "^21.0.4",
-    "prettier": "^1.13.2"
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-jest": "^24.8.0",
+    "codecov": "^3.5.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1"
   },
   "engines": {
     "node": ">=6"
