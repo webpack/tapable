@@ -85,14 +85,16 @@ interface HookMapInterceptor<H> {
 }
 
 export class HookMap<H> {
-	constructor(factory: HookFactory<H>);
+	constructor(factory: HookFactory<H>, name?: string);
+	name: string | undefined;
 	get(key: any): H | undefined;
 	for(key: any): H;
 	intercept(interceptor: HookMapInterceptor<H>): void;
 }
 
 export class MultiHook<H> {
-	constructor(hooks: H[]);
+	constructor(hooks: H[], name?: string);
+	name: string | undefined;
 	tap(options: string | Tap, fn?: Function): void;
 	tapAsync(options: string | Tap, fn?: Function): void;
 	tapPromise(options: string | Tap, fn?: Function): void;
