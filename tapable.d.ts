@@ -43,6 +43,7 @@ type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
 
 declare class Hook<T, R> {
 	constructor(args?: ArgumentNames<AsArray<T>>, name?: string);
+	name: string | undefined;
 	intercept(interceptor: HookInterceptor<Hook<T, R>>): void;
 	isUsed(): boolean;
 	callAsync(...args: Append<AsArray<T>, Callback<Error, R>>): void;
