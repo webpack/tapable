@@ -263,7 +263,8 @@ interface Tap {
 	type: string
 	fn: Function,
 	stage: number,
-	context: boolean
+	context: boolean,
+	before?: string | Array
 }
 ```
 
