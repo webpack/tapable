@@ -218,9 +218,9 @@ const keyedHook = new HookMap(key => new SyncHook(["arg"]))
 ```
 
 ``` js
-keyedHook.tap("some-key", "MyPlugin", (arg) => { /* ... */ });
-keyedHook.tapAsync("some-key", "MyPlugin", (arg, callback) => { /* ... */ });
-keyedHook.tapPromise("some-key", "MyPlugin", (arg) => { /* ... */ });
+keyedHook.for("some-key").tap("MyPlugin", (arg) => { /* ... */ });
+keyedHook.for("some-key").tapAsync("MyPlugin", (arg, callback) => { /* ... */ });
+keyedHook.for("some-key").tapPromise("MyPlugin", (arg) => { /* ... */ });
 ```
 
 ``` js
@@ -252,9 +252,6 @@ interface HookInterceptor {
 
 interface HookMap {
 	for: (key: any) => Hook,
-	tap: (key: any, name: string | Tap, fn: (context?, ...args) => Result) => void,
-	tapAsync: (key: any, name: string | Tap, fn: (context?, ...args, callback: (err, result: Result) => void) => void) => void,
-	tapPromise: (key: any, name: string | Tap, fn: (context?, ...args) => Promise<Result>) => void,
 	intercept: (interceptor: HookMapInterceptor) => void
 }
 
