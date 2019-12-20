@@ -431,6 +431,8 @@ Object {
       2,
       3,
     ],
+    "callAsyncInterceptedResult1": 6,
+    "callAsyncInterceptedResult2": 6,
     "callAsyncInterceptedTap1": Object {
       "fn": 3,
       "name": "sync",
@@ -491,6 +493,8 @@ Object {
       2,
       3,
     ],
+    "promiseInterceptedResult1": 6,
+    "promiseInterceptedResult2": 6,
     "promiseInterceptedTap1": Object {
       "fn": 3,
       "name": "sync",
@@ -1152,6 +1156,8 @@ Object {
       2,
       3,
     ],
+    "callAsyncInterceptedDone1": true,
+    "callAsyncInterceptedDone2": true,
     "callAsyncInterceptedTap1": Object {
       "fn": 2,
       "name": "promise",
@@ -1212,6 +1218,8 @@ Object {
       2,
       3,
     ],
+    "promiseInterceptedDone1": true,
+    "promiseInterceptedDone2": true,
     "promiseInterceptedTap1": Object {
       "fn": 2,
       "name": "promise",
@@ -1955,6 +1963,8 @@ Object {
       2,
       3,
     ],
+    "callAsyncInterceptedResult1": 9,
+    "callAsyncInterceptedResult2": 9,
     "callAsyncInterceptedTap1": Object {
       "fn": 2,
       "name": "promise",
@@ -2015,6 +2025,8 @@ Object {
       2,
       3,
     ],
+    "promiseInterceptedResult1": 9,
+    "promiseInterceptedResult2": 9,
     "promiseInterceptedTap1": Object {
       "fn": 2,
       "name": "promise",
