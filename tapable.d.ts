@@ -31,12 +31,15 @@ type TapOptions = {
 	stage?: number;
 };
 
-interface HookInterceptor<H> {
+interface HookInterceptor<T, R> {
 	name?: string;
 	tap?: (tap: Tap) => void;
 	call?: (...args: any[]) => void;
 	loop?: (...args: any[]) => void;
-	register?: (hook: H) => H;
+	error?: (err: Error) => void;
+	result?: (result: R) => void;
+	done?: () => void;
+	register?: (hook: Hook<T, R>) => Hook<T, R>;
 }
 
 type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
@@ -44,7 +47,7 @@ type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
 declare class Hook<T, R> {
 	constructor(args?: ArgumentNames<AsArray<T>>, name?: string);
 	name: string | undefined;
-	intercept(interceptor: HookInterceptor<Hook<T, R>>): void;
+	intercept(interceptor: HookInterceptor<T, R>): void;
 	isUsed(): boolean;
 	callAsync(...args: Append<AsArray<T>, Callback<Error, R>>): void;
 	promise(...args: AsArray<T>): Promise<R>;
