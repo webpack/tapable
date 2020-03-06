@@ -20,7 +20,8 @@ type Append<T extends any[], U> = {
 }[Measure<T["length"]>];
 type AsArray<T> = T extends any[] ? T : [T];
 
-type Callback<E, T> = (error?: E, result?: T) => void;
+type Callback<E, T> = (error: E | null, result?: T) => void;
+type InnerCallback<E, T> = (error?: E | null | false, result?: T) => void;
 
 type Tap = TapOptions & {
 	name: string;
@@ -66,7 +67,7 @@ export class SyncWaterfallHook<T> extends SyncHook<T, AsArray<T>[0]> {}
 declare class AsyncHook<T, R> extends Hook<T, R> {
 	tapAsync(
 		options: string | Tap,
-		fn: (...args: Append<AsArray<T>, Callback<Error, R>>) => void
+		fn: (...args: Append<AsArray<T>, InnerCallback<Error, R>>) => void
 	): void;
 	tapPromise(
 		options: string | Tap,
