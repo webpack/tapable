@@ -139,7 +139,7 @@ Each hook can be tapped with one or several functions. How they are executed dep
 
 * __Bail__. A bail hook allows exiting early. When any of the tapped function returns anything, the bail hook will stop executing the remaining ones.
 
-* __Loop__. TODO
+* __Loop__. When a plugin in a loop hook returns a non-undefined value the hook will restart from the first plugin. It will loop until all plugins return undefined.
 
 Additionally, hooks can be synchronous or asynchronous. To reflect this, there’re “Sync”, “AsyncSeries”, and “AsyncParallel” hook classes:
 
