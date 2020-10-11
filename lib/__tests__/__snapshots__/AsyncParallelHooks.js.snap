@@ -20,14 +20,14 @@ Object {
     "callAsyncMultipleAsyncLateErrorCalled1": true,
     "callAsyncMultipleAsyncLateErrorCalled3": true,
     "callAsyncMultipleAsyncLateErrorEarlyResult1": Object {
-      "error": "Error in async2",
       "type": "async",
+      "value": 7,
     },
     "callAsyncMultipleAsyncLateErrorEarlyResult1Called1": true,
     "callAsyncMultipleAsyncLateErrorEarlyResult1Called3": true,
     "callAsyncMultipleAsyncLateErrorEarlyResult2": Object {
       "type": "async",
-      "value": 42,
+      "value": 7,
     },
     "callAsyncMultipleAsyncLateErrorEarlyResult2Called1": true,
     "callAsyncMultipleAsyncLateErrorEarlyResult2Called3": true,
@@ -60,7 +60,7 @@ Object {
     "callAsyncMultipleMixed1WithArgCalled1": 42,
     "callAsyncMultipleMixed2WithArg": Object {
       "type": "async",
-      "value": 43,
+      "value": 44,
     },
     "callAsyncMultipleMixed2WithArgCalled1": 42,
     "callAsyncMultipleMixed2WithArgCalled2": 42,
@@ -85,8 +85,8 @@ Object {
     },
     "callAsyncMultipleMixedError3WithArgCalled1": 42,
     "callAsyncMultipleMixedLateError": Object {
-      "error": "Error in async",
       "type": "async",
+      "value": 43,
     },
     "callAsyncMultipleMixedLateErrorCalled1": true,
     "callAsyncMultipleMixedLateErrorCalled2": true,
@@ -227,14 +227,14 @@ Object {
     "promiseMultipleAsyncLateErrorCalled1": true,
     "promiseMultipleAsyncLateErrorCalled3": true,
     "promiseMultipleAsyncLateErrorEarlyResult1": Object {
-      "error": "Error in async2",
       "type": "promise",
+      "value": 7,
     },
     "promiseMultipleAsyncLateErrorEarlyResult1Called1": true,
     "promiseMultipleAsyncLateErrorEarlyResult1Called3": true,
     "promiseMultipleAsyncLateErrorEarlyResult2": Object {
       "type": "promise",
-      "value": 42,
+      "value": 7,
     },
     "promiseMultipleAsyncLateErrorEarlyResult2Called1": true,
     "promiseMultipleAsyncLateErrorEarlyResult2Called3": true,
@@ -267,7 +267,7 @@ Object {
     "promiseMultipleMixed1WithArgCalled1": 42,
     "promiseMultipleMixed2WithArg": Object {
       "type": "promise",
-      "value": 43,
+      "value": 44,
     },
     "promiseMultipleMixed2WithArgCalled1": 42,
     "promiseMultipleMixed2WithArgCalled2": 42,
@@ -292,8 +292,8 @@ Object {
     },
     "promiseMultipleMixedError3WithArgCalled1": 42,
     "promiseMultipleMixedLateError": Object {
-      "error": "Error in async",
       "type": "promise",
+      "value": 43,
     },
     "promiseMultipleMixedLateErrorCalled1": true,
     "promiseMultipleMixedLateErrorCalled2": true,
