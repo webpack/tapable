@@ -60,7 +60,7 @@ export class SyncHook<T, R = void> extends Hook<T, R> {
 	call(...args: AsArray<T>): R;
 }
 
-export class SyncBailHook<T, R> extends SyncHook<T, R> {}
+export class SyncBailHook<T, R = void> extends SyncHook<T, R> {}
 export class SyncLoopHook<T> extends SyncHook<T, void> {}
 export class SyncWaterfallHook<T> extends SyncHook<T, AsArray<T>[0]> {}
 
