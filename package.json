@@ -27,6 +27,9 @@
   ],
   "main": "lib/index.js",
   "types": "./tapable.d.ts",
+  "browser": {
+    "util": "./lib/util-browser.js"
+  },
   "scripts": {
     "test": "jest",
     "travis": "yarn pretty-lint && jest --coverage && codecov",
