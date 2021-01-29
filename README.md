@@ -1,5 +1,7 @@
 # Tapable
 
+English | [Chinese](./README-zh.md)
+
 The tapable package expose many Hook classes, which can be used to create hooks for plugins.
 
 ``` javascript
