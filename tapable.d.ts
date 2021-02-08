@@ -1,23 +1,6 @@
-type FixedSizeArray<T extends number, U> = T extends 0
-	? void[]
-	: ReadonlyArray<U> & {
-			0: U;
-			length: T;
-	  };
-type Measure<T extends number> = T extends 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-	? T
-	: never;
-type Append<T extends any[], U> = {
-	0: [U];
-	1: [T[0], U];
-	2: [T[0], T[1], U];
-	3: [T[0], T[1], T[2], U];
-	4: [T[0], T[1], T[2], T[3], U];
-	5: [T[0], T[1], T[2], T[3], T[4], U];
-	6: [T[0], T[1], T[2], T[3], T[4], T[5], U];
-	7: [T[0], T[1], T[2], T[3], T[4], T[5], T[6], U];
-	8: [T[0], T[1], T[2], T[3], T[4], T[5], T[6], T[7], U];
-}[Measure<T["length"]>];
+type SingleTypeTuple<N extends number, T, Carry extends readonly T[] = []> = Carry["length"] extends N
+	? Carry
+	: SingleTypeTuple<N, T, readonly [...Carry, T]>;
 type AsArray<T> = T extends any[] ? T : [T];
 
 declare class UnsetAdditionalOptions {
@@ -53,14 +36,14 @@ interface HookInterceptor<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	register?: (tap: FullTap & IfSet<AdditionalOptions>) => FullTap & IfSet<AdditionalOptions>;
 }
 
-type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
+type ArgumentNames<T extends unknown[]> = SingleTypeTuple<T["length"], string>;
 
 declare class Hook<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	constructor(args?: ArgumentNames<AsArray<T>>, name?: string);
 	name: string | undefined;
 	intercept(interceptor: HookInterceptor<T, R, AdditionalOptions>): void;
 	isUsed(): boolean;
-	callAsync(...args: Append<AsArray<T>, Callback<Error, R>>): void;
+	callAsync(...args: [...AsArray<T>, Callback<Error, R>]): void;
 	promise(...args: AsArray<T>): Promise<R>;
 	tap(options: string | Tap & IfSet<AdditionalOptions>, fn: (...args: AsArray<T>) => R): void;
 	withOptions(options: TapOptions & IfSet<AdditionalOptions>): Hook<T, R>;
@@ -77,7 +60,7 @@ export class SyncWaterfallHook<T, AdditionalOptions = UnsetAdditionalOptions> ex
 declare class AsyncHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends Hook<T, R, AdditionalOptions> {
 	tapAsync(
 		options: string | Tap & IfSet<AdditionalOptions>,
-		fn: (...args: Append<AsArray<T>, InnerCallback<Error, R>>) => void
+		fn: (...args: [...AsArray<T>, InnerCallback<Error, R>]) => void
 	): void;
 	tapPromise(
 		options: string | Tap & IfSet<AdditionalOptions>,
