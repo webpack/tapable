@@ -1,6 +1,6 @@
 # Tapable
 
-The tapable package expose many Hook classes, which can be used to create hooks for plugins.
+The tapable package exposes many Hook classes, which can be used to create hooks for plugins.
 
 ``` javascript
 const {
@@ -88,7 +88,7 @@ myCar.hooks.calculateRoutes.tap("CachedRoutesPlugin", (source, target, routesLis
 		routesList.add(cachedRoute);
 })
 ```
-The class declaring these hooks need to call them:
+The class declaring these hooks needs to call them:
 
 ``` js
 class Car {
