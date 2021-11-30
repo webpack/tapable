@@ -91,7 +91,7 @@ export class AsyncParallelBailHook<T, R, AdditionalOptions = UnsetAdditionalOpti
 export class AsyncSeriesHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, void, AdditionalOptions> {}
 export class AsyncSeriesBailHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, R, AdditionalOptions> {}
 export class AsyncSeriesLoopHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, void, AdditionalOptions> {}
-export class AsyncSeriesWaterfallHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, AsArray<T>[0], AdditionalOptions> {}
+export class AsyncSeriesWaterfallHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, R, AdditionalOptions> {}
 
 type HookFactory<H> = (key: any, hook?: H) => H;
 
