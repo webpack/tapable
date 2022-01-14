@@ -56,7 +56,7 @@ interface HookInterceptor<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
 
 declare class Hook<T, R, AdditionalOptions = UnsetAdditionalOptions> {
-	constructor(args?: ArgumentNames<AsArray<T>>, name?: string);
+	constructor(args?: string[], name?: string);
 	name: string | undefined;
 	taps: FullTap[];
 	intercept(interceptor: HookInterceptor<T, R, AdditionalOptions>): void;
