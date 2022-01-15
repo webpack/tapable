@@ -1,3 +1,4 @@
+type AnyFn = ((...args: unknown[]) => unknown) | (() => unknown); 
 type FixedSizeArray<T extends number, U> = T extends 0
 	? void[]
 	: ReadonlyArray<U> & {
@@ -18,19 +19,19 @@ type Append<T extends any[], U> = {
 	7: [T[0], T[1], T[2], T[3], T[4], T[5], T[6], U];
 	8: [T[0], T[1], T[2], T[3], T[4], T[5], T[6], T[7], U];
 }[Measure<T["length"]>];
-type AsArray<T> = T extends any[] ? T : [T];
+type AsArray<T> = T extends unknown[] ? T : [T];
 
 declare class UnsetAdditionalOptions {
 	_UnsetAdditionalOptions: true
 }
-type IfSet<X> = X extends UnsetAdditionalOptions ? {} : X;
+type IfSet<X> = X extends UnsetAdditionalOptions ? Record<string, unknown> : X;
 
 type Callback<E, T> = (error: E | null, result?: T) => void;
 type InnerCallback<E, T> = (error?: E | null | false, result?: T) => void;
 
 type FullTap = Tap & {
 	type: "sync" | "async" | "promise",
-	fn: Function
+	fn: AnyFn
 }
 
 type Tap = TapOptions & {
@@ -45,15 +46,15 @@ type TapOptions = {
 interface HookInterceptor<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	name?: string;
 	tap?: (tap: FullTap & IfSet<AdditionalOptions>) => void;
-	call?: (...args: any[]) => void;
-	loop?: (...args: any[]) => void;
-	error?: (err: Error) => void;
+	call?: (...args: unknown[]) => void;
+	loop?: (...args: unknown[]) => void;
+	error?: <T extends Error>(err: T) => void;
 	result?: (result: R) => void;
 	done?: () => void;
 	register?: (tap: FullTap & IfSet<AdditionalOptions>) => FullTap & IfSet<AdditionalOptions>;
 }
 
-type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
+type ArgumentNames<T extends unknown[]> = FixedSizeArray<T["length"], string>;
 
 declare class Hook<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	constructor(args?: string[], name?: string);
@@ -93,7 +94,7 @@ export class AsyncSeriesBailHook<T, R, AdditionalOptions = UnsetAdditionalOption
 export class AsyncSeriesLoopHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, void, AdditionalOptions> {}
 export class AsyncSeriesWaterfallHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, AsArray<T>[0], AdditionalOptions> {}
 
-type HookFactory<H> = (key: any, hook?: H) => H;
+type HookFactory<H> = (key: unknown, hook?: H) => H;
 
 interface HookMapInterceptor<H> {
 	factory?: HookFactory<H>;
@@ -102,15 +103,15 @@ interface HookMapInterceptor<H> {
 export class HookMap<H> {
 	constructor(factory: HookFactory<H>, name?: string);
 	name: string | undefined;
-	get(key: any): H | undefined;
-	for(key: any): H;
+	get(key: unknown): H | undefined;
+	for(key: unknown): H;
 	intercept(interceptor: HookMapInterceptor<H>): void;
 }
 
 export class MultiHook<H> {
 	constructor(hooks: H[], name?: string);
 	name: string | undefined;
-	tap(options: string | Tap, fn?: Function): void;
-	tapAsync(options: string | Tap, fn?: Function): void;
-	tapPromise(options: string | Tap, fn?: Function): void;
+	tap(options: string | Tap, fn?: AnyFn): void;
+	tapAsync(options: string | Tap, fn?: AnyFn): void;
+	tapPromise(options: string | Tap, fn?: AnyFn): void;
 }
