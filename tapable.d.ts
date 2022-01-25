@@ -69,7 +69,7 @@ declare class Hook<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 }
 
 export class SyncHook<T, R = void, AdditionalOptions = UnsetAdditionalOptions> extends Hook<T, R, AdditionalOptions> {
-	call(...args: AsArray<T>): R;
+	call(...args: unknown[]): R;
 }
 
 export class SyncBailHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends SyncHook<T, R, AdditionalOptions> {}
