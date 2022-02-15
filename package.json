@@ -33,8 +33,8 @@
   "scripts": {
     "test": "jest",
     "travis": "yarn pretty-lint && jest --coverage && codecov",
-    "pretty-lint": "prettier --check lib/*.js lib/__tests__/*.js",
-    "pretty": "prettier --loglevel warn --write lib/*.js lib/__tests__/*.js"
+    "pretty-lint": "prettier --check lib/*.js lib/__tests__/*.js tapable.d.ts",
+    "pretty": "prettier --loglevel warn --write lib/*.js lib/__tests__/*.js tapable.d.ts"
   },
   "jest": {
     "transform": {
