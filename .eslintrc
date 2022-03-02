@@ -1,6 +1,7 @@
 {
 	"env": {
-		"node": true
+		"node": true,
+		"es2021": true
 	},
 	"rules": {
 		"strict": 0,
