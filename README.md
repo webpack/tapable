@@ -214,7 +214,7 @@ myCar.hooks.accelerate.tap({
 A HookMap is a helper class for a Map with Hooks
 
 ``` js
-const keyedHook = new HookMap(key => new SyncHook(["arg"]))
+const keyedHook = new HookMap(key => new AsyncSeriesHook(["arg"]))
 ```
 
 ``` js
