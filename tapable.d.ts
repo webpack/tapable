@@ -58,6 +58,7 @@ type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
 declare class Hook<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	constructor(args?: ArgumentNames<AsArray<T>>, name?: string);
 	name: string | undefined;
+	interceptors: HookInterceptor<T, R, AdditionalOptions>[];
 	taps: FullTap[];
 	intercept(interceptor: HookInterceptor<T, R, AdditionalOptions>): void;
 	isUsed(): boolean;
