@@ -98,6 +98,7 @@ myCar.hooks.calculateRoutes.tap(
 	}
 );
 ```
+
 The class declaring these hooks needs to call them:
 
 ```js

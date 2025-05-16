@@ -53,3 +53,4 @@ jobs:
       - uses: codecov/codecov-action@v5
         with:
           flags: integration
+          token: ${{ secrets.CODECOV_TOKEN }}
