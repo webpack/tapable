@@ -13,28 +13,25 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babel-jest": "^24.8.0",
-    "codecov": "^3.5.0",
     "jest": "^24.8.0",
-    "prettier": "^1.17.1"
+    "prettier": "^3.5.3",
+    "prettier-1": "npm:prettier@^1"
   },
   "engines": {
     "node": ">=6"
   },
-  "files": [
-    "lib",
-    "!lib/__tests__",
-    "tapable.d.ts"
-  ],
+  "files": ["lib", "!lib/__tests__", "tapable.d.ts"],
   "main": "lib/index.js",
   "types": "./tapable.d.ts",
   "browser": {
     "util": "./lib/util-browser.js"
   },
   "scripts": {
-    "test": "jest",
-    "travis": "yarn pretty-lint && jest --coverage && codecov",
-    "pretty-lint": "prettier --check lib/*.js lib/__tests__/*.js",
-    "pretty": "prettier --loglevel warn --write lib/*.js lib/__tests__/*.js"
+    "lint": "yarn fmt:check",
+    "fmt": "yarn fmt:base --log-level warn --write",
+    "fmt:check": "yarn fmt:base --check",
+    "fmt:base": "node node_modules/prettier/bin/prettier.cjs --cache --ignore-unknown .",
+    "test": "jest"
   },
   "jest": {
     "transform": {

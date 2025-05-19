@@ -3,7 +3,7 @@ type FixedSizeArray<T extends number, U> = T extends 0
 	: ReadonlyArray<U> & {
 			0: U;
 			length: T;
-	  };
+		};
 type Measure<T extends number> = T extends 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 	? T
 	: never;
@@ -21,7 +21,7 @@ type Append<T extends any[], U> = {
 type AsArray<T> = T extends any[] ? T : [T];
 
 declare class UnsetAdditionalOptions {
-	_UnsetAdditionalOptions: true
+	_UnsetAdditionalOptions: true;
 }
 type IfSet<X> = X extends UnsetAdditionalOptions ? {} : X;
 
@@ -29,9 +29,9 @@ type Callback<E, T> = (error: E | null, result?: T) => void;
 type InnerCallback<E, T> = (error?: E | null | false, result?: T) => void;
 
 type FullTap = Tap & {
-	type: "sync" | "async" | "promise",
-	fn: Function
-}
+	type: "sync" | "async" | "promise";
+	fn: Function;
+};
 
 type Tap = TapOptions & {
 	name: string;
@@ -50,7 +50,9 @@ interface HookInterceptor<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	error?: (err: Error) => void;
 	result?: (result: R) => void;
 	done?: () => void;
-	register?: (tap: FullTap & IfSet<AdditionalOptions>) => FullTap & IfSet<AdditionalOptions>;
+	register?: (
+		tap: FullTap & IfSet<AdditionalOptions>
+	) => FullTap & IfSet<AdditionalOptions>;
 }
 
 type ArgumentNames<T extends any[]> = FixedSizeArray<T["length"], string>;
@@ -64,35 +66,78 @@ declare class Hook<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	isUsed(): boolean;
 	callAsync(...args: Append<AsArray<T>, Callback<Error, R>>): void;
 	promise(...args: AsArray<T>): Promise<R>;
-	tap(options: string | Tap & IfSet<AdditionalOptions>, fn: (...args: AsArray<T>) => R): void;
-	withOptions(options: TapOptions & IfSet<AdditionalOptions>): Omit<this, "call" | "callAsync" | "promise">;
+	tap(
+		options: string | (Tap & IfSet<AdditionalOptions>),
+		fn: (...args: AsArray<T>) => R
+	): void;
+	withOptions(
+		options: TapOptions & IfSet<AdditionalOptions>
+	): Omit<this, "call" | "callAsync" | "promise">;
 }
 
-export class SyncHook<T, R = void, AdditionalOptions = UnsetAdditionalOptions> extends Hook<T, R, AdditionalOptions> {
+export class SyncHook<
+	T,
+	R = void,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends Hook<T, R, AdditionalOptions> {
 	call(...args: AsArray<T>): R;
 }
 
-export class SyncBailHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends SyncHook<T, R, AdditionalOptions> {}
-export class SyncLoopHook<T, AdditionalOptions = UnsetAdditionalOptions> extends SyncHook<T, void, AdditionalOptions> {}
-export class SyncWaterfallHook<T, AdditionalOptions = UnsetAdditionalOptions> extends SyncHook<T, AsArray<T>[0], AdditionalOptions> {}
+export class SyncBailHook<
+	T,
+	R,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends SyncHook<T, R, AdditionalOptions> {}
+export class SyncLoopHook<
+	T,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends SyncHook<T, void, AdditionalOptions> {}
+export class SyncWaterfallHook<
+	T,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends SyncHook<T, AsArray<T>[0], AdditionalOptions> {}
 
-declare class AsyncHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends Hook<T, R, AdditionalOptions> {
+declare class AsyncHook<
+	T,
+	R,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends Hook<T, R, AdditionalOptions> {
 	tapAsync(
-		options: string | Tap & IfSet<AdditionalOptions>,
+		options: string | (Tap & IfSet<AdditionalOptions>),
 		fn: (...args: Append<AsArray<T>, InnerCallback<Error, R>>) => void
 	): void;
 	tapPromise(
-		options: string | Tap & IfSet<AdditionalOptions>,
+		options: string | (Tap & IfSet<AdditionalOptions>),
 		fn: (...args: AsArray<T>) => Promise<R>
 	): void;
 }
 
-export class AsyncParallelHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, void, AdditionalOptions> {}
-export class AsyncParallelBailHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, R, AdditionalOptions> {}
-export class AsyncSeriesHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, void, AdditionalOptions> {}
-export class AsyncSeriesBailHook<T, R, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, R, AdditionalOptions> {}
-export class AsyncSeriesLoopHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, void, AdditionalOptions> {}
-export class AsyncSeriesWaterfallHook<T, AdditionalOptions = UnsetAdditionalOptions> extends AsyncHook<T, AsArray<T>[0], AdditionalOptions> {}
+export class AsyncParallelHook<
+	T,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends AsyncHook<T, void, AdditionalOptions> {}
+export class AsyncParallelBailHook<
+	T,
+	R,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends AsyncHook<T, R, AdditionalOptions> {}
+export class AsyncSeriesHook<
+	T,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends AsyncHook<T, void, AdditionalOptions> {}
+export class AsyncSeriesBailHook<
+	T,
+	R,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends AsyncHook<T, R, AdditionalOptions> {}
+export class AsyncSeriesLoopHook<
+	T,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends AsyncHook<T, void, AdditionalOptions> {}
+export class AsyncSeriesWaterfallHook<
+	T,
+	AdditionalOptions = UnsetAdditionalOptions
+> extends AsyncHook<T, AsArray<T>[0], AdditionalOptions> {}
 
 type HookFactory<H> = (key: any, hook?: H) => H;
 
