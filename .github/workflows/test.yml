@@ -47,7 +47,7 @@ jobs:
           architecture: ${{ steps.calculate_architecture.outputs.result }}
           cache: yarn
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --ignore-engines
       - name: Run tests with coverage
         run: yarn test --ci
       - uses: codecov/codecov-action@v5
