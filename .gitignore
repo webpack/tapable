@@ -11,5 +11,14 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
+# Logs
+*.log
+
 # IDEs
 .idea
+.vscode
+
+# Caches
+.cache
+.eslintcache
+.cspellcache
