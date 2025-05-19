@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile --ignore-engines
       - name: Run tests with coverage
-        run: yarn test --ci
+        run: yarn test --ci --coverage
       - uses: codecov/codecov-action@v5
         with:
           flags: integration
