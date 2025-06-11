@@ -48,6 +48,10 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn --frozen-lockfile --ignore-engines
+        if: matrix.node-version == '6.x' || matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x' || matrix.node-version == '16.x'
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+        if: matrix.node-version != '6.x' && matrix.node-version != '8.x' && matrix.node-version != '10.x' && matrix.node-version != '12.x' && matrix.node-version != '14.x' && matrix.node-version != '16.x'
       - name: Run tests with coverage
         run: yarn test --ci --coverage
       - uses: codecov/codecov-action@v5
