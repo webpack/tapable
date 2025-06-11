@@ -70,12 +70,12 @@ For sync hooks, `tap` is the only valid method to add a plugin. Async hooks also
 ```js
 myCar.hooks.calculateRoutes.tapPromise(
 	"GoogleMapsPlugin",
-	(source, target, routesList) => {
+	(source, target, routesList) => 
 		// return a promise
-		return google.maps.findRoute(source, target).then((route) => {
+		 google.maps.findRoute(source, target).then((route) => {
 			routesList.add(route);
-		});
-	}
+		})
+	
 );
 myCar.hooks.calculateRoutes.tapAsync(
 	"BingMapsPlugin",
@@ -106,7 +106,7 @@ class Car {
 	/**
 	 * You won't get returned value from SyncHook or AsyncParallelHook,
 	 * to do that, use SyncWaterfallHook and AsyncSeriesWaterfallHook respectively
-	 **/
+	 */
 
 	setSpeed(newSpeed) {
 		// following call returns undefined even when you returned values
@@ -117,10 +117,10 @@ class Car {
 		const routesList = new List();
 		return this.hooks.calculateRoutes
 			.promise(source, target, routesList)
-			.then((res) => {
+			.then((res) => 
 				// res is undefined for AsyncParallelHook
-				return routesList.getRoutes();
-			});
+				 routesList.getRoutes()
+			);
 	}
 
 	useNavigationSystemAsync(source, target, callback) {
