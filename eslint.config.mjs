@@ -8,5 +8,13 @@ export default defineConfig([
 			"no-new-func": "off",
 			"n/prefer-node-protocol": "off"
 		}
+	},
+	{
+		languageOptions: {
+			parserOptions: {
+				ecmaVersion: 2018
+			}
+		},
+		files: ["lib/__tests__/**/*.js"]
 	}
 ]);
