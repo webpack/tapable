@@ -94,8 +94,9 @@ export class SyncLoopHook<
 > extends SyncHook<T, void, AdditionalOptions> {}
 export class SyncWaterfallHook<
 	T,
+	R = AsArray<T>[0],
 	AdditionalOptions = UnsetAdditionalOptions
-> extends SyncHook<T, AsArray<T>[0] | void, AdditionalOptions> {}
+> extends SyncHook<T, R, AdditionalOptions> {}
 
 declare class AsyncHook<
 	T,
@@ -136,8 +137,9 @@ export class AsyncSeriesLoopHook<
 > extends AsyncHook<T, void, AdditionalOptions> {}
 export class AsyncSeriesWaterfallHook<
 	T,
+	R = AsArray<T>[0],
 	AdditionalOptions = UnsetAdditionalOptions
-> extends AsyncHook<T, AsArray<T>[0] | void, AdditionalOptions> {}
+> extends AsyncHook<T, R, AdditionalOptions> {}
 
 type HookFactory<H> = (key: any, hook?: H) => H;
 
