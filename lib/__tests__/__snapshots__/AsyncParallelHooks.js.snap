@@ -199,18 +199,38 @@ Object {
       "error": "Tap function (tapPromise) rejects \\"\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithEmptyStringArg": Object {
+      "type": "async",
+      "value": "",
+    },
+    "callAsyncSinglePromiseWithEmptyStringArgCalled1": 42,
     "callAsyncSinglePromiseWithFalseReject": Object {
       "error": "Tap function (tapPromise) rejects \\"false\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithNullArg": Object {
+      "type": "async",
+      "value": null,
+    },
+    "callAsyncSinglePromiseWithNullArgCalled1": 42,
     "callAsyncSinglePromiseWithNullReject": Object {
       "error": "Tap function (tapPromise) rejects \\"null\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithUndefined": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSinglePromiseWithUndefinedCalled1": 42,
     "callAsyncSinglePromiseWithUndefinedReject": Object {
       "error": "Tap function (tapPromise) rejects \\"undefined\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithZeroArg": Object {
+      "type": "async",
+      "value": 0,
+    },
+    "callAsyncSinglePromiseWithZeroArgCalled1": 42,
     "callAsyncSinglePromiseWithZeroReject": Object {
       "error": "Tap function (tapPromise) rejects \\"0\\" value",
       "type": "async",
@@ -426,18 +446,38 @@ Object {
       "error": "Tap function (tapPromise) rejects \\"\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithEmptyStringArg": Object {
+      "type": "promise",
+      "value": "",
+    },
+    "promiseSinglePromiseWithEmptyStringArgCalled1": 42,
     "promiseSinglePromiseWithFalseReject": Object {
       "error": "Tap function (tapPromise) rejects \\"false\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithNullArg": Object {
+      "type": "promise",
+      "value": null,
+    },
+    "promiseSinglePromiseWithNullArgCalled1": 42,
     "promiseSinglePromiseWithNullReject": Object {
       "error": "Tap function (tapPromise) rejects \\"null\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithUndefined": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSinglePromiseWithUndefinedCalled1": 42,
     "promiseSinglePromiseWithUndefinedReject": Object {
       "error": "Tap function (tapPromise) rejects \\"undefined\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithZeroArg": Object {
+      "type": "promise",
+      "value": 0,
+    },
+    "promiseSinglePromiseWithZeroArgCalled1": 42,
     "promiseSinglePromiseWithZeroReject": Object {
       "error": "Tap function (tapPromise) rejects \\"0\\" value",
       "type": "promise",
@@ -969,18 +1009,38 @@ Object {
       "error": "Tap function (tapPromise) rejects \\"\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithEmptyStringArg": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSinglePromiseWithEmptyStringArgCalled1": 42,
     "callAsyncSinglePromiseWithFalseReject": Object {
       "error": "Tap function (tapPromise) rejects \\"false\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithNullArg": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSinglePromiseWithNullArgCalled1": 42,
     "callAsyncSinglePromiseWithNullReject": Object {
       "error": "Tap function (tapPromise) rejects \\"null\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithUndefined": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSinglePromiseWithUndefinedCalled1": 42,
     "callAsyncSinglePromiseWithUndefinedReject": Object {
       "error": "Tap function (tapPromise) rejects \\"undefined\\" value",
       "type": "async",
     },
+    "callAsyncSinglePromiseWithZeroArg": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSinglePromiseWithZeroArgCalled1": 42,
     "callAsyncSinglePromiseWithZeroReject": Object {
       "error": "Tap function (tapPromise) rejects \\"0\\" value",
       "type": "async",
@@ -1209,18 +1269,38 @@ Object {
       "error": "Tap function (tapPromise) rejects \\"\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithEmptyStringArg": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSinglePromiseWithEmptyStringArgCalled1": 42,
     "promiseSinglePromiseWithFalseReject": Object {
       "error": "Tap function (tapPromise) rejects \\"false\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithNullArg": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSinglePromiseWithNullArgCalled1": 42,
     "promiseSinglePromiseWithNullReject": Object {
       "error": "Tap function (tapPromise) rejects \\"null\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithUndefined": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSinglePromiseWithUndefinedCalled1": 42,
     "promiseSinglePromiseWithUndefinedReject": Object {
       "error": "Tap function (tapPromise) rejects \\"undefined\\" value",
       "type": "promise",
     },
+    "promiseSinglePromiseWithZeroArg": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSinglePromiseWithZeroArgCalled1": 42,
     "promiseSinglePromiseWithZeroReject": Object {
       "error": "Tap function (tapPromise) rejects \\"0\\" value",
       "type": "promise",
