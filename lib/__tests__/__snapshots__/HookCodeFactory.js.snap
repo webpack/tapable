@@ -59,7 +59,7 @@ _hasResult2 = true;
 onResult(_result2);
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(_err2);
+onError(!_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 "
 `;
@@ -81,7 +81,11 @@ _promise2.then(
   },
   function(_err2) {
     if (_hasResult2) throw _err2;
-    onError(_err2);
+    onError(
+      !_err2
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+        : _err2
+    );
   }
 );
 "
@@ -98,7 +102,7 @@ _hasResult2 = true;
 onDone();
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(_err2);
+onError(!_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 "
 `;
@@ -120,7 +124,11 @@ _promise2.then(
   },
   function(_err2) {
     if (_hasResult2) throw _err2;
-    onError(_err2);
+    onError(
+      !_err2
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+        : _err2
+    );
   }
 );
 "
@@ -245,7 +253,7 @@ _hasResult2 = true;
 onResult(_result2);
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(_err2);
+onError(!_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 "
 `;
@@ -267,7 +275,11 @@ _promise2.then(
   },
   function(_err2) {
     if (_hasResult2) throw _err2;
-    onError(_err2);
+    onError(
+      !_err2
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+        : _err2
+    );
   }
 );
 "
@@ -284,7 +296,7 @@ _hasResult2 = true;
 onDone();
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(_err2);
+onError(!_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 "
 `;
@@ -306,7 +318,11 @@ _promise2.then(
   },
   function(_err2) {
     if (_hasResult2) throw _err2;
-    onError(_err2);
+    onError(
+      !_err2
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+        : _err2
+    );
   }
 );
 "
@@ -446,7 +462,7 @@ _hasResult2 = true;
 onResult(_result2);
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(_err2);
+onError(!_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 "
 `;
@@ -471,7 +487,11 @@ _promise2.then(
   },
   function(_err2) {
     if (_hasResult2) throw _err2;
-    onError(_err2);
+    onError(
+      !_err2
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+        : _err2
+    );
   }
 );
 "
@@ -491,7 +511,7 @@ _hasResult2 = true;
 onDone();
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(_err2);
+onError(!_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 "
 `;
@@ -516,7 +536,11 @@ _promise2.then(
   },
   function(_err2) {
     if (_hasResult2) throw _err2;
-    onError(_err2);
+    onError(
+      !_err2
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+        : _err2
+    );
   }
 );
 "
@@ -618,7 +642,7 @@ onDone();
 }
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(2, _err2);
+onError(2, !_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 }
 var _fn0 = _x[0];
@@ -686,7 +710,14 @@ exports[`HookCodeFactory taps (mixed) callTapsLooping 2`] = `
         },
         function(_err2) {
           if (_hasResult2) throw _err2;
-          onError(2, _err2);
+          onError(
+            2,
+            !_err2
+              ? new Error(
+                  'Tap function (tapPromise) rejects \\"' + _err2 + '\\" value'
+                )
+              : _err2
+          );
         }
       );
     }
@@ -779,7 +810,7 @@ _done();
 }), function(_err2) {
 if(_hasResult2) throw _err2;
 if(_counter > 0) {
-onError(2, _err2);
+onError(2, !_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 }
 });
 } while(false);
@@ -861,7 +892,14 @@ exports[`HookCodeFactory taps (mixed) callTapsParallel 2`] = `
     function(_err2) {
       if (_hasResult2) throw _err2;
       if (_counter > 0) {
-        onError(2, _err2);
+        onError(
+          2,
+          !_err2
+            ? new Error(
+                'Tap function (tapPromise) rejects \\"' + _err2 + '\\" value'
+              )
+            : _err2
+        );
       }
     }
   );
@@ -885,7 +923,7 @@ onDone();
 });
 }), function(_err2) {
 if(_hasResult2) throw _err2;
-onError(2, _err2);
+onError(2, !_err2 ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value') : _err2);
 });
 }
 var _fn0 = _x[0];
@@ -936,7 +974,12 @@ exports[`HookCodeFactory taps (mixed) callTapsSeries 2`] = `
     },
     function(_err2) {
       if (_hasResult2) throw _err2;
-      onError(2, _err2);
+      onError(
+        2,
+        !_err2
+          ? new Error('Tap function (tapPromise) rejects \\"' + _err2 + '\\" value')
+          : _err2
+      );
     }
   );
 }
@@ -1013,7 +1056,7 @@ _next1();
 }
 }), function(_err1) {
 if(_hasResult1) throw _err1;
-onError(1, _err1);
+onError(1, !_err1 ? new Error('Tap function (tapPromise) rejects \\"' + _err1 + '\\" value') : _err1);
 });
 }
 var _fn0 = _x[0];
@@ -1084,7 +1127,14 @@ exports[`HookCodeFactory taps (mixed2) callTapsLooping 2`] = `
         },
         function(_err1) {
           if (_hasResult1) throw _err1;
-          onError(1, _err1);
+          onError(
+            1,
+            !_err1
+              ? new Error(
+                  'Tap function (tapPromise) rejects \\"' + _err1 + '\\" value'
+                )
+              : _err1
+          );
         }
       );
     }
@@ -1151,7 +1201,7 @@ _done();
 }), function(_err1) {
 if(_hasResult1) throw _err1;
 if(_counter > 0) {
-onError(1, _err1);
+onError(1, !_err1 ? new Error('Tap function (tapPromise) rejects \\"' + _err1 + '\\" value') : _err1);
 }
 });
 if(_counter <= 0) break;
@@ -1228,7 +1278,14 @@ exports[`HookCodeFactory taps (mixed2) callTapsParallel 2`] = `
     function(_err1) {
       if (_hasResult1) throw _err1;
       if (_counter > 0) {
-        onError(1, _err1);
+        onError(
+          1,
+          !_err1
+            ? new Error(
+                'Tap function (tapPromise) rejects \\"' + _err1 + '\\" value'
+              )
+            : _err1
+        );
       }
     }
   );
@@ -1285,7 +1342,7 @@ onDone();
 });
 }), function(_err1) {
 if(_hasResult1) throw _err1;
-onError(1, _err1);
+onError(1, !_err1 ? new Error('Tap function (tapPromise) rejects \\"' + _err1 + '\\" value') : _err1);
 });
 }
 var _fn0 = _x[0];
@@ -1352,7 +1409,12 @@ function _next0() {
     },
     function(_err1) {
       if (_hasResult1) throw _err1;
-      onError(1, _err1);
+      onError(
+        1,
+        !_err1
+          ? new Error('Tap function (tapPromise) rejects \\"' + _err1 + '\\" value')
+          : _err1
+      );
     }
   );
 }
@@ -1779,7 +1841,7 @@ onDone();
 }
 }), function(_err0) {
 if(_hasResult0) throw _err0;
-onError(0, _err0);
+onError(0, !_err0 ? new Error('Tap function (tapPromise) rejects \\"' + _err0 + '\\" value') : _err0);
 });
 } while(_loop);
 _loopAsync = true;
@@ -1817,7 +1879,14 @@ exports[`HookCodeFactory taps (single promise) callTapsLooping 2`] = `
       },
       function(_err0) {
         if (_hasResult0) throw _err0;
-        onError(0, _err0);
+        onError(
+          0,
+          !_err0
+            ? new Error(
+                'Tap function (tapPromise) rejects \\"' + _err0 + '\\" value'
+              )
+            : _err0
+        );
       }
     );
   } while (_loop);
@@ -1842,7 +1911,7 @@ onDone();
 });
 }), function(_err0) {
 if(_hasResult0) throw _err0;
-onError(0, _err0);
+onError(0, !_err0 ? new Error('Tap function (tapPromise) rejects \\"' + _err0 + '\\" value') : _err0);
 });
 "
 `;
@@ -1873,7 +1942,12 @@ _promise0.then(
   },
   function(_err0) {
     if (_hasResult0) throw _err0;
-    onError(0, _err0);
+    onError(
+      0,
+      !_err0
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err0 + '\\" value')
+        : _err0
+    );
   }
 );
 "
@@ -1894,7 +1968,7 @@ onDone();
 });
 }), function(_err0) {
 if(_hasResult0) throw _err0;
-onError(0, _err0);
+onError(0, !_err0 ? new Error('Tap function (tapPromise) rejects \\"' + _err0 + '\\" value') : _err0);
 });
 "
 `;
@@ -1925,7 +1999,12 @@ _promise0.then(
   },
   function(_err0) {
     if (_hasResult0) throw _err0;
-    onError(0, _err0);
+    onError(
+      0,
+      !_err0
+        ? new Error('Tap function (tapPromise) rejects \\"' + _err0 + '\\" value')
+        : _err0
+    );
   }
 );
 "

@@ -20,11 +20,11 @@
   "types": "./tapable.d.ts",
   "files": ["lib", "!lib/__tests__", "tapable.d.ts"],
   "scripts": {
-    "lint": "yarn lint:code",
+    "lint": "yarn lint:code && yarn fmt:check",
     "lint:code": "eslint --cache .",
     "fmt": "yarn fmt:base --log-level warn --write",
     "fmt:check": "yarn fmt:base --check",
-    "fmt:base": "node prettier --cache --ignore-unknown .",
+    "fmt:base": "node ./node_modules/prettier/bin/prettier.cjs --cache --ignore-unknown .",
     "fix": "yarn fix:code && yarn fmt",
     "fix:code": "yarn lint:code --fix",
     "test": "jest"
