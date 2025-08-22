@@ -1,43 +1,24 @@
 {
   "name": "tapable",
   "version": "2.2.2",
-  "author": "Tobias Koppers @sokra",
   "description": "Just a little module for plugins.",
-  "license": "MIT",
   "homepage": "https://github.com/webpack/tapable",
   "repository": {
     "type": "git",
     "url": "http://github.com/webpack/tapable.git"
   },
-  "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@eslint/js": "^9.28.0",
-    "@eslint/markdown": "^6.5.0",
-    "@stylistic/eslint-plugin": "^4.4.1",
-    "babel-jest": "^24.8.0",
-    "globals": "^16.2.0",
-    "eslint": "^9.28.0",
-    "eslint-config-webpack": "^4.0.8",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^28.12.0",
-    "eslint-plugin-n": "^17.19.0",
-    "eslint-plugin-prettier": "^5.4.1",
-    "eslint-plugin-unicorn": "^59.0.1",
-    "jest": "^24.8.0",
-    "prettier": "^3.5.3",
-    "prettier-1": "npm:prettier@^1"
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/webpack"
   },
-  "engines": {
-    "node": ">=6"
-  },
-  "files": ["lib", "!lib/__tests__", "tapable.d.ts"],
+  "license": "MIT",
+  "author": "Tobias Koppers @sokra",
   "main": "lib/index.js",
-  "types": "./tapable.d.ts",
   "browser": {
     "util": "./lib/util-browser.js"
   },
+  "types": "./tapable.d.ts",
+  "files": ["lib", "!lib/__tests__", "tapable.d.ts"],
   "scripts": {
     "lint": "yarn lint:code",
     "lint:code": "eslint --cache .",
@@ -52,5 +33,28 @@
     "transform": {
       "__tests__[\\\\/].+\\.js$": "babel-jest"
     }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@eslint/js": "^9.28.0",
+    "@eslint/markdown": "^7.1.0",
+    "@stylistic/eslint-plugin": "^5.2.3",
+    "babel-jest": "^24.8.0",
+    "globals": "^16.2.0",
+    "eslint": "^9.28.0",
+    "eslint-config-webpack": "^4.6.3",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-n": "^17.19.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "jest": "^24.8.0",
+    "prettier": "^3.5.3",
+    "prettier-1": "npm:prettier@^1"
+  },
+  "engines": {
+    "node": ">=6"
   }
 }

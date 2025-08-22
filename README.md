@@ -4,15 +4,15 @@ The tapable package exposes many Hook classes, which can be used to create hooks
 
 ```javascript
 const {
-	SyncHook,
-	SyncBailHook,
-	SyncWaterfallHook,
-	SyncLoopHook,
-	AsyncParallelHook,
 	AsyncParallelBailHook,
-	AsyncSeriesHook,
+	AsyncParallelHook,
 	AsyncSeriesBailHook,
-	AsyncSeriesWaterfallHook
+	AsyncSeriesHook,
+	AsyncSeriesWaterfallHook,
+	SyncBailHook,
+	SyncHook,
+	SyncLoopHook,
+	SyncWaterfallHook
 } = require("tapable");
 ```
 
