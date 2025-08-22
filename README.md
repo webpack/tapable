@@ -262,7 +262,11 @@ interface Hook {
 	tap: (name: string | Tap, fn: (context?, ...args) => Result) => void;
 	tapAsync: (
 		name: string | Tap,
-		fn: (context?, ...args, callback: (err: Error | null, result: Result) => void) => void
+		fn: (
+			context?,
+			...args,
+			callback: (err: Error | null, result: Result) => void
+		) => void
 	) => void;
 	tapPromise: (
 		name: string | Tap,
@@ -305,7 +309,10 @@ interface Hook {
 	isUsed: () => boolean;
 	call: (...args) => Result;
 	promise: (...args) => Promise<Result>;
-	callAsync: (...args, callback: (err: Error | null, result: Result) => void) => void;
+	callAsync: (
+		...args,
+		callback: (err: Error | null, result: Result) => void
+	) => void;
 }
 
 interface HookMap {
