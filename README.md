@@ -70,12 +70,11 @@ For sync hooks, `tap` is the only valid method to add a plugin. Async hooks also
 ```js
 myCar.hooks.calculateRoutes.tapPromise(
 	"GoogleMapsPlugin",
-	(source, target, routesList) => 
+	(source, target, routesList) =>
 		// return a promise
-		 google.maps.findRoute(source, target).then((route) => {
+		google.maps.findRoute(source, target).then((route) => {
 			routesList.add(route);
 		})
-	
 );
 myCar.hooks.calculateRoutes.tapAsync(
 	"BingMapsPlugin",
@@ -117,9 +116,9 @@ class Car {
 		const routesList = new List();
 		return this.hooks.calculateRoutes
 			.promise(source, target, routesList)
-			.then((res) => 
+			.then((res) =>
 				// res is undefined for AsyncParallelHook
-				 routesList.getRoutes()
+				routesList.getRoutes()
 			);
 	}
 
@@ -263,7 +262,7 @@ interface Hook {
 	tap: (name: string | Tap, fn: (context?, ...args) => Result) => void;
 	tapAsync: (
 		name: string | Tap,
-		fn: (context?, ...args, callback: (err, result: Result) => void) => void
+		fn: (context?, ...args, callback: (err: Error | null, result: Result) => void) => void
 	) => void;
 	tapPromise: (
 		name: string | Tap,
@@ -306,7 +305,7 @@ interface Hook {
 	isUsed: () => boolean;
 	call: (...args) => Result;
 	promise: (...args) => Promise<Result>;
-	callAsync: (...args, callback: (err, result: Result) => void) => void;
+	callAsync: (...args, callback: (err: Error | null, result: Result) => void) => void;
 }
 
 interface HookMap {
