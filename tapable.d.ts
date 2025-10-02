@@ -141,10 +141,10 @@ export class AsyncSeriesWaterfallHook<
 	AdditionalOptions = UnsetAdditionalOptions
 > extends AsyncHook<T, R, AdditionalOptions> {}
 
-type HookFactory<H> = (key: any, hook?: H) => H;
+type HookFactory<H, K = any> = (key: K) => H;
 
-interface HookMapInterceptor<H> {
-	factory?: HookFactory<H>;
+interface HookMapInterceptor<H, K = any> {
+	factory?: (key: K, hook: H) => H;
 }
 
 export class HookMap<H> {
@@ -153,6 +153,16 @@ export class HookMap<H> {
 	get(key: any): H | undefined;
 	for(key: any): H;
 	intercept(interceptor: HookMapInterceptor<H>): void;
+}
+
+type AnyHook = Hook<any, any>;
+
+export class TypedHookMap<M extends Record<any, AnyHook>> {
+	constructor(factory: HookFactory<M[keyof M], keyof M>, name?: string);
+	name: string | undefined;
+	get<K extends keyof M>(key: K): M[K] | undefined;
+	for<K extends keyof M>(key: K): M[K];
+	intercept(interceptor: HookMapInterceptor<M[keyof M], keyof M>): void;
 }
 
 export class MultiHook<H> {
