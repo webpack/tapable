@@ -1,6 +1,6 @@
 {
   "name": "tapable",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Just a little module for plugins.",
   "homepage": "https://github.com/webpack/tapable",
   "repository": {
