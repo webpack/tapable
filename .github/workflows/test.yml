@@ -18,15 +18,27 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: yarn
-      - run: yarn --frozen-lockfile
-      - run: yarn lint
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
   test:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [6.x, 8.x, 10.x, 12.x, 14.x, 16.x, 18.x, 20.x, 22.x, 24.x]
+        node-version: [
+            # Node.js@6 is fully broken for testing, npm can't install dependecies, babel is broken due broken mapping new features with Node.js version, jest breaks randomly and crashes
+            # 6.x,
+            8.x,
+            10.x,
+            12.x,
+            14.x,
+            16.x,
+            18.x,
+            20.x,
+            22.x,
+            24.x
+          ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -45,15 +57,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           architecture: ${{ steps.calculate_architecture.outputs.result }}
-          cache: yarn
+          cache: npm
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-engines
-        if: matrix.node-version == '6.x' || matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x' || matrix.node-version == '16.x' || matrix.node-version == '18.x'
+        run: npm install
+        if: matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x'
       - name: Install dependencies
-        run: yarn --frozen-lockfile
-        if: matrix.node-version != '6.x' && matrix.node-version != '8.x' && matrix.node-version != '10.x' && matrix.node-version != '12.x' && matrix.node-version != '14.x' && matrix.node-version != '16.x' && matrix.node-version != '18.x'
+        run: npm ci
+        if: matrix.node-version != '8.x' && matrix.node-version != '10.x' && matrix.node-version != '12.x' && matrix.node-version != '14.x'
       - name: Run tests with coverage
-        run: yarn test --ci --coverage
+        run: npm run test -- --ci --coverage
       - uses: codecov/codecov-action@v5
         with:
           flags: integration
