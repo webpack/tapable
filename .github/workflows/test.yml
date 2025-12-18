@@ -18,9 +18,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: yarn
-      - run: yarn --frozen-lockfile
-      - run: yarn lint
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
   test:
     strategy:
       fail-fast: false
@@ -45,15 +45,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           architecture: ${{ steps.calculate_architecture.outputs.result }}
-          cache: yarn
+          cache: npm
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-engines
-        if: matrix.node-version == '6.x' || matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x' || matrix.node-version == '16.x' || matrix.node-version == '18.x'
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
-        if: matrix.node-version != '6.x' && matrix.node-version != '8.x' && matrix.node-version != '10.x' && matrix.node-version != '12.x' && matrix.node-version != '14.x' && matrix.node-version != '16.x' && matrix.node-version != '18.x'
+        run: npm ci
       - name: Run tests with coverage
-        run: yarn test --ci --coverage
+        run: npm run test -- --ci --coverage
       - uses: codecov/codecov-action@v5
         with:
           flags: integration

@@ -20,13 +20,13 @@
   "types": "./tapable.d.ts",
   "files": ["lib", "!lib/__tests__", "tapable.d.ts"],
   "scripts": {
-    "lint": "yarn lint:code && yarn fmt:check",
+    "lint": "npm run lint:code && npm run fmt:check",
     "lint:code": "eslint --cache .",
-    "fmt": "yarn fmt:base --log-level warn --write",
-    "fmt:check": "yarn fmt:base --check",
+    "fmt": "npm run fmt:base -- --log-level warn --write",
+    "fmt:check": "npm run fmt:base -- --check",
     "fmt:base": "node ./node_modules/prettier/bin/prettier.cjs --cache --ignore-unknown .",
-    "fix": "yarn fix:code && yarn fmt",
-    "fix:code": "yarn lint:code --fix",
+    "fix": "npm run fix:code && npm run fmt",
+    "fix:code": "npm run lint:code -- --fix",
     "test": "jest"
   },
   "jest": {
@@ -49,7 +49,7 @@
     "eslint-plugin-jest": "^29.0.1",
     "eslint-plugin-n": "^17.19.0",
     "eslint-plugin-prettier": "^5.4.1",
-    "eslint-plugin-unicorn": "^60.0.0",
+    "eslint-plugin-unicorn": "^62.0.0",
     "jest": "^24.8.0",
     "prettier": "^3.5.3",
     "prettier-1": "npm:prettier@^1"
