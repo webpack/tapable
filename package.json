@@ -52,7 +52,7 @@
     "eslint-plugin-unicorn": "^62.0.0",
     "jest": "^24.8.0",
     "prettier": "^3.5.3",
-    "prettier-1": "git+https://github.com/prettier/prettier#95b8e54d1a6eeabebd81db37a4e088ea1de9197d"
+    "prettier-1": "npm:prettier@^1"
   },
   "engines": {
     "node": ">=6"
