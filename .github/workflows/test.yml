@@ -47,7 +47,7 @@ jobs:
           architecture: ${{ steps.calculate_architecture.outputs.result }}
           cache: npm
       - name: Update npm to latest version (optional, usually not needed)
-        run: npm install -g npm@latest
+        run: npm install -g npm@^6
         if: matrix.node-version == '6.x'
       - name: Install dependencies
         run: npm install
