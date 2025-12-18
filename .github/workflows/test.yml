@@ -46,8 +46,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           architecture: ${{ steps.calculate_architecture.outputs.result }}
           cache: npm
-      - name: Update npm to latest version (optional, usually not needed)
-        run: npm update
+      - name: Install old versions (optional)
+        run: npm i prettier@^1
         if: matrix.node-version == '6.x'
       - name: Install dependencies
         run: npm install
