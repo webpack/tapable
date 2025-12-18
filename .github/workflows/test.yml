@@ -46,9 +46,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           architecture: ${{ steps.calculate_architecture.outputs.result }}
           cache: npm
-      - name: Install old versions (optional)
-        run: npm i prettier@^1
-        if: matrix.node-version == '6.x'
       - name: Install dependencies
         run: npm install
         if: matrix.node-version == '6.x' || matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x'
