@@ -39,7 +39,7 @@
     "@babel/preset-env": "^7.4.4",
     "@stylistic/eslint-plugin": "^5.2.3",
     "babel-jest": "^24.8.0",
-    "eslint": "^9.28.0",
+    "eslint": "^10.1.0",
     "eslint-config-webpack": "^4.6.3",
     "jest": "^24.8.0",
     "prettier": "^3.5.3",
