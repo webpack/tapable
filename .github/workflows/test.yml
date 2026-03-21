@@ -71,7 +71,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install jest@27 babel-jest@29 --save-dev
+          npm install jest@27 babel-jest@27 --save-dev
           npm install
         if: matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x' || matrix.node-version == '16.x'
 
