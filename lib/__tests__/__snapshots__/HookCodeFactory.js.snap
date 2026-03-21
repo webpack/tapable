@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`HookCodeFactory callTap (no args, no intercept) async with onResult 1`] = `
 "var _fn1 = _x[1];

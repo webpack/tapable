@@ -32,6 +32,10 @@
   "jest": {
     "transform": {
       "__tests__[\\\\/].+\\.js$": "babel-jest"
+    },
+    "snapshotFormat": {
+      "escapeString": true,
+      "printBasicPrototype": true
     }
   },
   "devDependencies": {
