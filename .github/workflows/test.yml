@@ -70,12 +70,14 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
-        if: matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x'
+        run: |
+          npm install jest@24 babel-jest@24 --save-dev
+          npm install
+        if: matrix.node-version == '8.x' || matrix.node-version == '10.x' || matrix.node-version == '12.x' || matrix.node-version == '14.x' || matrix.node-version == '16.x'
 
       - name: Install dependencies
         run: npm ci
-        if: matrix.node-version != '8.x' && matrix.node-version != '10.x' && matrix.node-version != '12.x' && matrix.node-version != '14.x'
+        if: matrix.node-version != '8.x' && matrix.node-version != '10.x' && matrix.node-version != '12.x' && matrix.node-version != '14.x' && matrix.node-version != '16.x'
 
       - name: Run tests with coverage
         run: npm run test -- --ci --coverage
