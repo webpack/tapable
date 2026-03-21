@@ -18,7 +18,11 @@
     "util": "./lib/util-browser.js"
   },
   "types": "./tapable.d.ts",
-  "files": ["lib", "!lib/__tests__", "tapable.d.ts"],
+  "files": [
+    "lib",
+    "!lib/__tests__",
+    "tapable.d.ts"
+  ],
   "scripts": {
     "lint": "npm run lint:code && npm run fmt:check",
     "lint:code": "eslint --cache .",
@@ -27,7 +31,9 @@
     "fmt:base": "node ./node_modules/prettier/bin/prettier.cjs --cache --ignore-unknown .",
     "fix": "npm run fix:code && npm run fmt",
     "fix:code": "npm run lint:code -- --fix",
-    "test": "jest"
+    "test": "jest",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "jest": {
     "transform": {
@@ -51,5 +57,9 @@
   },
   "engines": {
     "node": ">=6"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@changesets/get-github-info": "^0.8.0"
   }
 }
