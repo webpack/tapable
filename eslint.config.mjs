@@ -3,6 +3,9 @@ import config from "eslint-config-webpack";
 
 export default defineConfig([
 	{
+		ignores: [".changeset/"]
+	},
+	{
 		extends: [config],
 		rules: {
 			"no-new-func": "off"
