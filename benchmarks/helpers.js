@@ -42,4 +42,21 @@ async function runBench(bench) {
 	}
 }
 
-module.exports = { createBench, runBench };
+/**
+ * Helper so each bench file can be both `require()`-d by the runner and
+ * executed directly via `node benchmarks/<suite>/<name>.bench.js`.
+ *
+ * @param {NodeModule} mod - the caller's `module`
+ * @param {() => Promise<void>} main - the suite's async main
+ */
+function runIfMain(mod, main) {
+	if (require.main === mod) {
+		main().catch((err) => {
+			// eslint-disable-next-line no-console
+			console.error(err);
+			process.exitCode = 1;
+		});
+	}
+}
+
+module.exports = { createBench, runBench, runIfMain };
