@@ -165,11 +165,11 @@ hook.tap(
 );
 ```
 
-| Option    | Type                   | Description                                                                                                                                                                                                         |
-| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`    | `string`               | Required. Identifies the tap for debugging, interceptors, and the `before` option.                                                                                                                                  |
-| `stage`   | `number`               | Defaults to `0`. Taps with a lower stage run before taps with a higher stage. Taps with the same stage run in registration order.                                                                                   |
-| `before`  | `string` \| `string[]` | The tap is inserted before the named tap(s). Unknown names are ignored. Combined with `stage`, `before` wins for the taps it targets; other taps are still ordered by `stage`.                                      |
+| Option   | Type                   | Description                                                                                                                                                                    |
+| -------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`   | `string`               | Required. Identifies the tap for debugging, interceptors, and the `before` option.                                                                                             |
+| `stage`  | `number`               | Defaults to `0`. Taps with a lower stage run before taps with a higher stage. Taps with the same stage run in registration order.                                              |
+| `before` | `string` \| `string[]` | The tap is inserted before the named tap(s). Unknown names are ignored. Combined with `stage`, `before` wins for the taps it targets; other taps are still ordered by `stage`. |
 
 The `name` is also used by some ecosystems (like webpack) for profiling and error messages. Within a single tap registration, later interceptors' `register` hooks may still replace the tap object (see [Interception](#interception)).
 
@@ -439,22 +439,24 @@ myCar.hooks.calculateRoutes.intercept({
 	register: (tapInfo) => {
 		// Called once per tap (and for each tap already registered when the
 		// interceptor is added). Return a new tapInfo object to replace it.
+		console.log(`${tapInfo.name} is registered`);
+
 		return tapInfo;
 	}
 });
 ```
 
-| Handler    | Signature                              | When it runs                                                                                                                                  |
-| ---------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `call`     | `(...args) => void`                    | Before the hook starts executing its taps. Receives the arguments passed to `call` / `callAsync` / `promise`.                                 |
-| `tap`      | `(tap: Tap) => void`                   | Before each tap runs. The `tap` object is a snapshot — mutations are ignored.                                                                 |
-| `loop`     | `(...args) => void`                    | At the start of each iteration of a `SyncLoopHook` / `AsyncSeriesLoopHook`.                                                                   |
-| `error`    | `(err: Error) => void`                 | Whenever a tap throws, rejects, or calls its callback with an error.                                                                          |
-| `result`   | `(result: any) => void`                | When a bail or waterfall hook produces a value, or when a tap produces one for a loop hook.                                                   |
-| `done`     | `() => void`                           | When the hook finishes successfully (no error, no early bail).                                                                                |
-| `register` | `(tap: Tap) => Tap \| undefined`       | Once per tap at registration time (including taps that existed before the interceptor was added). Return a new `Tap` object to replace it.   |
-| `name`     | `string`                               | Optional label used by ecosystems for debugging.                                                                                              |
-| `context`  | `boolean`                              | Opt into the shared `context` object. See [Context](#context).                                                                                |
+| Handler    | Signature                        | When it runs                                                                                                                               |
+| ---------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `call`     | `(...args) => void`              | Before the hook starts executing its taps. Receives the arguments passed to `call` / `callAsync` / `promise`.                              |
+| `tap`      | `(tap: Tap) => void`             | Before each tap runs. The `tap` object is a snapshot — mutations are ignored.                                                              |
+| `loop`     | `(...args) => void`              | At the start of each iteration of a `SyncLoopHook` / `AsyncSeriesLoopHook`.                                                                |
+| `error`    | `(err: Error) => void`           | Whenever a tap throws, rejects, or calls its callback with an error.                                                                       |
+| `result`   | `(result: any) => void`          | When a bail or waterfall hook produces a value, or when a tap produces one for a loop hook.                                                |
+| `done`     | `() => void`                     | When the hook finishes successfully (no error, no early bail).                                                                             |
+| `register` | `(tap: Tap) => Tap \| undefined` | Once per tap at registration time (including taps that existed before the interceptor was added). Return a new `Tap` object to replace it. |
+| `name`     | `string`                         | Optional label used by ecosystems for debugging.                                                                                           |
+| `context`  | `boolean`                        | Opt into the shared `context` object. See [Context](#context).                                                                             |
 
 Adding an interceptor invalidates the hook's compiled call function — the next `call` / `callAsync` / `promise` recompiles it so that the new interceptor is woven in.
 
@@ -569,7 +571,9 @@ interface Hook {
 		fn: (context?, ...args) => Promise<Result>
 	) => void;
 	intercept: (interceptor: HookInterceptor) => void;
-	withOptions: (options: TapOptions) => Omit<Hook, "call" | "callAsync" | "promise">;
+	withOptions: (
+		options: TapOptions
+	) => Omit<Hook, "call" | "callAsync" | "promise">;
 }
 
 interface HookInterceptor {
@@ -625,10 +629,14 @@ interface HookMap {
 `isUsed()` returns `true` when the hook has at least one tap or interceptor registered. Hook owners can use it to skip expensive argument preparation when no plugin is listening:
 
 ```js
-setSpeed(newSpeed) {
-	if (this.hooks.accelerate.isUsed()) {
-		this.hooks.accelerate.call(newSpeed);
+class Car {
+	// ...
+	setSpeed(newSpeed) {
+		if (this.hooks.accelerate.isUsed()) {
+			this.hooks.accelerate.call(newSpeed);
+		}
 	}
+	// ...
 }
 ```
 
@@ -639,7 +647,7 @@ A `MultiHook` is a Hook-like facade that forwards `tap`, `tapAsync`, `tapPromise
 ### Fan out a tap to several hooks
 
 ```js
-const { SyncHook, MultiHook } = require("tapable");
+const { MultiHook, SyncHook } = require("tapable");
 
 class Car {
 	constructor() {
@@ -659,7 +667,7 @@ const car = new Car();
 car.hooks.anyMovement.tap("Telemetry", () => console.log("car moved"));
 
 car.hooks.accelerate.call(42); // "car moved"
-car.hooks.brake.call();        // "car moved"
+car.hooks.brake.call(); // "car moved"
 ```
 
 The `MultiHook` has no state of its own: the tap above ends up inside `accelerate.taps` and `brake.taps`.
