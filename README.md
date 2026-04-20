@@ -185,6 +185,32 @@ lateHook.tap("LogAfterOthers", (speed) => console.log("final speed", speed));
 
 The returned object does not expose the `call*` methods, so it is safe to hand out to plugins.
 
+A runnable example showing how `withOptions` influences tap ordering:
+
+```js
+const { SyncHook } = require("tapable");
+
+const hook = new SyncHook(["value"]);
+
+hook.tap("Default", (v) => console.log("default", v));
+
+// Pre-configure stage: 10 so all taps registered through `late` run last.
+const late = hook.withOptions({ stage: 10 });
+late.tap("RunLast", (v) => console.log("last", v));
+
+// Pre-configure stage: -10 so these taps run first. Each facade can also
+// be further narrowed via `withOptions`.
+const early = hook.withOptions({ stage: -10 });
+early.tap("RunFirst", (v) => console.log("first", v));
+
+hook.call(1);
+// first 1
+// default 1
+// last 1
+```
+
+Per-tap options override values from `withOptions`. For example, `late.tap({ name: "Override", stage: 0 }, fn)` ignores the facade's `stage: 10` and registers `fn` at stage `0`.
+
 ## Hook types
 
 Each hook can be tapped with one or several functions. How they are executed depends on the hook type:
