@@ -118,10 +118,12 @@ export function withCodSpeed(bench) {
 	 */
 	const wrapFrame = (fn, isAsync) => {
 		if (isAsync) {
+			// eslint-disable-next-line camelcase
 			return async function __codspeed_root_frame__() {
 				await fn();
 			};
 		}
+		// eslint-disable-next-line camelcase
 		return function __codspeed_root_frame__() {
 			fn();
 		};

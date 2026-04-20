@@ -82,8 +82,9 @@ export default function register(bench) {
 		"hook-compile: AsyncParallelBailHook, 5 taps + first callAsync",
 		() => {
 			const hook = new AsyncParallelBailHook(["a"]);
-			for (let i = 0; i < 5; i++)
+			for (let i = 0; i < 5; i++) {
 				hook.tapAsync(`p-${i}`, (_a, cb) => cb(null, undefined));
+			}
 			hook.callAsync(1, () => {});
 		}
 	);

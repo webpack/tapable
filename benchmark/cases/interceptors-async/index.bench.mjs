@@ -54,8 +54,9 @@ export default function register(bench) {
 
 	// --- AsyncParallelHook ---
 	const parallelBaseline = new AsyncParallelHook(["a"]);
-	for (let i = 0; i < 5; i++)
+	for (let i = 0; i < 5; i++) {
 		parallelBaseline.tapAsync(`p-${i}`, (_a, cb) => cb());
+	}
 	parallelBaseline.callAsync(1, () => {});
 	bench.add("interceptors-async: parallel, 5 async taps, no interceptors", () =>
 		runBatch(parallelBaseline, INNER_ITERATIONS)

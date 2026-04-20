@@ -58,9 +58,9 @@ export default function register(bench) {
 	bench.add(
 		"interceptors-sync: register interceptor + 10 tap registrations",
 		() => {
-			const h = new SyncHook(["a"]);
-			h.intercept({ register: (t) => t });
-			for (let i = 0; i < 10; i++) h.tap(`p-${i}`, () => {});
+			const hook = new SyncHook(["a"]);
+			hook.intercept({ register: (t) => t });
+			for (let i = 0; i < 10; i++) hook.tap(`p-${i}`, () => {});
 		}
 	);
 }
