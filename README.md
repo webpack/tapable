@@ -140,7 +140,76 @@ The Hook will compile a method with the most efficient way of running your plugi
 - The number of arguments
 - Whether interception is used
 
-This ensures fastest possible execution.
+This ensures fastest possible execution. See [Code generation](#code-generation) for more details on the runtime compilation.
+
+## Plugin API
+
+A plugin registers a callback on a hook using one of the `tap*` methods. The hook type determines which of these are valid (see [Hook classes](#hook-classes)):
+
+- `hook.tap(nameOrOptions, fn)` — register a synchronous callback.
+- `hook.tapAsync(nameOrOptions, fn)` — register a callback-based async callback. The last argument passed to `fn` is a node-style callback `(err, result)`.
+- `hook.tapPromise(nameOrOptions, fn)` — register a promise-returning async callback. If `fn` returns something that is not thenable, the hook throws.
+
+The first argument can be either a string (the plugin name) or an options object that also allows influencing the order in which taps run:
+
+```js
+hook.tap(
+	{
+		name: "MyPlugin",
+		stage: -10, // lower stages run earlier, default is 0
+		before: "OtherPlugin" // run before a named tap (string or string[])
+	},
+	(...args) => {
+		/* ... */
+	}
+);
+```
+
+| Option   | Type                   | Description                                                                                                                                                                    |
+| -------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`   | `string`               | Required. Identifies the tap for debugging, interceptors, and the `before` option.                                                                                             |
+| `stage`  | `number`               | Defaults to `0`. Taps with a lower stage run before taps with a higher stage. Taps with the same stage run in registration order.                                              |
+| `before` | `string` \| `string[]` | The tap is inserted before the named tap(s). Unknown names are ignored. Combined with `stage`, `before` wins for the taps it targets; other taps are still ordered by `stage`. |
+
+The `name` is also used by some ecosystems (like webpack) for profiling and error messages. Within a single tap registration, later interceptors' `register` hooks may still replace the tap object (see [Interception](#interception)).
+
+### `hook.withOptions(options)`
+
+`withOptions` returns a facade around the hook whose `tap*` methods automatically merge `options` into every registration. It is useful for libraries that want to pre-configure a `stage` or `before` for all the taps they add:
+
+```js
+const lateHook = myCar.hooks.accelerate.withOptions({ stage: 10 });
+lateHook.tap("LogAfterOthers", (speed) => console.log("final speed", speed));
+// equivalent to: myCar.hooks.accelerate.tap({ name: "LogAfterOthers", stage: 10 }, ...)
+```
+
+The returned object does not expose the `call*` methods, so it is safe to hand out to plugins.
+
+A runnable example showing how `withOptions` influences tap ordering:
+
+```js
+const { SyncHook } = require("tapable");
+
+const hook = new SyncHook(["value"]);
+
+hook.tap("Default", (v) => console.log("default", v));
+
+// Pre-configure stage: 10 so all taps registered through `late` run last.
+const late = hook.withOptions({ stage: 10 });
+late.tap("RunLast", (v) => console.log("last", v));
+
+// Pre-configure stage: -10 so these taps run first. Each facade can also
+// be further narrowed via `withOptions`.
+const early = hook.withOptions({ stage: -10 });
+early.tap("RunFirst", (v) => console.log("first", v));
+
+hook.call(1);
+// first 1
+// default 1
+// last 1
+```
+
+Per-tap options override values from `withOptions`. For example, `late.tap({ name: "Override", stage: 0 }, fn)` ignores the facade's `stage: 10` and registers `fn` at stage `0`.
 
 ## Hook types
 
@@ -355,28 +424,41 @@ const output = await hook.promise("./input.txt");
 
 ## Interception
 
-All Hooks offer an additional interception API:
+All hooks expose an `intercept(interceptor)` method. An interceptor is a plain object whose methods are invoked at specific points during the lifetime of the hook. Interceptors are invoked in registration order before the taps, and are useful for logging, tracing, profiling, or re-mapping tap options.
 
 ```js
 myCar.hooks.calculateRoutes.intercept({
+	name: "LoggingInterceptor",
 	call: (source, target, routesList) => {
 		console.log("Starting to calculate routes");
 	},
+	tap: (tapInfo) => {
+		// tapInfo = { type: "promise", name: "GoogleMapsPlugin", fn: ..., stage: 0 }
+		console.log(`${tapInfo.name} is running`);
+	},
 	register: (tapInfo) => {
-		// tapInfo = { type: "promise", name: "GoogleMapsPlugin", fn: ... }
-		console.log(`${tapInfo.name} is doing its job`);
-		return tapInfo; // may return a new tapInfo object
+		// Called once per tap (and for each tap already registered when the
+		// interceptor is added). Return a new tapInfo object to replace it.
+		console.log(`${tapInfo.name} is registered`);
+
+		return tapInfo;
 	}
 });
 ```
 
-**call**: `(...args) => void` Adding `call` to your interceptor will trigger when hooks are triggered. You have access to the hooks arguments.
+| Handler    | Signature                        | When it runs                                                                                                                               |
+| ---------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `call`     | `(...args) => void`              | Before the hook starts executing its taps. Receives the arguments passed to `call` / `callAsync` / `promise`.                              |
+| `tap`      | `(tap: Tap) => void`             | Before each tap runs. The `tap` object is a snapshot — mutations are ignored.                                                              |
+| `loop`     | `(...args) => void`              | At the start of each iteration of a `SyncLoopHook` / `AsyncSeriesLoopHook`.                                                                |
+| `error`    | `(err: Error) => void`           | Whenever a tap throws, rejects, or calls its callback with an error.                                                                       |
+| `result`   | `(result: any) => void`          | When a bail or waterfall hook produces a value, or when a tap produces one for a loop hook.                                                |
+| `done`     | `() => void`                     | When the hook finishes successfully (no error, no early bail).                                                                             |
+| `register` | `(tap: Tap) => Tap \| undefined` | Once per tap at registration time (including taps that existed before the interceptor was added). Return a new `Tap` object to replace it. |
+| `name`     | `string`                         | Optional label used by ecosystems for debugging.                                                                                           |
+| `context`  | `boolean`                        | Opt into the shared `context` object. See [Context](#context).                                                                             |
 
-**tap**: `(tap: Tap) => void` Adding `tap` to your interceptor will trigger when a plugin taps into a hook. Provided is the `Tap` object. `Tap` object can't be changed.
-
-**loop**: `(...args) => void` Adding `loop` to your interceptor will trigger for each loop of a looping hook.
-
-**register**: `(tap: Tap) => Tap | undefined` Adding `register` to your interceptor will trigger for each added `Tap` and allows to modify it.
+Adding an interceptor invalidates the hook's compiled call function — the next `call` / `callAsync` / `promise` recompiles it so that the new interceptor is woven in.
 
 ## Context
 
@@ -415,11 +497,13 @@ myCar.hooks.accelerate.tap(
 
 ## HookMap
 
-A HookMap is a helper class for a Map with Hooks
+A `HookMap` is a helper class that lazily creates hooks per key. The constructor takes a factory function; the first time a key is requested via `for(key)`, the factory is called and the resulting hook is cached.
 
 ```js
 const keyedHook = new HookMap((key) => new SyncHook(["arg"]));
 ```
+
+Plugins use `for(key)` to obtain the hook for a specific key (creating it on demand) and then `tap` on it as usual:
 
 ```js
 keyedHook.for("some-key").tap("MyPlugin", (arg) => {
@@ -433,6 +517,8 @@ keyedHook.for("some-key").tapPromise("MyPlugin", (arg) => {
 });
 ```
 
+The owner of the `HookMap` uses `get(key)` to look up an existing hook without creating one. This is typically preferred on the calling side so that keys no plugin cares about are never materialized:
+
 ```js
 const hook = keyedHook.get("some-key");
 if (hook !== undefined) {
@@ -442,9 +528,32 @@ if (hook !== undefined) {
 }
 ```
 
+A `HookMap` can also be intercepted. `intercept({ factory })` wraps the factory so you can customize or replace the hook returned for each new key.
+
+## Code generation
+
+Tapable does not iterate over taps at call time. Instead, the first time `call`, `callAsync` or `promise` is invoked after the hook has been modified, the hook compiles a specialized function using `new Function(...)` and caches it on the instance. This is what the README means by "evals in code": the hook's dispatch logic is generated as a string and turned into a real JavaScript function the engine can inline and optimize.
+
+The generated function is tailored to:
+
+- **Call type** — whether the owner called `call` (sync), `callAsync` (callback), or `promise`. Each produces a different skeleton — e.g. `promise()` wraps the body in `new Promise((_resolve, _reject) => { ... })`.
+- **Tap types** — for each tap, the generator emits the right invocation pattern: direct call for `tap`, node-style callback wrapping for `tapAsync`, and `.then(...)` chaining for `tapPromise`.
+- **Hook class** — `SyncHook` emits a straight-line sequence of calls; `SyncBailHook` emits early-return checks; `SyncWaterfallHook` threads a value through calls; loop hooks wrap the body in a re-entry loop; `AsyncParallel*` fans the taps out and counts completions; `AsyncSeries*` chains them.
+- **Interceptors** — if interceptors are attached, calls to their `call`/`tap`/`loop`/`error`/`result`/`done` handlers are spliced into the generated body; otherwise they cost nothing.
+- **Context** — a `_context` object is only created when at least one tap or interceptor opts into it with `context: true`.
+- **Arity** — the generated code hard-codes the number of arguments declared when the hook was constructed, so no `arguments`/rest handling happens at runtime.
+
+The compiled function is invalidated (reset back to a one-shot "recompile then call" trampoline) whenever the hook's shape changes — i.e. on any new `tap*` or `intercept` call. Steady-state calls therefore run straight through the cached function with no per-tap branching.
+
+### Why this matters
+
+- You only pay for features you use. An interceptor-free, sync-only hook compiles down to a short sequence of direct function calls.
+- Debugging a hook means reading the generated source. If you need to see it, `Hook.prototype.compile` returns the `new Function(...)` result — log `hook._createCall("sync").toString()` (or `"async"` / `"promise"`) to inspect the body.
+- Because the dispatch is code-generated, a hook's behavior is fully determined at compile time. Mutating tap options after registration (for example, changing `stage` on an existing `Tap` object) will not reorder taps until you cause a recompile.
+
 ## Hook/HookMap interface
 
-Public:
+Public (callable by anyone holding a reference to the hook, i.e. the plugins):
 
 ```ts
 interface Hook {
@@ -462,14 +571,21 @@ interface Hook {
 		fn: (context?, ...args) => Promise<Result>
 	) => void;
 	intercept: (interceptor: HookInterceptor) => void;
+	withOptions: (
+		options: TapOptions
+	) => Omit<Hook, "call" | "callAsync" | "promise">;
 }
 
 interface HookInterceptor {
-	call: (context?, ...args) => void;
-	loop: (context?, ...args) => void;
-	tap: (context?, tap: Tap) => void;
-	register: (tap: Tap) => Tap;
-	context: boolean;
+	name?: string;
+	call?: (context?, ...args) => void;
+	loop?: (context?, ...args) => void;
+	tap?: (context?, tap: Tap) => void;
+	error?: (err: Error) => void;
+	result?: (result: any) => void;
+	done?: () => void;
+	register?: (tap: Tap) => Tap | undefined;
+	context?: boolean;
 }
 
 interface HookMap {
@@ -483,15 +599,15 @@ interface HookMapInterceptor {
 
 interface Tap {
 	name: string;
-	type: string;
+	type: "sync" | "async" | "promise";
 	fn: Function;
 	stage: number;
 	context: boolean;
-	before?: string | Array;
+	before?: string | Array<string>;
 }
 ```
 
-Protected (only for the class containing the hook):
+Protected (only for the class containing the hook — it owns the right to trigger it):
 
 ```ts
 interface Hook {
@@ -510,12 +626,90 @@ interface HookMap {
 }
 ```
 
-## MultiHook
-
-A helper Hook-like class to redirect taps to multiple other hooks:
+`isUsed()` returns `true` when the hook has at least one tap or interceptor registered. Hook owners can use it to skip expensive argument preparation when no plugin is listening:
 
 ```js
-const { MultiHook } = require("tapable");
+class Car {
+	// ...
+	setSpeed(newSpeed) {
+		if (this.hooks.accelerate.isUsed()) {
+			this.hooks.accelerate.call(newSpeed);
+		}
+	}
+	// ...
+}
+```
 
-this.hooks.allHooks = new MultiHook([this.hooks.hookA, this.hooks.hookB]);
+## MultiHook
+
+A `MultiHook` is a Hook-like facade that forwards `tap`, `tapAsync`, `tapPromise`, `intercept`, and `withOptions` to several underlying hooks at once. It does not expose `call*` methods — only the owners of the wrapped hooks decide when each of them runs. It is the typical way a class exposes a "happens on any of these events" listening surface without having the plugin wire itself up to every hook individually.
+
+### Fan out a tap to several hooks
+
+```js
+const { MultiHook, SyncHook } = require("tapable");
+
+class Car {
+	constructor() {
+		const accelerate = new SyncHook(["newSpeed"]);
+		const brake = new SyncHook();
+		this.hooks = {
+			accelerate,
+			brake,
+			// `anyMovement` is not a real hook — it simply re-registers taps
+			// on both `accelerate` and `brake`.
+			anyMovement: new MultiHook([accelerate, brake])
+		};
+	}
+}
+
+const car = new Car();
+car.hooks.anyMovement.tap("Telemetry", () => console.log("car moved"));
+
+car.hooks.accelerate.call(42); // "car moved"
+car.hooks.brake.call(); // "car moved"
+```
+
+The `MultiHook` has no state of its own: the tap above ends up inside `accelerate.taps` and `brake.taps`.
+
+### Forwarding async taps
+
+`tapAsync` / `tapPromise` forward to every wrapped hook — it is the plugin's job to make sure they are all compatible. Registering a `tapPromise` on a `MultiHook` that wraps a `SyncHook` will throw at registration time for that hook.
+
+```js
+const build = new AsyncSeriesHook(["stats"]);
+const rebuild = new AsyncSeriesHook(["stats"]);
+const anyBuild = new MultiHook([build, rebuild]);
+
+anyBuild.tapPromise("Report", async (stats) => report.send(stats));
+```
+
+### Shared interceptors and options
+
+`intercept` and `withOptions` are also forwarded, so a `MultiHook` can be used to attach the same interceptor or pre-configured options to a group of hooks:
+
+```js
+const anyBuild = new MultiHook([build, rebuild]);
+
+anyBuild.intercept({
+	call: () => console.log("build started"),
+	done: () => console.log("build done")
+});
+
+// Every tap added through `late` is staged late on both underlying hooks.
+const late = anyBuild.withOptions({ stage: 10 });
+late.tap("RunLast", () => {
+	/* ... */
+});
+```
+
+### `isUsed`
+
+`isUsed()` returns `true` if any of the wrapped hooks has at least one tap or interceptor, which lets the owner cheaply skip work when no one is listening on any of them:
+
+```js
+if (this.hooks.anyMovement.isUsed()) {
+	// expensive telemetry payload is only built when a plugin actually cares
+	this.hooks.accelerate.call(computeSpeed());
+}
 ```
