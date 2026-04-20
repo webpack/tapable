@@ -608,17 +608,74 @@ setSpeed(newSpeed) {
 
 ## MultiHook
 
-A `MultiHook` is a Hook-like facade that forwards `tap`, `tapAsync`, `tapPromise`, `intercept`, and `withOptions` to several underlying hooks at once. It does not expose `call*` methods — only the owners of the wrapped hooks decide when each of them runs.
+A `MultiHook` is a Hook-like facade that forwards `tap`, `tapAsync`, `tapPromise`, `intercept`, and `withOptions` to several underlying hooks at once. It does not expose `call*` methods — only the owners of the wrapped hooks decide when each of them runs. It is the typical way a class exposes a "happens on any of these events" listening surface without having the plugin wire itself up to every hook individually.
+
+### Fan out a tap to several hooks
 
 ```js
-const { MultiHook } = require("tapable");
+const { SyncHook, MultiHook } = require("tapable");
 
-this.hooks.allHooks = new MultiHook([this.hooks.hookA, this.hooks.hookB]);
+class Car {
+	constructor() {
+		const accelerate = new SyncHook(["newSpeed"]);
+		const brake = new SyncHook();
+		this.hooks = {
+			accelerate,
+			brake,
+			// `anyMovement` is not a real hook — it simply re-registers taps
+			// on both `accelerate` and `brake`.
+			anyMovement: new MultiHook([accelerate, brake])
+		};
+	}
+}
 
-// A plugin that taps `allHooks` is registered on both `hookA` and `hookB`.
-this.hooks.allHooks.tap("MyPlugin", () => {
+const car = new Car();
+car.hooks.anyMovement.tap("Telemetry", () => console.log("car moved"));
+
+car.hooks.accelerate.call(42); // "car moved"
+car.hooks.brake.call();        // "car moved"
+```
+
+The `MultiHook` has no state of its own: the tap above ends up inside `accelerate.taps` and `brake.taps`.
+
+### Forwarding async taps
+
+`tapAsync` / `tapPromise` forward to every wrapped hook — it is the plugin's job to make sure they are all compatible. Registering a `tapPromise` on a `MultiHook` that wraps a `SyncHook` will throw at registration time for that hook.
+
+```js
+const build = new AsyncSeriesHook(["stats"]);
+const rebuild = new AsyncSeriesHook(["stats"]);
+const anyBuild = new MultiHook([build, rebuild]);
+
+anyBuild.tapPromise("Report", async (stats) => report.send(stats));
+```
+
+### Shared interceptors and options
+
+`intercept` and `withOptions` are also forwarded, so a `MultiHook` can be used to attach the same interceptor or pre-configured options to a group of hooks:
+
+```js
+const anyBuild = new MultiHook([build, rebuild]);
+
+anyBuild.intercept({
+	call: () => console.log("build started"),
+	done: () => console.log("build done")
+});
+
+// Every tap added through `late` is staged late on both underlying hooks.
+const late = anyBuild.withOptions({ stage: 10 });
+late.tap("RunLast", () => {
 	/* ... */
 });
 ```
 
-`isUsed()` returns `true` if any of the wrapped hooks has at least one tap or interceptor.
+### `isUsed`
+
+`isUsed()` returns `true` if any of the wrapped hooks has at least one tap or interceptor, which lets the owner cheaply skip work when no one is listening on any of them:
+
+```js
+if (this.hooks.anyMovement.isUsed()) {
+	// expensive telemetry payload is only built when a plugin actually cares
+	this.hooks.accelerate.call(computeSpeed());
+}
+```
