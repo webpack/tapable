@@ -4,12 +4,12 @@
 */
 "use strict";
 
-const Hook = require("../Hook");
-const SyncHook = require("../SyncHook");
+const HookTest = require("../lib/Hook");
+const SyncHook = require("../lib/SyncHook");
 
 describe("Hook", () => {
 	it("should throw when compile is not overridden", () => {
-		const hook = new Hook(["arg"]);
+		const hook = new HookTest(["arg"]);
 		expect(() =>
 			hook.compile({ taps: [], interceptors: [], args: [], type: "sync" })
 		).toThrow(/Abstract: should be overridden/);

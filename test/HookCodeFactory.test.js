@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const HookCodeFactory = require("../HookCodeFactory");
+const HookCodeFactoryTest = require("../lib/HookCodeFactory");
 
 const expectNoSyntaxError = (code) => {
 	// eslint-disable-next-line no-new
@@ -80,7 +80,7 @@ describe("HookCodeFactory", () => {
 				let factory;
 
 				beforeEach(() => {
-					factory = new HookCodeFactory();
+					factory = new HookCodeFactoryTest();
 					factory.init(factoryConfigurations[configurationName]);
 				});
 
@@ -233,7 +233,7 @@ describe("HookCodeFactory", () => {
 				let factory;
 
 				beforeEach(() => {
-					factory = new HookCodeFactory();
+					factory = new HookCodeFactoryTest();
 					factory.init(factoryConfigurations[configurationName]);
 				});
 

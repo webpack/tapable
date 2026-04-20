@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const MultiHook = require("../MultiHook");
+const MultiHookTest = require("../lib/MultiHook");
 
 describe("MultiHook", () => {
 	const redirectedMethods = ["tap", "tapAsync", "tapPromise"];
@@ -16,7 +16,7 @@ describe("MultiHook", () => {
 					calls.push({ options, fn });
 				}
 			};
-			new MultiHook([fakeHook, fakeHook])[name]("options", "fn");
+			new MultiHookTest([fakeHook, fakeHook])[name]("options", "fn");
 			expect(calls).toEqual([
 				{ options: "options", fn: "fn" },
 				{ options: "options", fn: "fn" }
@@ -31,7 +31,7 @@ describe("MultiHook", () => {
 				calls.push(interceptor);
 			}
 		};
-		new MultiHook([fakeHook, fakeHook]).intercept("interceptor");
+		new MultiHookTest([fakeHook, fakeHook]).intercept("interceptor");
 		expect(calls).toEqual(["interceptor", "interceptor"]);
 	});
 
@@ -47,7 +47,9 @@ describe("MultiHook", () => {
 				};
 			}
 		};
-		const newHook = new MultiHook([fakeHook, fakeHook]).withOptions("options");
+		const newHook = new MultiHookTest([fakeHook, fakeHook]).withOptions(
+			"options"
+		);
 		newHook.tap("options", "fn");
 		expect(calls).toEqual([
 			"options",
@@ -64,9 +66,9 @@ describe("MultiHook", () => {
 		const fakeHook2 = {
 			isUsed: () => false
 		};
-		expect(new MultiHook([fakeHook1, fakeHook1]).isUsed()).toBe(true);
-		expect(new MultiHook([fakeHook1, fakeHook2]).isUsed()).toBe(true);
-		expect(new MultiHook([fakeHook2, fakeHook1]).isUsed()).toBe(true);
-		expect(new MultiHook([fakeHook2, fakeHook2]).isUsed()).toBe(false);
+		expect(new MultiHookTest([fakeHook1, fakeHook1]).isUsed()).toBe(true);
+		expect(new MultiHookTest([fakeHook1, fakeHook2]).isUsed()).toBe(true);
+		expect(new MultiHookTest([fakeHook2, fakeHook1]).isUsed()).toBe(true);
+		expect(new MultiHookTest([fakeHook2, fakeHook2]).isUsed()).toBe(false);
 	});
 });

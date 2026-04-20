@@ -20,7 +20,6 @@
   "types": "./tapable.d.ts",
   "files": [
     "lib",
-    "!lib/__tests__",
     "tapable.d.ts"
   ],
   "scripts": {
@@ -38,7 +37,7 @@
   },
   "jest": {
     "transform": {
-      "__tests__[\\\\/].+\\.js$": "babel-jest"
+      "test[\\\\/].+\\.js$": "babel-jest"
     },
     "snapshotFormat": {
       "escapeString": true,

@@ -4,9 +4,9 @@
 */
 "use strict";
 
-const AsyncParallelBailHook = require("../AsyncParallelBailHook");
-const AsyncParallelHook = require("../AsyncParallelHook");
-const HookTester = require("./HookTester");
+const AsyncParallelBailHook = require("../lib/AsyncParallelBailHook");
+const AsyncParallelHook = require("../lib/AsyncParallelHook");
+const HookTester = require("./HookTester.test");
 
 describe("AsyncParallelHook", () => {
 	it("should have to correct behavior", async () => {

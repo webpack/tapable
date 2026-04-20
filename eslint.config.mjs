@@ -12,7 +12,7 @@ export default defineConfig([
 		}
 	},
 	{
-		files: ["lib/__tests__/**/*.js"],
+		files: ["test/**/*"],
 		languageOptions: {
 			parserOptions: {
 				ecmaVersion: 2018
@@ -20,7 +20,7 @@ export default defineConfig([
 		}
 	},
 	{
-		files: ["benchmark/**/*.mjs"],
+		files: ["benchmark/**/*"],
 		languageOptions: {
 			parserOptions: {
 				ecmaVersion: 2022
