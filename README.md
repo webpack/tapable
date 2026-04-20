@@ -173,18 +173,18 @@ The table below summarizes the 9 built-in hook classes. For each class:
 - **Result** is the value returned from `call` (or passed to the `callAsync` callback / resolved from the `promise` call).
 - **Returned value from tap** describes whether the value returned from a tapped function has an effect.
 
-| Class | Tap methods | Call methods | Result | Returned value from tap |
-| --- | --- | --- | --- | --- |
-| `SyncHook` | `tap` | `call` | `undefined` | ignored |
-| `SyncBailHook` | `tap` | `call` | first non-`undefined` value, or `undefined` | short-circuits the hook |
-| `SyncWaterfallHook` | `tap` | `call` | final value (first argument after the last tap) | passed as first argument to the next tap |
-| `SyncLoopHook` | `tap` | `call` | `undefined` | non-`undefined` restarts the loop from the first tap |
-| `AsyncParallelHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | `undefined` | ignored |
-| `AsyncParallelBailHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | first non-`undefined` value, or `undefined` | short-circuits the hook |
-| `AsyncSeriesHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | `undefined` | ignored |
-| `AsyncSeriesBailHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | first non-`undefined` value, or `undefined` | short-circuits the hook |
-| `AsyncSeriesLoopHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | `undefined` | non-`undefined` restarts the loop from the first tap |
-| `AsyncSeriesWaterfallHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | final value (first argument after the last tap) | passed as first argument to the next tap |
+| Class                      | Tap methods                     | Call methods           | Result                                          | Returned value from tap                              |
+| -------------------------- | ------------------------------- | ---------------------- | ----------------------------------------------- | ---------------------------------------------------- |
+| `SyncHook`                 | `tap`                           | `call`                 | `undefined`                                     | ignored                                              |
+| `SyncBailHook`             | `tap`                           | `call`                 | first non-`undefined` value, or `undefined`     | short-circuits the hook                              |
+| `SyncWaterfallHook`        | `tap`                           | `call`                 | final value (first argument after the last tap) | passed as first argument to the next tap             |
+| `SyncLoopHook`             | `tap`                           | `call`                 | `undefined`                                     | non-`undefined` restarts the loop from the first tap |
+| `AsyncParallelHook`        | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | `undefined`                                     | ignored                                              |
+| `AsyncParallelBailHook`    | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | first non-`undefined` value, or `undefined`     | short-circuits the hook                              |
+| `AsyncSeriesHook`          | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | `undefined`                                     | ignored                                              |
+| `AsyncSeriesBailHook`      | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | first non-`undefined` value, or `undefined`     | short-circuits the hook                              |
+| `AsyncSeriesLoopHook`      | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | `undefined`                                     | non-`undefined` restarts the loop from the first tap |
+| `AsyncSeriesWaterfallHook` | `tap`, `tapAsync`, `tapPromise` | `callAsync`, `promise` | final value (first argument after the last tap) | passed as first argument to the next tap             |
 
 Detailed behavior of each class:
 
