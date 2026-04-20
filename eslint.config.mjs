@@ -3,7 +3,7 @@ import config from "eslint-config-webpack";
 
 export default defineConfig([
 	{
-		ignores: [".changeset/", "benchmarks/"]
+		ignores: [".changeset/", "benchmark/"]
 	},
 	{
 		extends: [config],
