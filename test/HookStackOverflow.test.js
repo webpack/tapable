@@ -1,6 +1,6 @@
 "use strict";
 
-const AsyncSeriesHook = require("../AsyncSeriesHook");
+const AsyncSeriesHook = require("../lib/AsyncSeriesHook");
 
 describe("HookStackOverflow", () => {
 	it("should not crash when compiling a large hook", () => {

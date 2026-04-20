@@ -3,18 +3,18 @@
 */
 "use strict";
 
-const HookMap = require("../HookMap");
-const SyncHook = require("../SyncHook");
+const HookMapTest = require("../lib/HookMap");
+const SyncHook = require("../lib/SyncHook");
 
 describe("HookMap", () => {
 	it("should return undefined from get when the key is unknown", () => {
-		const map = new HookMap(() => new SyncHook());
+		const map = new HookMapTest(() => new SyncHook());
 		expect(map.get("missing")).toBeUndefined();
 	});
 
 	it("should lazily create hooks through for(...) and cache them", () => {
 		const factory = jest.fn(() => new SyncHook(["a"]));
-		const map = new HookMap(factory, "myMap");
+		const map = new HookMapTest(factory, "myMap");
 
 		expect(map.name).toBe("myMap");
 
@@ -32,7 +32,7 @@ describe("HookMap", () => {
 	});
 
 	it("should apply interceptor factories when creating hooks", () => {
-		const map = new HookMap(() => new SyncHook());
+		const map = new HookMapTest(() => new SyncHook());
 		const wrapped = new SyncHook();
 
 		map.intercept({
@@ -47,7 +47,7 @@ describe("HookMap", () => {
 	});
 
 	it("should default the interceptor factory to pass-through", () => {
-		const map = new HookMap(() => new SyncHook());
+		const map = new HookMapTest(() => new SyncHook());
 		map.intercept({});
 		const hook = map.for("bar");
 		expect(hook).toBeDefined();
@@ -56,15 +56,15 @@ describe("HookMap", () => {
 
 	it("should forward deprecated tap helpers to the underlying hook", () => {
 		const warn = jest.spyOn(console, "warn").mockImplementation(() => {});
-		const map = new HookMap(() => new SyncHook(["a"]));
+		const map = new HookMapTest(() => new SyncHook(["a"]));
 
 		const syncMock = jest.fn();
 		map.tap("k", "plugin-sync", syncMock);
 		map.for("k").call(1);
 		expect(syncMock).toHaveBeenCalledWith(1);
 
-		const asyncMap = new HookMap(
-			() => new (require("../AsyncSeriesHook"))(["a"])
+		const asyncMap = new HookMapTest(
+			() => new (require("../lib/AsyncSeriesHook"))(["a"])
 		);
 		const asyncMock = jest.fn((_a, cb) => cb());
 		asyncMap.tapAsync("k", "plugin-async", asyncMock);
@@ -73,8 +73,8 @@ describe("HookMap", () => {
 			asyncMap.for("k").callAsync(2, () => {
 				expect(asyncMock).toHaveBeenCalled();
 
-				const promiseMap = new HookMap(
-					() => new (require("../AsyncSeriesHook"))(["a"])
+				const promiseMap = new HookMapTest(
+					() => new (require("../lib/AsyncSeriesHook"))(["a"])
 				);
 				const promiseMock = jest.fn(() => Promise.resolve());
 				promiseMap.tapPromise("k", "plugin-promise", promiseMock);

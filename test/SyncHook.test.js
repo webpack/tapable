@@ -4,14 +4,14 @@
 */
 "use strict";
 
-const SyncHook = require("../SyncHook");
+const SyncHookTest = require("../lib/SyncHook");
 
 describe("SyncHook", () => {
 	it("should allow to create sync hooks", async () => {
-		const h0 = new SyncHook();
-		const h1 = new SyncHook(["test"]);
-		const h2 = new SyncHook(["test", "arg2"]);
-		const h3 = new SyncHook(["test", "arg2", "arg3"]);
+		const h0 = new SyncHookTest();
+		const h1 = new SyncHookTest(["test"]);
+		const h2 = new SyncHookTest(["test", "arg2"]);
+		const h3 = new SyncHookTest(["test", "arg2", "arg3"]);
 
 		h0.call();
 		await h0.promise();
@@ -72,7 +72,7 @@ describe("SyncHook", () => {
 	});
 
 	it("should sync execute hooks", () => {
-		const h1 = new SyncHook(["a"]);
+		const h1 = new SyncHookTest(["a"]);
 		const mockCall1 = jest.fn();
 		const mockCall2 = jest.fn(() => "B");
 		const mockCall3 = jest.fn(() => "C");
@@ -86,7 +86,7 @@ describe("SyncHook", () => {
 	});
 
 	it("should allow to intercept calls", () => {
-		const hook = new SyncHook(["arg1", "arg2"]);
+		const hook = new SyncHookTest(["arg1", "arg2"]);
 
 		const mockCall = jest.fn();
 		const mock0 = jest.fn();
@@ -121,12 +121,12 @@ describe("SyncHook", () => {
 	});
 
 	it("should throw error on tapAsync", () => {
-		const hook = new SyncHook(["arg1", "arg2"]);
+		const hook = new SyncHookTest(["arg1", "arg2"]);
 		expect(() => hook.tapAsync()).toThrow(/tapAsync/);
 	});
 
 	it("should throw error on tapPromise", () => {
-		const hook = new SyncHook(["arg1", "arg2"]);
+		const hook = new SyncHookTest(["arg1", "arg2"]);
 		expect(() => hook.tapPromise()).toThrow(/tapPromise/);
 	});
 });

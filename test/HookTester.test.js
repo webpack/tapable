@@ -11,7 +11,7 @@ describe("HookTester", () => {
 
 process.on("unhandledRejection", (err) => console.error(err.stack));
 
-class HookTester {
+class HookTesterTest {
 	constructor(hookCreator, sync) {
 		this.hookCreator = hookCreator;
 		this.sync = sync;
@@ -1339,4 +1339,4 @@ class HookTester {
 }
 
 // eslint-disable-next-line jest/no-export
-module.exports = HookTester;
+module.exports = HookTesterTest;

@@ -4,11 +4,11 @@
 */
 "use strict";
 
-const AsyncSeriesBailHook = require("../AsyncSeriesBailHook");
-const AsyncSeriesHook = require("../AsyncSeriesHook");
-const AsyncSeriesLoopHook = require("../AsyncSeriesLoopHook");
-const AsyncSeriesWaterfallHook = require("../AsyncSeriesWaterfallHook");
-const HookTester = require("./HookTester");
+const AsyncSeriesBailHook = require("../lib/AsyncSeriesBailHook");
+const AsyncSeriesHook = require("../lib/AsyncSeriesHook");
+const AsyncSeriesLoopHook = require("../lib/AsyncSeriesLoopHook");
+const AsyncSeriesWaterfallHook = require("../lib/AsyncSeriesWaterfallHook");
+const HookTester = require("./HookTester.test");
 
 describe("AsyncSeriesHook", () => {
 	it("should not have call method", () => {

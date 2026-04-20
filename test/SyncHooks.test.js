@@ -4,11 +4,11 @@
 */
 "use strict";
 
-const SyncBailHook = require("../SyncBailHook");
-const SyncHook = require("../SyncHook");
-const SyncLoopHook = require("../SyncLoopHook");
-const SyncWaterfallHook = require("../SyncWaterfallHook");
-const HookTester = require("./HookTester");
+const SyncBailHook = require("../lib/SyncBailHook");
+const SyncHook = require("../lib/SyncHook");
+const SyncLoopHook = require("../lib/SyncLoopHook");
+const SyncWaterfallHook = require("../lib/SyncWaterfallHook");
+const HookTester = require("./HookTester.test");
 
 describe("SyncHook", () => {
 	it("should have to correct behavior", async () => {

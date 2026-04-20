@@ -4,7 +4,7 @@
 */
 "use strict";
 
-const SyncBailHook = require("../SyncBailHook");
+const SyncBailHookTest = require("../lib/SyncBailHook");
 
 function pify(fn) {
 	return new Promise((resolve, reject) => {
@@ -17,8 +17,8 @@ function pify(fn) {
 
 describe("SyncBailHook", () => {
 	it("should allow to create sync bail hooks", async () => {
-		const h1 = new SyncBailHook(["a"]);
-		const h2 = new SyncBailHook(["a", "b"]);
+		const h1 = new SyncBailHookTest(["a"]);
+		const h2 = new SyncBailHookTest(["a", "b"]);
 
 		const r = h1.call(1);
 		expect(r).toBeUndefined();
@@ -45,7 +45,7 @@ describe("SyncBailHook", () => {
 	});
 
 	it("should bail on non-null return", async () => {
-		const h1 = new SyncBailHook(["a"]);
+		const h1 = new SyncBailHookTest(["a"]);
 		const mockCall1 = jest.fn();
 		const mockCall2 = jest.fn(() => "B");
 		const mockCall3 = jest.fn(() => "C");
@@ -59,7 +59,7 @@ describe("SyncBailHook", () => {
 	});
 
 	it("should allow to intercept calls", () => {
-		const hook = new SyncBailHook(["x"]);
+		const hook = new SyncBailHookTest(["x"]);
 
 		const mockCall = jest.fn();
 		const mockTap = jest.fn((x) => x);
@@ -83,17 +83,17 @@ describe("SyncBailHook", () => {
 	});
 
 	it("should throw on tapAsync", () => {
-		const hook = new SyncBailHook(["x"]);
+		const hook = new SyncBailHookTest(["x"]);
 		expect(() => hook.tapAsync()).toThrow(/tapAsync/);
 	});
 
 	it("should throw on tapPromise", () => {
-		const hook = new SyncBailHook(["x"]);
+		const hook = new SyncBailHookTest(["x"]);
 		expect(() => hook.tapPromise()).toThrow(/tapPromise/);
 	});
 
 	it("should not crash with many plugins", () => {
-		const hook = new SyncBailHook(["x"]);
+		const hook = new SyncBailHookTest(["x"]);
 		for (let i = 0; i < 1000; i++) {
 			hook.tap("Test", () => 42);
 		}

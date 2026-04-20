@@ -3,16 +3,16 @@
 */
 "use strict";
 
-const AsyncParallelBailHook = require("../AsyncParallelBailHook");
-const AsyncParallelHook = require("../AsyncParallelHook");
-const AsyncSeriesBailHook = require("../AsyncSeriesBailHook");
-const AsyncSeriesHook = require("../AsyncSeriesHook");
-const AsyncSeriesLoopHook = require("../AsyncSeriesLoopHook");
-const AsyncSeriesWaterfallHook = require("../AsyncSeriesWaterfallHook");
-const SyncBailHook = require("../SyncBailHook");
-const SyncHook = require("../SyncHook");
-const SyncLoopHook = require("../SyncLoopHook");
-const SyncWaterfallHook = require("../SyncWaterfallHook");
+const AsyncParallelBailHook = require("../lib/AsyncParallelBailHook");
+const AsyncParallelHook = require("../lib/AsyncParallelHook");
+const AsyncSeriesBailHook = require("../lib/AsyncSeriesBailHook");
+const AsyncSeriesHook = require("../lib/AsyncSeriesHook");
+const AsyncSeriesLoopHook = require("../lib/AsyncSeriesLoopHook");
+const AsyncSeriesWaterfallHook = require("../lib/AsyncSeriesWaterfallHook");
+const SyncBailHook = require("../lib/SyncBailHook");
+const SyncHook = require("../lib/SyncHook");
+const SyncLoopHook = require("../lib/SyncLoopHook");
+const SyncWaterfallHook = require("../lib/SyncWaterfallHook");
 
 describe("Hooks without explicit args", () => {
 	it("should construct SyncHook without args", () => {

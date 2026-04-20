@@ -3,25 +3,25 @@
 */
 "use strict";
 
-const SyncLoopHook = require("../SyncLoopHook");
+const SyncLoopHookTest = require("../lib/SyncLoopHook");
 
 describe("SyncLoopHook", () => {
 	it("should throw on tapAsync", () => {
-		const hook = new SyncLoopHook(["a"]);
+		const hook = new SyncLoopHookTest(["a"]);
 		expect(() => hook.tapAsync("A", () => {})).toThrow(
 			/tapAsync is not supported on a SyncLoopHook/
 		);
 	});
 
 	it("should throw on tapPromise", () => {
-		const hook = new SyncLoopHook(["a"]);
+		const hook = new SyncLoopHookTest(["a"]);
 		expect(() => hook.tapPromise("A", () => {})).toThrow(
 			/tapPromise is not supported on a SyncLoopHook/
 		);
 	});
 
 	it("should loop through taps until all return undefined", () => {
-		const hook = new SyncLoopHook(["counter"]);
+		const hook = new SyncLoopHookTest(["counter"]);
 		let firstCalls = 0;
 		let secondCalls = 0;
 		hook.tap("first", () => {
@@ -36,7 +36,7 @@ describe("SyncLoopHook", () => {
 	});
 
 	it("should be callable without arguments using default args", () => {
-		const hook = new SyncLoopHook();
+		const hook = new SyncLoopHookTest();
 		const mock = jest.fn();
 		hook.tap("A", mock);
 		hook.call();
