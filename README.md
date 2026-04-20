@@ -196,12 +196,31 @@ A basic synchronous hook. Every tapped function is called in registration order 
 - Call methods: `call`
 - `tapAsync` and `tapPromise` throw an error.
 
+```js
+const hook = new SyncHook(["name"]);
+hook.tap("A", (name) => console.log(`hello ${name}`));
+hook.tap("B", (name) => console.log(`hi ${name}`));
+hook.call("world");
+// hello world
+// hi world
+```
+
 ### SyncBailHook
 
 A synchronous hook that allows exiting early. Every tapped function is called in order until one returns a non-`undefined` value; that value becomes the result of `call` and the remaining taps are skipped. If all taps return `undefined`, `call` returns `undefined`.
 
 - Tap methods: `tap`
 - Call methods: `call`
+
+```js
+const hook = new SyncBailHook(["value"]);
+hook.tap("Negative", (v) => (v < 0 ? "negative" : undefined));
+hook.tap("Zero", (v) => (v === 0 ? "zero" : undefined));
+hook.tap("Positive", (v) => "positive");
+
+hook.call(-1); // "negative" (later taps skipped)
+hook.call(5); // "positive"
+```
 
 ### SyncWaterfallHook
 
@@ -210,12 +229,32 @@ A synchronous hook that threads a value through its tapped functions. The first 
 - Tap methods: `tap`
 - Call methods: `call`
 
+```js
+const hook = new SyncWaterfallHook(["value"]);
+hook.tap("Double", (v) => v * 2);
+hook.tap("PlusOne", (v) => v + 1);
+
+hook.call(3); // 7  -> (3 * 2) + 1
+```
+
 ### SyncLoopHook
 
 A synchronous hook that keeps re-running its taps until all of them return `undefined` for a full pass. Whenever a tap returns a non-`undefined` value the hook restarts from the first tap. `call` returns `undefined`.
 
 - Tap methods: `tap`
 - Call methods: `call`
+
+```js
+const hook = new SyncLoopHook(["state"]);
+let retries = 3;
+hook.tap("Retry", () => {
+	if (retries-- > 0) return true; // non-undefined restarts the loop
+});
+hook.tap("Log", () => console.log("pass"));
+
+hook.call({});
+// pass (runs once all taps return undefined)
+```
 
 ### AsyncParallelHook
 
@@ -224,12 +263,32 @@ An asynchronous hook that runs all of its tapped functions in parallel. It compl
 - Tap methods: `tap`, `tapAsync`, `tapPromise`
 - Call methods: `callAsync`, `promise`
 
+```js
+const hook = new AsyncParallelHook(["source"]);
+hook.tapPromise("Fetch", (src) => fetch(src));
+hook.tapAsync("Log", (src, cb) => {
+	console.log("fetching", src);
+	cb();
+});
+
+await hook.promise("https://example.com");
+```
+
 ### AsyncParallelBailHook
 
 Like `AsyncParallelHook`, but designed to bail out with a result. All tapped functions start in parallel; the first tap to produce a non-`undefined` value (synchronously, via its callback, or by resolving its promise) determines the hook’s result. The remaining taps continue to run but their results are ignored. Order is determined by tap registration order: an earlier tap’s value takes precedence over a later one’s, even if the later one finishes first.
 
 - Tap methods: `tap`, `tapAsync`, `tapPromise`
 - Call methods: `callAsync`, `promise`
+
+```js
+const hook = new AsyncParallelBailHook(["key"]);
+hook.tapPromise("Cache", async (key) => cache.get(key));
+hook.tapPromise("Db", async (key) => db.lookup(key));
+
+const value = await hook.promise("user:42");
+// First non-undefined result (by registration order) wins.
+```
 
 ### AsyncSeriesHook
 
@@ -238,12 +297,29 @@ An asynchronous hook that runs tapped functions one after another, waiting for e
 - Tap methods: `tap`, `tapAsync`, `tapPromise`
 - Call methods: `callAsync`, `promise`
 
+```js
+const hook = new AsyncSeriesHook(["request"]);
+hook.tapPromise("Authenticate", async (req) => authenticate(req));
+hook.tapPromise("Log", async (req) => logger.info(req.url));
+
+await hook.promise(request);
+```
+
 ### AsyncSeriesBailHook
 
 An asynchronous series hook that allows exiting early. Tapped functions run one after another; as soon as one produces a non-`undefined` value, that value becomes the hook’s result and the remaining taps are skipped.
 
 - Tap methods: `tap`, `tapAsync`, `tapPromise`
 - Call methods: `callAsync`, `promise`
+
+```js
+const hook = new AsyncSeriesBailHook(["id"]);
+hook.tapPromise("Memory", async (id) => memory.get(id));
+hook.tapPromise("Disk", async (id) => disk.read(id));
+
+const value = await hook.promise("doc-1");
+// Stops at the first tap that produces a value.
+```
 
 ### AsyncSeriesLoopHook
 
@@ -252,12 +328,30 @@ An asynchronous series hook that loops. Tapped functions run one after another; 
 - Tap methods: `tap`, `tapAsync`, `tapPromise`
 - Call methods: `callAsync`, `promise`
 
+```js
+const hook = new AsyncSeriesLoopHook(["job"]);
+hook.tapPromise("Process", async (job) => {
+	const more = await job.step();
+	if (more) return true; // restart the loop
+});
+
+await hook.promise(job);
+```
+
 ### AsyncSeriesWaterfallHook
 
 An asynchronous series hook that threads a value through its taps. The first argument passed to `callAsync` / `promise` is forwarded to the first tap. A tap's non-`undefined` return / callback / resolution value replaces it for the next tap; `undefined` keeps the previous value. The hook completes with the value after the last tap.
 
 - Tap methods: `tap`, `tapAsync`, `tapPromise`
 - Call methods: `callAsync`, `promise`
+
+```js
+const hook = new AsyncSeriesWaterfallHook(["source"]);
+hook.tapPromise("Read", async (src) => fs.readFile(src, "utf8"));
+hook.tapPromise("Trim", async (text) => text.trim());
+
+const output = await hook.promise("./input.txt");
+```
 
 ## Interception
 
