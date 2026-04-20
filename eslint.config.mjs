@@ -12,11 +12,27 @@ export default defineConfig([
 		}
 	},
 	{
+		files: ["lib/__tests__/**/*.js"],
 		languageOptions: {
 			parserOptions: {
 				ecmaVersion: 2018
 			}
+		}
+	},
+	{
+		files: ["benchmark/**/*.mjs"],
+		languageOptions: {
+			parserOptions: {
+				ecmaVersion: 2022
+			}
 		},
-		files: ["lib/__tests__/**/*.js"]
+		rules: {
+			"no-console": "off",
+			"import/namespace": "off",
+			"n/hashbang": "off",
+			"n/no-unsupported-features/es-syntax": "off",
+			"n/no-unsupported-features/node-builtins": "off",
+			"n/no-process-exit": "off"
+		}
 	}
 ]);
