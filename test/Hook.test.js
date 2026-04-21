@@ -183,6 +183,23 @@ describe("Hook", () => {
 		);
 	});
 
+	it("should preserve custom tap options (e.g. webpack's `additionalAssets`) on the tap descriptor", () => {
+		const hook = new SyncHook();
+
+		// Options with only `name` plus a custom property - used by webpack's
+		// processAssets (`additionalAssets: true`). The fast-path in `_tap`
+		// must not drop the custom property.
+		hook.tap({ name: "A", additionalAssets: true }, () => {});
+		// Options with `name`, `stage` and a custom property go through the
+		// slow path - also checked for completeness.
+		hook.tap({ name: "B", stage: 10, extra: "value" }, () => {});
+
+		expect(hook.taps[0].name).toBe("A");
+		expect(hook.taps[0].additionalAssets).toBe(true);
+		expect(hook.taps[1].name).toBe("B");
+		expect(hook.taps[1].extra).toBe("value");
+	});
+
 	it("should not ignore invalid before values", () => {
 		// A plugin may use a hook that will never be executed
 		const hook = new SyncHook();
