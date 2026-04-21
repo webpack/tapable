@@ -1,5 +1,11 @@
 # tapable
 
+## 2.3.3
+
+### Patch Changes
+
+- Improved performance in many places. (by [@alexander-akait](https://github.com/alexander-akait) in [#217](https://github.com/webpack/tapable/pull/217))
+
 ## 2.3.2
 
 ### Patch Changes
