@@ -31,6 +31,7 @@
     "fix": "npm run fix:code && npm run fmt",
     "fix:code": "npm run lint:code -- --fix",
     "test": "jest",
+    "build:types": "tsc",
     "benchmark": "node --max-old-space-size=4096 --hash-seed=1 --random-seed=1 --no-opt --predictable --predictable-gc-schedule --interpreted-frames-native-stack --allow-natives-syntax --expose-gc --no-concurrent-sweeping ./benchmark/run.mjs",
     "version": "changeset version",
     "release": "changeset publish"
@@ -57,7 +58,8 @@
     "jest": "^30.3.0",
     "prettier": "^3.8.3",
     "prettier-1": "npm:prettier@^1",
-    "tinybench": "^6.0.0"
+    "tinybench": "^6.0.0",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=6"
