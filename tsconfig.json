@@ -1,17 +1,26 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "allowJs": true,
-    "checkJs": false,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
+    "target": "esnext",
+    "module": "nodenext",
+
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "rewriteRelativeImportExtensions": true,
+
+    "types": ["node"],
+
+    "rootDir": "./lib",
     "outDir": "./types",
-    "rootDir": "./lib"
+
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+
+    "declaration": true,
+    "emitDeclarationOnly": true
   },
-  "include": ["lib/**/*.js"]
+  "include": ["./lib/**/*"]
 }

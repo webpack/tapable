@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`SyncHook should have to correct behavior 1`] = `
+exports[`SyncBailHook should have to correct behavior 1`] = `
 Object {
   "async": Object {},
   "intercept": Object {},
   "sync": Object {
     "callAsyncIntercepted": Object {
       "type": "async",
-      "value": undefined,
+      "value": 6,
     },
     "callAsyncInterceptedCall1": Array [
       1,
@@ -20,8 +20,8 @@ Object {
       3,
     ],
     "callAsyncInterceptedTap1": Object {
-      "fn": 2,
-      "name": "sync2",
+      "fn": 3,
+      "name": "sync1",
       "type": "sync",
     },
     "callAsyncInterceptedTap2": Object {
@@ -31,10 +31,9 @@ Object {
     },
     "callAsyncMultipleSync": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncMultipleSyncCalled1": true,
-    "callAsyncMultipleSyncCalled2": true,
     "callAsyncMultipleSyncError": Object {
       "error": "Error in sync2",
       "type": "async",
@@ -43,19 +42,17 @@ Object {
     "callAsyncMultipleSyncErrorCalled2": true,
     "callAsyncMultipleSyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 84,
     },
     "callAsyncMultipleSyncWithArgCalled1": 42,
-    "callAsyncMultipleSyncWithArgCalled2": 42,
     "callAsyncMultipleSyncWithArgFirstReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 84,
     },
     "callAsyncMultipleSyncWithArgFirstReturnCalled1": 42,
-    "callAsyncMultipleSyncWithArgFirstReturnCalled2": 42,
     "callAsyncMultipleSyncWithArgLastReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 85,
     },
     "callAsyncMultipleSyncWithArgLastReturnCalled1": 42,
     "callAsyncMultipleSyncWithArgLastReturnCalled2": 42,
@@ -67,14 +64,9 @@ Object {
     "callAsyncMultipleSyncWithArgNoReturnCalled2": 42,
     "callAsyncMultipleSyncWithArgs": Object {
       "type": "async",
-      "value": undefined,
+      "value": 129,
     },
     "callAsyncMultipleSyncWithArgsCalled1": Array [
-      42,
-      43,
-      44,
-    ],
-    "callAsyncMultipleSyncWithArgsCalled2": Array [
       42,
       43,
       44,
@@ -89,16 +81,17 @@ Object {
     },
     "callAsyncSingleSync": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncSingleSyncCalled": true,
     "callAsyncSingleSyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncSingleSyncWithArgCalled": 42,
     "callIntercepted": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 6,
     },
     "callInterceptedCall1": Array [
       1,
@@ -111,8 +104,8 @@ Object {
       3,
     ],
     "callInterceptedTap1": Object {
-      "fn": 2,
-      "name": "sync2",
+      "fn": 3,
+      "name": "sync1",
       "type": "sync",
     },
     "callInterceptedTap2": Object {
@@ -121,27 +114,28 @@ Object {
       "type": "sync",
     },
     "callMultipleSync": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 42,
     },
     "callMultipleSyncCalled1": true,
-    "callMultipleSyncCalled2": true,
     "callMultipleSyncError": Object {
       "error": "Error in sync2",
     },
     "callMultipleSyncErrorCalled1": true,
     "callMultipleSyncErrorCalled2": true,
     "callMultipleSyncWithArg": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 84,
     },
     "callMultipleSyncWithArgCalled1": 42,
-    "callMultipleSyncWithArgCalled2": 42,
     "callMultipleSyncWithArgFirstReturn": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 84,
     },
     "callMultipleSyncWithArgFirstReturnCalled1": 42,
-    "callMultipleSyncWithArgFirstReturnCalled2": 42,
     "callMultipleSyncWithArgLastReturn": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 85,
     },
     "callMultipleSyncWithArgLastReturnCalled1": 42,
     "callMultipleSyncWithArgLastReturnCalled2": 42,
@@ -151,14 +145,10 @@ Object {
     "callMultipleSyncWithArgNoReturnCalled1": 42,
     "callMultipleSyncWithArgNoReturnCalled2": 42,
     "callMultipleSyncWithArgs": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 129,
     },
     "callMultipleSyncWithArgsCalled1": Array [
-      42,
-      43,
-      44,
-    ],
-    "callMultipleSyncWithArgsCalled2": Array [
       42,
       43,
       44,
@@ -170,16 +160,18 @@ Object {
       "type": "no result",
     },
     "callSingleSync": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 42,
     },
     "callSingleSyncCalled": true,
     "callSingleSyncWithArg": Object {
-      "type": "no result",
+      "type": "return",
+      "value": 42,
     },
     "callSingleSyncWithArgCalled": 42,
     "promiseIntercepted": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 6,
     },
     "promiseInterceptedCall1": Array [
       1,
@@ -192,8 +184,8 @@ Object {
       3,
     ],
     "promiseInterceptedTap1": Object {
-      "fn": 2,
-      "name": "sync2",
+      "fn": 3,
+      "name": "sync1",
       "type": "sync",
     },
     "promiseInterceptedTap2": Object {
@@ -203,10 +195,9 @@ Object {
     },
     "promiseMultipleSync": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseMultipleSyncCalled1": true,
-    "promiseMultipleSyncCalled2": true,
     "promiseMultipleSyncError": Object {
       "error": "Error in sync2",
       "type": "promise",
@@ -215,19 +206,17 @@ Object {
     "promiseMultipleSyncErrorCalled2": true,
     "promiseMultipleSyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 84,
     },
     "promiseMultipleSyncWithArgCalled1": 42,
-    "promiseMultipleSyncWithArgCalled2": 42,
     "promiseMultipleSyncWithArgFirstReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 84,
     },
     "promiseMultipleSyncWithArgFirstReturnCalled1": 42,
-    "promiseMultipleSyncWithArgFirstReturnCalled2": 42,
     "promiseMultipleSyncWithArgLastReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 85,
     },
     "promiseMultipleSyncWithArgLastReturnCalled1": 42,
     "promiseMultipleSyncWithArgLastReturnCalled2": 42,
@@ -239,14 +228,9 @@ Object {
     "promiseMultipleSyncWithArgNoReturnCalled2": 42,
     "promiseMultipleSyncWithArgs": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 129,
     },
     "promiseMultipleSyncWithArgsCalled1": Array [
-      42,
-      43,
-      44,
-    ],
-    "promiseMultipleSyncWithArgsCalled2": Array [
       42,
       43,
       44,
@@ -261,12 +245,12 @@ Object {
     },
     "promiseSingleSync": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseSingleSyncCalled": true,
     "promiseSingleSyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseSingleSyncWithArgCalled": 42,
   },

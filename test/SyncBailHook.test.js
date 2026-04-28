@@ -4,7 +4,8 @@
 */
 "use strict";
 
-const SyncBailHookTest = require("../lib/SyncBailHook");
+const SyncBailHook = require("../lib/SyncBailHook");
+const HookTester = require("./HookTester.test");
 
 function pify(fn) {
 	return new Promise((resolve, reject) => {
@@ -16,9 +17,17 @@ function pify(fn) {
 }
 
 describe("SyncBailHook", () => {
+	it("should have to correct behavior", async () => {
+		const tester = new HookTester((args) => new SyncBailHook(args));
+
+		const result = await tester.run(true);
+
+		expect(result).toMatchSnapshot();
+	}, 15000);
+
 	it("should allow to create sync bail hooks", async () => {
-		const h1 = new SyncBailHookTest(["a"]);
-		const h2 = new SyncBailHookTest(["a", "b"]);
+		const h1 = new SyncBailHook(["a"]);
+		const h2 = new SyncBailHook(["a", "b"]);
 
 		const r = h1.call(1);
 		expect(r).toBeUndefined();
@@ -45,7 +54,7 @@ describe("SyncBailHook", () => {
 	});
 
 	it("should bail on non-null return", async () => {
-		const h1 = new SyncBailHookTest(["a"]);
+		const h1 = new SyncBailHook(["a"]);
 		const mockCall1 = jest.fn();
 		const mockCall2 = jest.fn(() => "B");
 		const mockCall3 = jest.fn(() => "C");
@@ -59,7 +68,7 @@ describe("SyncBailHook", () => {
 	});
 
 	it("should allow to intercept calls", () => {
-		const hook = new SyncBailHookTest(["x"]);
+		const hook = new SyncBailHook(["x"]);
 
 		const mockCall = jest.fn();
 		const mockTap = jest.fn((x) => x);
@@ -83,17 +92,17 @@ describe("SyncBailHook", () => {
 	});
 
 	it("should throw on tapAsync", () => {
-		const hook = new SyncBailHookTest(["x"]);
+		const hook = new SyncBailHook(["x"]);
 		expect(() => hook.tapAsync()).toThrow(/tapAsync/);
 	});
 
 	it("should throw on tapPromise", () => {
-		const hook = new SyncBailHookTest(["x"]);
+		const hook = new SyncBailHook(["x"]);
 		expect(() => hook.tapPromise()).toThrow(/tapPromise/);
 	});
 
 	it("should not crash with many plugins", () => {
-		const hook = new SyncBailHookTest(["x"]);
+		const hook = new SyncBailHook(["x"]);
 		for (let i = 0; i < 1000; i++) {
 			hook.tap("Test", () => 42);
 		}

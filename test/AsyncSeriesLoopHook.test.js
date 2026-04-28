@@ -4,15 +4,15 @@
 */
 "use strict";
 
-const AsyncParallelHook = require("../lib/AsyncParallelHook");
+const AsyncSeriesLoopHook = require("../lib/AsyncSeriesLoopHook");
 const HookTester = require("./HookTester.test");
 
-describe("AsyncParallelHook", () => {
+describe("AsyncSeriesLoopHook", () => {
 	it("should have to correct behavior", async () => {
-		const tester = new HookTester((args) => new AsyncParallelHook(args));
+		const tester = new HookTester((args) => new AsyncSeriesLoopHook(args));
 
-		const result = await tester.run();
+		const result = await tester.runForLoop();
 
 		expect(result).toMatchSnapshot();
-	}, 15000);
+	});
 });
