@@ -32,7 +32,6 @@
     "fix": "npm run fix:code && npm run fmt",
     "fix:code": "npm run lint:code -- --fix",
     "test": "jest",
-    "build:types": "tsc",
     "benchmark": "node --max-old-space-size=4096 --hash-seed=1 --random-seed=1 --no-opt --predictable --predictable-gc-schedule --interpreted-frames-native-stack --allow-natives-syntax --expose-gc --no-concurrent-sweeping ./benchmark/run.mjs",
     "version": "changeset version",
     "release": "changeset publish"
