@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "rewriteRelativeImportExtensions": true,
+
+    "types": ["node"],
+
+    "rootDir": "./lib",
+    "outDir": "./types",
+
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["./lib/**/*"]
+}

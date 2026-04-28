@@ -4,10 +4,7 @@
 */
 "use strict";
 
-const AsyncSeriesBailHook = require("../lib/AsyncSeriesBailHook");
 const AsyncSeriesHook = require("../lib/AsyncSeriesHook");
-const AsyncSeriesLoopHook = require("../lib/AsyncSeriesLoopHook");
-const AsyncSeriesWaterfallHook = require("../lib/AsyncSeriesWaterfallHook");
 const HookTester = require("./HookTester.test");
 
 describe("AsyncSeriesHook", () => {
@@ -38,82 +35,6 @@ describe("AsyncSeriesHook", () => {
 		const tester = new HookTester((args) => new AsyncSeriesHook(args));
 
 		const result = await tester.run();
-
-		expect(result).toMatchSnapshot();
-	});
-});
-
-describe("AsyncSeriesBailHook", () => {
-	it("should have to correct behavior", async () => {
-		const tester = new HookTester((args) => new AsyncSeriesBailHook(args));
-
-		const result = await tester.run();
-
-		expect(result).toMatchSnapshot();
-	});
-
-	it("should not crash with many plugins", () => {
-		const hook = new AsyncSeriesBailHook(["x"]);
-		for (let i = 0; i < 1000; i++) {
-			hook.tap("Test", () => 42);
-		}
-		hook.tapAsync("Test", (x, callback) => callback(null, 42));
-		hook.tapPromise("Test", (_x) => Promise.resolve(42));
-		return expect(hook.promise()).resolves.toBe(42);
-	});
-});
-
-describe("AsyncSeriesWaterfallHook", () => {
-	it("should have to correct behavior", async () => {
-		const tester = new HookTester((args) => new AsyncSeriesWaterfallHook(args));
-
-		const result = await tester.run();
-
-		expect(result).toMatchSnapshot();
-	});
-
-	it("should work with undefined", async () => {
-		const hook = new AsyncSeriesWaterfallHook(["x"]);
-		hook.tap("number", () => 42);
-		hook.tap("undefined", () => undefined);
-		return expect(hook.promise()).resolves.toBe(42);
-	});
-
-	it("should work with void", async () => {
-		const hook = new AsyncSeriesWaterfallHook(["x"]);
-		hook.tap("number", () => 42);
-		hook.tap("undefined", () => {});
-		return expect(hook.promise()).resolves.toBe(42);
-	});
-
-	it("should work with undefined and number again", async () => {
-		const hook = new AsyncSeriesWaterfallHook(["x"]);
-		hook.tap("number", () => 42);
-		hook.tap("undefined", () => {});
-		hook.tap("number-again", () => 43);
-		return expect(hook.promise()).resolves.toBe(43);
-	});
-
-	it("should work with null", async () => {
-		const hook = new AsyncSeriesWaterfallHook(["x"]);
-		hook.tap("number", () => 42);
-		hook.tap("undefined", () => null);
-		return expect(hook.promise()).resolves.toBeNull();
-	});
-
-	it("should work with different types", async () => {
-		const hook = new AsyncSeriesWaterfallHook(["x"]);
-		hook.tap("number", () => 42);
-		hook.tap("string", () => "string");
-		return expect(hook.promise()).resolves.toBe("string");
-	});
-});
-
-describe("AsyncSeriesLoopHook", () => {
-	it("should have to correct behavior", async () => {
-		const tester = new HookTester((args) => new AsyncSeriesLoopHook(args));
-
-		const result = await tester.runForLoop();
 
 		expect(result).toMatchSnapshot();
 	});

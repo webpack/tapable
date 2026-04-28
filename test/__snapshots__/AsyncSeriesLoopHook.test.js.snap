@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`AsyncSeriesLoopHook should have to correct behavior 1`] = `
+Object {
+  "async": Object {
+    "callAsyncBrokenPromise": Object {
+      "error": "Tap function (tapPromise) did not return promise (returned this is not a promise)",
+    },
+    "callAsyncMixed": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncMixedCalled1": 124,
+    "callAsyncMixedCalled2": 83,
+    "callAsyncMixedCalled3": 42,
+    "callAsyncMultipleAsync": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncMultipleAsyncCalled1": 83,
+    "callAsyncMultipleAsyncCalled2": 42,
+    "callAsyncMultiplePromise": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncMultiplePromiseCalled1": 83,
+    "callAsyncMultiplePromiseCalled2": 42,
+    "callAsyncSingleAsync": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSingleAsyncCalled": 42,
+    "callAsyncSinglePromise": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSinglePromiseCalled": 42,
+    "promiseBrokenPromise": Object {
+      "error": "Tap function (tapPromise) did not return promise (returned this is not a promise)",
+      "type": "promise",
+    },
+    "promiseMixed": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseMixedCalled1": 124,
+    "promiseMixedCalled2": 83,
+    "promiseMixedCalled3": 42,
+    "promiseMultipleAsync": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseMultipleAsyncCalled1": 83,
+    "promiseMultipleAsyncCalled2": 42,
+    "promiseMultiplePromise": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseMultiplePromiseCalled1": 83,
+    "promiseMultiplePromiseCalled2": 42,
+    "promiseSingleAsync": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSingleAsyncCalled": 42,
+    "promiseSinglePromise": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSinglePromiseCalled": 42,
+  },
+  "sync": Object {
+    "callAsyncInterceptedSync": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncInterceptedSyncCalled1": 83,
+    "callAsyncInterceptedSyncCalled2": 42,
+    "callAsyncInterceptedSyncCalledCall": 1,
+    "callAsyncInterceptedSyncCalledLoop": 83,
+    "callAsyncInterceptedSyncCalledTap": 125,
+    "callAsyncMultipleSync": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncMultipleSyncCalled1": 83,
+    "callAsyncMultipleSyncCalled2": 42,
+    "callAsyncNone": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncNoneWithArg": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSingleSync": Object {
+      "type": "async",
+      "value": undefined,
+    },
+    "callAsyncSingleSyncCalled": 42,
+    "promiseInterceptedSync": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseInterceptedSyncCalled1": 83,
+    "promiseInterceptedSyncCalled2": 42,
+    "promiseInterceptedSyncCalledCall": 1,
+    "promiseInterceptedSyncCalledLoop": 83,
+    "promiseInterceptedSyncCalledTap": 125,
+    "promiseMultipleSync": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseMultipleSyncCalled1": 83,
+    "promiseMultipleSyncCalled2": 42,
+    "promiseNone": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseNoneWithArg": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSingleSync": Object {
+      "type": "promise",
+      "value": undefined,
+    },
+    "promiseSingleSyncCalled": 42,
+  },
+}
+`;

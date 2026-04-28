@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`AsyncSeriesHook should have to correct behavior 1`] = `
+exports[`AsyncSeriesBailHook should have to correct behavior 1`] = `
 Object {
   "async": Object {
     "callAsyncMultipleAsyncEarlyError": Object {
@@ -24,25 +24,23 @@ Object {
     },
     "callAsyncMultipleAsyncLateErrorEarlyResult1Called1": true,
     "callAsyncMultipleAsyncLateErrorEarlyResult2": Object {
-      "error": "Error in async2",
       "type": "async",
+      "value": 42,
     },
     "callAsyncMultipleAsyncLateErrorEarlyResult2Called1": true,
     "callAsyncMultipleAsyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleAsyncWithArgCalled1": 42,
-    "callAsyncMultipleAsyncWithArgCalled2": 42,
     "callAsyncMultipleAsyncWithArgFirstReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleAsyncWithArgFirstReturnCalled1": 42,
-    "callAsyncMultipleAsyncWithArgFirstReturnCalled2": 42,
     "callAsyncMultipleAsyncWithArgLastReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 44,
     },
     "callAsyncMultipleAsyncWithArgLastReturnCalled1": 42,
     "callAsyncMultipleAsyncWithArgLastReturnCalled2": 42,
@@ -54,37 +52,29 @@ Object {
     "callAsyncMultipleAsyncWithArgNoReturnCalled2": 42,
     "callAsyncMultipleMixed1WithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleMixed1WithArgCalled1": 42,
-    "callAsyncMultipleMixed1WithArgCalled2": 42,
-    "callAsyncMultipleMixed1WithArgCalled3": 42,
     "callAsyncMultipleMixed2WithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleMixed2WithArgCalled1": 42,
-    "callAsyncMultipleMixed2WithArgCalled2": 42,
     "callAsyncMultipleMixed3WithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleMixed3WithArgCalled1": 42,
-    "callAsyncMultipleMixed3WithArgCalled2": 42,
-    "callAsyncMultipleMixed3WithArgCalled3": 42,
     "callAsyncMultipleMixedError1WithArg": Object {
-      "error": "Error in sync",
       "type": "async",
+      "value": 42,
     },
     "callAsyncMultipleMixedError1WithArgCalled1": 42,
-    "callAsyncMultipleMixedError1WithArgCalled2": 42,
-    "callAsyncMultipleMixedError1WithArgCalled3": 42,
     "callAsyncMultipleMixedError2WithArg": Object {
-      "error": "Error in promise",
       "type": "async",
+      "value": 42,
     },
     "callAsyncMultipleMixedError2WithArgCalled1": 42,
-    "callAsyncMultipleMixedError2WithArgCalled2": 42,
     "callAsyncMultipleMixedError3WithArg": Object {
       "error": "Error in async",
       "type": "async",
@@ -112,19 +102,17 @@ Object {
     "callAsyncMultiplePromiseLateErrorCalled1": true,
     "callAsyncMultiplePromiseWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultiplePromiseWithArgCalled1": 42,
-    "callAsyncMultiplePromiseWithArgCalled2": 42,
     "callAsyncMultiplePromiseWithArgFirstReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultiplePromiseWithArgFirstReturnCalled1": 42,
-    "callAsyncMultiplePromiseWithArgFirstReturnCalled2": 42,
     "callAsyncMultiplePromiseWithArgLastReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 44,
     },
     "callAsyncMultiplePromiseWithArgLastReturnCalled1": 42,
     "callAsyncMultiplePromiseWithArgLastReturnCalled2": 42,
@@ -136,10 +124,9 @@ Object {
     "callAsyncMultiplePromiseWithArgNoReturnCalled2": 42,
     "callAsyncMultipleSync": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncMultipleSyncCalled1": true,
-    "callAsyncMultipleSyncCalled2": true,
     "callAsyncMultipleSyncError": Object {
       "error": "Error in sync2",
       "type": "async",
@@ -147,7 +134,7 @@ Object {
     "callAsyncMultipleSyncErrorCalled1": true,
     "callAsyncMultipleSyncLastReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleSyncLastReturnCalled1": true,
     "callAsyncMultipleSyncLastReturnCalled2": true,
@@ -159,19 +146,17 @@ Object {
     "callAsyncMultipleSyncNoReturnCalled2": true,
     "callAsyncMultipleSyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleSyncWithArgCalled1": 42,
-    "callAsyncMultipleSyncWithArgCalled2": 42,
     "callAsyncMultipleSyncWithArgFirstReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncMultipleSyncWithArgFirstReturnCalled1": 42,
-    "callAsyncMultipleSyncWithArgFirstReturnCalled2": 42,
     "callAsyncMultipleSyncWithArgLastReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 44,
     },
     "callAsyncMultipleSyncWithArgLastReturnCalled1": 42,
     "callAsyncMultipleSyncWithArgLastReturnCalled2": 42,
@@ -191,12 +176,12 @@ Object {
     },
     "callAsyncSingleAsyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncSingleAsyncWithArgCalled1": 42,
     "callAsyncSinglePromiseWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncSinglePromiseWithArgCalled1": 42,
     "callAsyncSinglePromiseWithEmptyReject": Object {
@@ -205,7 +190,7 @@ Object {
     },
     "callAsyncSinglePromiseWithEmptyStringArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": "",
     },
     "callAsyncSinglePromiseWithEmptyStringArgCalled1": 42,
     "callAsyncSinglePromiseWithFalseReject": Object {
@@ -214,7 +199,7 @@ Object {
     },
     "callAsyncSinglePromiseWithNullArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": null,
     },
     "callAsyncSinglePromiseWithNullArgCalled1": 42,
     "callAsyncSinglePromiseWithNullReject": Object {
@@ -232,7 +217,7 @@ Object {
     },
     "callAsyncSinglePromiseWithZeroArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 0,
     },
     "callAsyncSinglePromiseWithZeroArgCalled1": 42,
     "callAsyncSinglePromiseWithZeroReject": Object {
@@ -241,12 +226,12 @@ Object {
     },
     "callAsyncSingleSync": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncSingleSyncCalled1": true,
     "callAsyncSingleSyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 43,
     },
     "callAsyncSingleSyncWithArgCalled1": 42,
     "callAsyncSingleSyncWithArgNoReturn": Object {
@@ -275,25 +260,23 @@ Object {
     },
     "promiseMultipleAsyncLateErrorEarlyResult1Called1": true,
     "promiseMultipleAsyncLateErrorEarlyResult2": Object {
-      "error": "Error in async2",
       "type": "promise",
+      "value": 42,
     },
     "promiseMultipleAsyncLateErrorEarlyResult2Called1": true,
     "promiseMultipleAsyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleAsyncWithArgCalled1": 42,
-    "promiseMultipleAsyncWithArgCalled2": 42,
     "promiseMultipleAsyncWithArgFirstReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleAsyncWithArgFirstReturnCalled1": 42,
-    "promiseMultipleAsyncWithArgFirstReturnCalled2": 42,
     "promiseMultipleAsyncWithArgLastReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 44,
     },
     "promiseMultipleAsyncWithArgLastReturnCalled1": 42,
     "promiseMultipleAsyncWithArgLastReturnCalled2": 42,
@@ -305,37 +288,29 @@ Object {
     "promiseMultipleAsyncWithArgNoReturnCalled2": 42,
     "promiseMultipleMixed1WithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleMixed1WithArgCalled1": 42,
-    "promiseMultipleMixed1WithArgCalled2": 42,
-    "promiseMultipleMixed1WithArgCalled3": 42,
     "promiseMultipleMixed2WithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleMixed2WithArgCalled1": 42,
-    "promiseMultipleMixed2WithArgCalled2": 42,
     "promiseMultipleMixed3WithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleMixed3WithArgCalled1": 42,
-    "promiseMultipleMixed3WithArgCalled2": 42,
-    "promiseMultipleMixed3WithArgCalled3": 42,
     "promiseMultipleMixedError1WithArg": Object {
-      "error": "Error in sync",
       "type": "promise",
+      "value": 42,
     },
     "promiseMultipleMixedError1WithArgCalled1": 42,
-    "promiseMultipleMixedError1WithArgCalled2": 42,
-    "promiseMultipleMixedError1WithArgCalled3": 42,
     "promiseMultipleMixedError2WithArg": Object {
-      "error": "Error in promise",
       "type": "promise",
+      "value": 42,
     },
     "promiseMultipleMixedError2WithArgCalled1": 42,
-    "promiseMultipleMixedError2WithArgCalled2": 42,
     "promiseMultipleMixedError3WithArg": Object {
       "error": "Error in async",
       "type": "promise",
@@ -363,19 +338,17 @@ Object {
     "promiseMultiplePromiseLateErrorCalled1": true,
     "promiseMultiplePromiseWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultiplePromiseWithArgCalled1": 42,
-    "promiseMultiplePromiseWithArgCalled2": 42,
     "promiseMultiplePromiseWithArgFirstReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultiplePromiseWithArgFirstReturnCalled1": 42,
-    "promiseMultiplePromiseWithArgFirstReturnCalled2": 42,
     "promiseMultiplePromiseWithArgLastReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 44,
     },
     "promiseMultiplePromiseWithArgLastReturnCalled1": 42,
     "promiseMultiplePromiseWithArgLastReturnCalled2": 42,
@@ -387,10 +360,9 @@ Object {
     "promiseMultiplePromiseWithArgNoReturnCalled2": 42,
     "promiseMultipleSync": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseMultipleSyncCalled1": true,
-    "promiseMultipleSyncCalled2": true,
     "promiseMultipleSyncError": Object {
       "error": "Error in sync2",
       "type": "promise",
@@ -398,7 +370,7 @@ Object {
     "promiseMultipleSyncErrorCalled1": true,
     "promiseMultipleSyncLastReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleSyncLastReturnCalled1": true,
     "promiseMultipleSyncLastReturnCalled2": true,
@@ -410,19 +382,17 @@ Object {
     "promiseMultipleSyncNoReturnCalled2": true,
     "promiseMultipleSyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleSyncWithArgCalled1": 42,
-    "promiseMultipleSyncWithArgCalled2": 42,
     "promiseMultipleSyncWithArgFirstReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseMultipleSyncWithArgFirstReturnCalled1": 42,
-    "promiseMultipleSyncWithArgFirstReturnCalled2": 42,
     "promiseMultipleSyncWithArgLastReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 44,
     },
     "promiseMultipleSyncWithArgLastReturnCalled1": 42,
     "promiseMultipleSyncWithArgLastReturnCalled2": 42,
@@ -442,12 +412,12 @@ Object {
     },
     "promiseSingleAsyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseSingleAsyncWithArgCalled1": 42,
     "promiseSinglePromiseWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseSinglePromiseWithArgCalled1": 42,
     "promiseSinglePromiseWithEmptyReject": Object {
@@ -456,7 +426,7 @@ Object {
     },
     "promiseSinglePromiseWithEmptyStringArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": "",
     },
     "promiseSinglePromiseWithEmptyStringArgCalled1": 42,
     "promiseSinglePromiseWithFalseReject": Object {
@@ -465,7 +435,7 @@ Object {
     },
     "promiseSinglePromiseWithNullArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": null,
     },
     "promiseSinglePromiseWithNullArgCalled1": 42,
     "promiseSinglePromiseWithNullReject": Object {
@@ -483,7 +453,7 @@ Object {
     },
     "promiseSinglePromiseWithZeroArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 0,
     },
     "promiseSinglePromiseWithZeroArgCalled1": 42,
     "promiseSinglePromiseWithZeroReject": Object {
@@ -492,12 +462,12 @@ Object {
     },
     "promiseSingleSync": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseSingleSyncCalled1": true,
     "promiseSingleSyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 43,
     },
     "promiseSingleSyncWithArgCalled1": 42,
     "promiseSingleSyncWithArgNoReturn": Object {
@@ -509,7 +479,7 @@ Object {
   "intercept": Object {
     "callAsyncContextIntercepted": Object {
       "type": "async",
-      "value": undefined,
+      "value": 48,
     },
     "callAsyncContextInterceptedCall1": Array [
       Object {
@@ -529,7 +499,7 @@ Object {
     },
     "callAsyncIntercepted": Object {
       "type": "async",
-      "value": undefined,
+      "value": 6,
     },
     "callAsyncInterceptedCall1": Array [
       1,
@@ -541,12 +511,12 @@ Object {
       2,
       3,
     ],
-    "callAsyncInterceptedDone1": true,
-    "callAsyncInterceptedDone2": true,
+    "callAsyncInterceptedResult1": 6,
+    "callAsyncInterceptedResult2": 6,
     "callAsyncInterceptedTap1": Object {
-      "fn": 2,
-      "name": "promise",
-      "type": "promise",
+      "fn": 3,
+      "name": "sync",
+      "type": "sync",
     },
     "callAsyncInterceptedTap2": Object {
       "fn": 3,
@@ -555,7 +525,7 @@ Object {
     },
     "callAsyncUnusedContextIntercepted": Object {
       "type": "async",
-      "value": undefined,
+      "value": 6,
     },
     "callAsyncUnusedContextInterceptedCall1": Array [
       undefined,
@@ -571,7 +541,7 @@ Object {
     "callAsyncUnusedContextInterceptedTap1": undefined,
     "promiseContextIntercepted": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 48,
     },
     "promiseContextInterceptedCall1": Array [
       Object {
@@ -591,7 +561,7 @@ Object {
     },
     "promiseIntercepted": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 6,
     },
     "promiseInterceptedCall1": Array [
       1,
@@ -603,12 +573,12 @@ Object {
       2,
       3,
     ],
-    "promiseInterceptedDone1": true,
-    "promiseInterceptedDone2": true,
+    "promiseInterceptedResult1": 6,
+    "promiseInterceptedResult2": 6,
     "promiseInterceptedTap1": Object {
-      "fn": 2,
-      "name": "promise",
-      "type": "promise",
+      "fn": 3,
+      "name": "sync",
+      "type": "sync",
     },
     "promiseInterceptedTap2": Object {
       "fn": 3,
@@ -617,7 +587,7 @@ Object {
     },
     "promiseUnusedContextIntercepted": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 6,
     },
     "promiseUnusedContextInterceptedCall1": Array [
       undefined,
@@ -635,7 +605,7 @@ Object {
   "sync": Object {
     "callAsyncIntercepted": Object {
       "type": "async",
-      "value": undefined,
+      "value": 6,
     },
     "callAsyncInterceptedCall1": Array [
       1,
@@ -648,8 +618,8 @@ Object {
       3,
     ],
     "callAsyncInterceptedTap1": Object {
-      "fn": 2,
-      "name": "sync2",
+      "fn": 3,
+      "name": "sync1",
       "type": "sync",
     },
     "callAsyncInterceptedTap2": Object {
@@ -659,10 +629,9 @@ Object {
     },
     "callAsyncMultipleSync": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncMultipleSyncCalled1": true,
-    "callAsyncMultipleSyncCalled2": true,
     "callAsyncMultipleSyncError": Object {
       "error": "Error in sync2",
       "type": "async",
@@ -671,19 +640,17 @@ Object {
     "callAsyncMultipleSyncErrorCalled2": true,
     "callAsyncMultipleSyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 84,
     },
     "callAsyncMultipleSyncWithArgCalled1": 42,
-    "callAsyncMultipleSyncWithArgCalled2": 42,
     "callAsyncMultipleSyncWithArgFirstReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 84,
     },
     "callAsyncMultipleSyncWithArgFirstReturnCalled1": 42,
-    "callAsyncMultipleSyncWithArgFirstReturnCalled2": 42,
     "callAsyncMultipleSyncWithArgLastReturn": Object {
       "type": "async",
-      "value": undefined,
+      "value": 85,
     },
     "callAsyncMultipleSyncWithArgLastReturnCalled1": 42,
     "callAsyncMultipleSyncWithArgLastReturnCalled2": 42,
@@ -695,14 +662,9 @@ Object {
     "callAsyncMultipleSyncWithArgNoReturnCalled2": 42,
     "callAsyncMultipleSyncWithArgs": Object {
       "type": "async",
-      "value": undefined,
+      "value": 129,
     },
     "callAsyncMultipleSyncWithArgsCalled1": Array [
-      42,
-      43,
-      44,
-    ],
-    "callAsyncMultipleSyncWithArgsCalled2": Array [
       42,
       43,
       44,
@@ -717,17 +679,17 @@ Object {
     },
     "callAsyncSingleSync": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncSingleSyncCalled": true,
     "callAsyncSingleSyncWithArg": Object {
       "type": "async",
-      "value": undefined,
+      "value": 42,
     },
     "callAsyncSingleSyncWithArgCalled": 42,
     "promiseIntercepted": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 6,
     },
     "promiseInterceptedCall1": Array [
       1,
@@ -740,8 +702,8 @@ Object {
       3,
     ],
     "promiseInterceptedTap1": Object {
-      "fn": 2,
-      "name": "sync2",
+      "fn": 3,
+      "name": "sync1",
       "type": "sync",
     },
     "promiseInterceptedTap2": Object {
@@ -751,10 +713,9 @@ Object {
     },
     "promiseMultipleSync": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseMultipleSyncCalled1": true,
-    "promiseMultipleSyncCalled2": true,
     "promiseMultipleSyncError": Object {
       "error": "Error in sync2",
       "type": "promise",
@@ -763,19 +724,17 @@ Object {
     "promiseMultipleSyncErrorCalled2": true,
     "promiseMultipleSyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 84,
     },
     "promiseMultipleSyncWithArgCalled1": 42,
-    "promiseMultipleSyncWithArgCalled2": 42,
     "promiseMultipleSyncWithArgFirstReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 84,
     },
     "promiseMultipleSyncWithArgFirstReturnCalled1": 42,
-    "promiseMultipleSyncWithArgFirstReturnCalled2": 42,
     "promiseMultipleSyncWithArgLastReturn": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 85,
     },
     "promiseMultipleSyncWithArgLastReturnCalled1": 42,
     "promiseMultipleSyncWithArgLastReturnCalled2": 42,
@@ -787,14 +746,9 @@ Object {
     "promiseMultipleSyncWithArgNoReturnCalled2": 42,
     "promiseMultipleSyncWithArgs": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 129,
     },
     "promiseMultipleSyncWithArgsCalled1": Array [
-      42,
-      43,
-      44,
-    ],
-    "promiseMultipleSyncWithArgsCalled2": Array [
       42,
       43,
       44,
@@ -809,12 +763,12 @@ Object {
     },
     "promiseSingleSync": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseSingleSyncCalled": true,
     "promiseSingleSyncWithArg": Object {
       "type": "promise",
-      "value": undefined,
+      "value": 42,
     },
     "promiseSingleSyncWithArgCalled": 42,
   },

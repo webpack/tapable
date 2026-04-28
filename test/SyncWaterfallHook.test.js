@@ -4,7 +4,8 @@
 */
 "use strict";
 
-const SyncWaterfallHookTest = require("../lib/SyncWaterfallHook");
+const SyncWaterfallHook = require("../lib/SyncWaterfallHook");
+const HookTester = require("./HookTester.test");
 
 function pify(fn) {
 	return new Promise((resolve, reject) => {
@@ -17,13 +18,21 @@ function pify(fn) {
 
 describe("SyncWaterfallHook", () => {
 	it("should throw an error when hook has no argument", () => {
-		expect(() => new SyncWaterfallHookTest()).toThrow(
+		expect(() => new SyncWaterfallHook()).toThrow(
 			"Waterfall hooks must have at least one argument"
 		);
 	});
 
+	it("should have to correct behavior", async () => {
+		const tester = new HookTester((args) => new SyncWaterfallHook(args));
+
+		const result = await tester.run(true);
+
+		expect(result).toMatchSnapshot();
+	}, 15000);
+
 	it("should work", () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		hook.tap("number", () => 42);
 		hook.tap("string", () => "str");
 		hook.tap("false", () => false);
@@ -31,21 +40,21 @@ describe("SyncWaterfallHook", () => {
 	});
 
 	it("should work with undefined", async () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		hook.tap("number", () => 42);
 		hook.tap("undefined", () => undefined);
 		return expect(hook.call()).toBe(42);
 	});
 
 	it("should work with void", async () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		hook.tap("number", () => 42);
 		hook.tap("undefined", () => {});
 		return expect(hook.call()).toBe(42);
 	});
 
 	it("should work with undefined and number again", async () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		hook.tap("number", () => 42);
 		hook.tap("undefined", () => {});
 		hook.tap("number-again", () => 43);
@@ -53,21 +62,21 @@ describe("SyncWaterfallHook", () => {
 	});
 
 	it("should work with null", async () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		hook.tap("number", () => 42);
 		hook.tap("undefined", () => null);
 		return expect(hook.call()).toBeNull();
 	});
 
 	it("should work with different types", async () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		hook.tap("number", () => 42);
 		hook.tap("string", () => "string");
 		return expect(hook.call()).toBe("string");
 	});
 
 	it("should allow to create sync hooks", async () => {
-		const hook = new SyncWaterfallHookTest(["arg1", "arg2"]);
+		const hook = new SyncWaterfallHook(["arg1", "arg2"]);
 
 		const mock0 = jest.fn((arg) => `${arg},0`);
 		const mock1 = jest.fn((arg) => `${arg},1`);
@@ -100,7 +109,7 @@ describe("SyncWaterfallHook", () => {
 	});
 
 	it("should allow to intercept calls", () => {
-		const hook = new SyncWaterfallHookTest(["arg1", "arg2"]);
+		const hook = new SyncWaterfallHook(["arg1", "arg2"]);
 
 		const mockCall = jest.fn();
 		const mock0 = jest.fn(() => "mock0");
@@ -139,8 +148,8 @@ describe("SyncWaterfallHook", () => {
 	});
 
 	it("should allow to create waterfall hooks", async () => {
-		const h1 = new SyncWaterfallHookTest(["a"]);
-		const h2 = new SyncWaterfallHookTest(["a", "b"]);
+		const h1 = new SyncWaterfallHook(["a"]);
+		const h2 = new SyncWaterfallHook(["a", "b"]);
 
 		expect(h1.call(1)).toBe(1);
 
@@ -164,12 +173,12 @@ describe("SyncWaterfallHook", () => {
 	it("should throw when args have length less than 1", () => {
 		expect(() => {
 			// eslint-disable-next-line no-new
-			new SyncWaterfallHookTest([]);
+			new SyncWaterfallHook([]);
 		}).toThrow(/Waterfall/);
 	});
 
 	it("should allow to intercept calls #2", () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 
 		const mockCall = jest.fn();
 		const mockTap = jest.fn((x) => x);
@@ -193,12 +202,12 @@ describe("SyncWaterfallHook", () => {
 	});
 
 	it("should throw on tapAsync", () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		expect(() => hook.tapAsync()).toThrow(/tapAsync/);
 	});
 
 	it("should throw on tapPromise", () => {
-		const hook = new SyncWaterfallHookTest(["x"]);
+		const hook = new SyncWaterfallHook(["x"]);
 		expect(() => hook.tapPromise()).toThrow(/tapPromise/);
 	});
 });

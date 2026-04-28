@@ -4,12 +4,12 @@
 */
 "use strict";
 
-const AsyncParallelHook = require("../lib/AsyncParallelHook");
+const AsyncParallelBailHook = require("../lib/AsyncParallelBailHook");
 const HookTester = require("./HookTester.test");
 
-describe("AsyncParallelHook", () => {
+describe("AsyncParallelBailHook", () => {
 	it("should have to correct behavior", async () => {
-		const tester = new HookTester((args) => new AsyncParallelHook(args));
+		const tester = new HookTester((args) => new AsyncParallelBailHook(args));
 
 		const result = await tester.run();
 
