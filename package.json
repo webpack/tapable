@@ -59,7 +59,7 @@
     "prettier": "^3.8.3",
     "prettier-1": "npm:prettier@^1",
     "tinybench": "^6.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": ">=6"
