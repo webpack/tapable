@@ -7,9 +7,14 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Only pull request runs share a group; every other run gets a group of its own
+# (`github.run_id`), because a group holds at most one pending run and a later
+# push would otherwise evict the one waiting. CodSpeed compares a pull request
+# against the benchmark result of its base commit, so a `main` commit that never
+# gets measured leaves later comparisons without a baseline.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
