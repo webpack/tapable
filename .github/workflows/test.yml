@@ -6,6 +6,17 @@ on:
   pull_request:
     branches: [main]
 
+# A new commit supersedes the previous one's jobs, so stop paying for them.
+# Only pull request runs share a group; every other run gets a group of its own
+# (`github.run_id`), because a group holds at most one pending run and a later
+# push would otherwise evict the one waiting — `cancel-in-progress` protects the
+# running run, not the queued one. `main` runs publish the coverage later
+# comparisons are measured against, and losing one would also hide a breakage
+# that is already on the default branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read #  to fetch code (actions/checkout)
 
