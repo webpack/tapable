@@ -50,7 +50,7 @@
     "@babel/preset-env": "^7.4.4",
     "@changesets/cli": "^2.31.0",
     "@changesets/get-github-info": "^0.8.0",
-    "@codspeed/core": "^5.3.0",
+    "@codspeed/core": "^6.0.0",
     "@stylistic/eslint-plugin": "^5.2.3",
     "babel-jest": "^30.3.0",
     "eslint": "^9.28.0",
