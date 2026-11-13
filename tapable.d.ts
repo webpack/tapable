@@ -155,13 +155,11 @@ export class HookMap<H> {
 	intercept(interceptor: HookMapInterceptor<H>): void;
 }
 
-type AnyHook = Hook<any, any>;
-
 /**
  * A `HookMap` whose keys are typed: each key `K` of `M` maps to the hook `M[K]`.
  * It is a type only, for annotating a `HookMap`; create one with `new HookMap()`.
  */
-export interface TypedHookMap<M extends Record<any, AnyHook>> {
+export interface TypedHookMap<M extends object> {
 	name: string | undefined;
 	get<K extends keyof M>(key: K): M[K] | undefined;
 	for<K extends keyof M>(key: K): M[K];
