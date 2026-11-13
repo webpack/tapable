@@ -45,8 +45,8 @@ type TapOptions = {
 interface HookInterceptor<T, R, AdditionalOptions = UnsetAdditionalOptions> {
 	name?: string;
 	tap?: (tap: FullTap & IfSet<AdditionalOptions>) => void;
-	call?: (...args: any[]) => void;
-	loop?: (...args: any[]) => void;
+	call?: (...args: AsArray<T>) => void;
+	loop?: (...args: AsArray<T>) => void;
 	error?: (err: Error) => void;
 	result?: (result: R) => void;
 	done?: () => void;
