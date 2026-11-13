@@ -157,8 +157,11 @@ export class HookMap<H> {
 
 type AnyHook = Hook<any, any>;
 
-export class TypedHookMap<M extends Record<any, AnyHook>> {
-	constructor(factory: HookFactory<M[keyof M], keyof M>, name?: string);
+/**
+ * A `HookMap` whose keys are typed: each key `K` of `M` maps to the hook `M[K]`.
+ * It is a type only, for annotating a `HookMap`; create one with `new HookMap()`.
+ */
+export interface TypedHookMap<M extends Record<any, AnyHook>> {
 	name: string | undefined;
 	get<K extends keyof M>(key: K): M[K] | undefined;
 	for<K extends keyof M>(key: K): M[K];
