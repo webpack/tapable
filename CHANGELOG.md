@@ -1,5 +1,13 @@
 # tapable
 
+## 2.3.4
+
+### Patch Changes
+
+- Declare `TypedHookMap` as an interface, as no such class is exported. (by [@alexander-akait](https://github.com/alexander-akait) in [#293](https://github.com/webpack/tapable/pull/293))
+
+- Type the `call` and `loop` interceptor arguments as the hook's own. (by [@alexander-akait](https://github.com/alexander-akait) in [#293](https://github.com/webpack/tapable/pull/293))
+
 ## 2.3.3
 
 ### Patch Changes
