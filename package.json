@@ -46,7 +46,7 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
+    "@babel/core": "^8.1.2",
     "@babel/preset-env": "^7.4.4",
     "@changesets/cli": "^3.0.3",
     "@changesets/get-github-info": "^1.0.1",
