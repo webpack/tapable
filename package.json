@@ -51,7 +51,7 @@
     "@changesets/cli": "^3.0.3",
     "@changesets/get-github-info": "^1.0.1",
     "@codspeed/core": "^6.1.1",
-    "@stylistic/eslint-plugin": "^5.2.3",
+    "@stylistic/eslint-plugin": "^6.0.1",
     "babel-jest": "^30.3.0",
     "eslint": "^9.28.0",
     "eslint-config-webpack": "^4.6.3",
