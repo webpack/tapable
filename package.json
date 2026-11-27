@@ -54,7 +54,7 @@
     "@stylistic/eslint-plugin": "^5.2.3",
     "babel-jest": "^30.3.0",
     "eslint": "^9.28.0",
-    "eslint-config-webpack": "^4.6.3",
+    "eslint-config-webpack": "^5.0.1",
     "jest": "^30.3.0",
     "prettier": "^3.8.3",
     "prettier-1": "npm:prettier@^1",
